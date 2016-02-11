@@ -1,0 +1,8 @@
+/vendor/*
+/config/app.php
+/config/ca.crt
+/config/ca.key
+/webroot/up/dl/*
+/tmp/*
+/logs/*
+/webroot/tuto.*
