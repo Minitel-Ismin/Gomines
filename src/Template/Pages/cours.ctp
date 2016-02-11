@@ -8,7 +8,7 @@ $title = "Cours";
 		</div>
 		<div class="plan">
 			<div class="header">
-				<a href="/Annales"><img src="/img/courses.png" alt="Annales"></a>
+				<?=$this->Html->link($this->Html->image("/img/courses.png"), '/Annales', array('escape' => false)); ?>
 			</div>
 		</div>
 	</div>
@@ -18,7 +18,7 @@ $title = "Cours";
 		</div>
 		<div class="plan">
 			<div class="header">
-				<a href="/Moocs"><img src="/img/moocs.png" alt="Annales"></a>
+				<?=$this->Html->link($this->Html->image("/img/moocs.png"), '/Moocs', array('escape' => false)); ?>
 			</div>
 		</div>
 	</div>

@@ -18,11 +18,6 @@ use Cake\Datasource\ConnectionManager;
 use Cake\Error\Debugger;
 use Cake\Network\Exception\NotFoundException;
 
-
-if (!Configure::read('debug')):
-    throw new NotFoundException();
-endif;
-
 $title = "Accueil";
 ?>
 			<div id="mainContent">
@@ -32,7 +27,7 @@ $title = "Accueil";
 					</div>
 					<div class="plan">
 						<div class="header">
-							<a href="/Films1"><img src="/img/darth.png" alt="Movies"></a>
+							<?=$this->Html->link($this->Html->image("/img/darth.png"), '/Films1', array('escape' => false)); ?>
 						</div>
 					</div>
 				</div>
@@ -43,7 +38,7 @@ $title = "Accueil";
 					</div>
 					<div class="plan">
 						<div class="header">
-							<a href="/Bluray"><img src="/img/film19.png" alt="BluRays"></a>
+							<?=$this->Html->link($this->Html->image("/img/film19.png"), '/Bluray', array('escape' => false)); ?>
 						</div>
 					</div>
 				</div>
@@ -54,7 +49,7 @@ $title = "Accueil";
 					</div>
 					<div class="plan">
 						<div class="header">
-							<a href="/Series"><img src="/img/film50.png" alt="Series"></a>
+							<?=$this->Html->link($this->Html->image("/img/film50.png"), '/Series', array('escape' => false)); ?>
 						</div>
 					</div>
 				</div>
@@ -65,7 +60,7 @@ $title = "Accueil";
 					</div>
 					<div class="plan">
 						<div class="header">
-							<a href="/NSFW"><img src="/img/xxx.png" alt="NSFW"></a>
+							<?=$this->Html->link($this->Html->image("/img/xxx.png"), '/NSFW', array('escape' => false)); ?>
 						</div>
 					</div>
 				</div>
@@ -76,7 +71,7 @@ $title = "Accueil";
 					</div>
 					<div class="plan">
 						<div class="header">
-							<a href="/Mangas"><img src="/img/japan15.png" alt="Manga"></a>
+							<?=$this->Html->link($this->Html->image("/img/japan15.png"), '/Mangas', array('escape' => false)); ?>
 						</div>
 					</div>
 				</div>
@@ -87,7 +82,7 @@ $title = "Accueil";
 					</div>
 					<div class="plan">
 						<div class="header">
-							<a href="/Logiciels"><img src="/img/github.png" alt="Soft"></a>
+							<?=$this->Html->link($this->Html->image("/img/github.png"), '/Logiciels', array('escape' => false)); ?>
 						</div>
 					</div>
 				</div>
@@ -98,7 +93,7 @@ $title = "Accueil";
 					</div>
 					<div class="plan">
 						<div class="header">
-							<a href="/Jeux"><img src="/img/alien8.png" alt="Jeux"></a>
+							<?=$this->Html->link($this->Html->image("/img/alien8.png"), '/Jeux', array('escape' => false)); ?>
 						</div>
 					</div>
 				</div>

@@ -223,10 +223,6 @@ h1 {
     pointer-events: none;
 }
 
-iframe {
-	display: none !important;
-}
-
 section .container-liquid {
 	position: relative;
 }
