@@ -269,3 +269,15 @@ section .container-liquid {
     text-align: center;
     font-size: 20px;
 }
+
+.error a
+{
+    color: white;
+    font-weight: bold;
+}
+
+.error a[href^="mailto:"]
+{
+    color: #EFAF9A;
+    font-weight: bold;
+}

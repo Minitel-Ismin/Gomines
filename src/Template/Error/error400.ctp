@@ -28,11 +28,13 @@ if (Configure::read('debug')):
     $this->end();
 endif;
 ?>
-<h2><?= h($message) ?></h2>
-<p class="error">
-    <strong><?= __d('cake', 'Error') ?>: </strong>
-    <?= sprintf(
-        __d('cake', 'The requested address %s was not found on this server.'),
-        "<strong>'{$url}'</strong>"
-    ) ?>
-</p>
+<div class="container">
+    <h2><?= h($message) ?></h2>
+    <p class="error">
+        <strong><?= __d('cake', 'Error') ?>: </strong>
+        <?= sprintf(
+            __d('cake', 'On dirait que tu as trouvé une erreur :O <br/>(Tu peux contacter un admin : <a href="mailto:minitelismin@gmail.com">minitelismin@gmail.com</a> :) ) <br/><a href="javascript:history.back()">Revenir en arrière</a>'),
+            "<strong>'{$url}'</strong>"
+        ) ?>
+    </p>
+</div>
