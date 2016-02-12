@@ -47,12 +47,16 @@ Router::scope('/', function ($routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    $routes->connect('/', ['controller' => 'Downloads', 'action' => 'display']);
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+    $routes->connect('/tweety/*', ['controller' => 'Downloads', 'action' => 'display']);
+    $routes->redirect('/sylvester/', ['controller' => 'Downloads', 'action' => 'display']);
+    $routes->connect('/sylvester/:virtFolder/**', ['controller' => 'Downloads', 'action' => 'files'],['pass' => array('virtFolder')]);
+    $routes->connect('/mysteries/*', ['controller' => 'Downloads', 'action' => 'download']);
 
     /**
      * Connect catchall routes for all controllers.

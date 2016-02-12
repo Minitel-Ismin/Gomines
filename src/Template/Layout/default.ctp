@@ -47,13 +47,13 @@ $cakeDescription = 'Gomines';
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <?= $this->Html->link($cakeDescription, ['controller' => 'pages', 'action' => 'home'], ['class' => 'navbar-brand']) ?>
+      <?= $this->Html->link($cakeDescription, ['controller' => 'Downloads', 'action' => 'display'], ['class' => 'navbar-brand']) ?>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <!--<li class="active"><?= $this->Html->link('Accueil', ['controller' => 'pages', 'action' => 'home']) ?></li>-->
+        <!--<li class="active"><?= $this->Html->link('Accueil', ['controller' => 'Downloads', 'action' => 'display']) ?></li>-->
       </ul>
       <ul class="nav navbar-nav navbar-right">
 		<?php
