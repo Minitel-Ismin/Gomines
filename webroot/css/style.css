@@ -316,3 +316,11 @@ li.files.dir a{
 li.files.return {
     border-left: 5px solid #8EBD40;
 }
+
+footer
+{
+    text-align: center;
+    color: lightgrey;
+    background-color: rgb(248, 248, 248);
+    padding: 20px;
+}

@@ -45,11 +45,22 @@ foreach($conf as $name => $item):
 					<div class="plan">
 						<div class="header">
 							<?=$this->Html->link($this->Html->image("/img/{$item['icon']}"), $url, array('escape' => false)); ?>
-							<!-- <?php print_r($url); ?> -->
 						</div>
 					</div>
 				</div>
 <?php
 endforeach;
+
+// ADDs CONSTANT NODES
 ?>
+				<div class="whole">
+					<div class="type"style='background-color: #25C861;'>
+						<p>Services</p>
+					</div>
+					<div class="plan">
+						<div class="header">
+							<?=$this->Html->link($this->Html->image("/img/services.png"), ['controller' => 'pages', 'action' => 'services'], array('escape' => false)); ?>
+						</div>
+					</div>
+				</div>
 			</div>

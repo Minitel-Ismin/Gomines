@@ -87,6 +87,7 @@ $cakeDescription = 'Gomines';
 		<script src="/js/bootstrap.min.js"></script>
 		<script src="/js/site.js"></script>
     <?= $this->fetch('footerscript') ?>
+        Proud to be Gomines version <?php system("git log --pretty=format:%h -n 1"); ?> !
     </footer>
 </body>
 </html>
