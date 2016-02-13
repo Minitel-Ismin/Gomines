@@ -52,6 +52,7 @@ foreach($conf as $name => $item):
 endforeach;
 
 // ADDs CONSTANT NODES
+if(empty($subcat)):
 ?>
 				<div class="whole">
 					<div class="type vpn">
@@ -84,3 +85,6 @@ endforeach;
 					</div>
 				</div>
 			</div>
+<?php
+endif;
+?>
