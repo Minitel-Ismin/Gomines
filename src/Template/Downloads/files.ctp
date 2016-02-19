@@ -3,7 +3,9 @@
 		<?= $this->Html->link("Retour", ["controller" => "Downloads","action" => "display"]); ?>
 	</div>
 	<div class="row">
+		<?php if($readme): ?>
 		<div class="col-lg-8">
+			<?php endif; ?>
 			<ul>
 			<li class="files dir return"><?= $this->Html->link("Dossier Parent", ["action" => "files", $vpath, "../"]); ?></li>
 			<?php
@@ -19,9 +21,11 @@
 			endforeach;
 			?>
 			</ul>
+		<?php if($readme): ?>
 		</div>
 		<code class="col-lg-4">
 			<?= nl2br($readme) ?>
 		</code>
+		<?php endif; ?>
 	</div>
 </div>

@@ -63,10 +63,13 @@ class DownloadsController extends AppController
 	    	$files = $directory->read(true,$hiddenFiles);
 
             $readme = $directory->find("readme\..*");
-            if(count($readme) > 0)
+            if(count($readme) > 0){
                 $readme = $readme[0];
-            $readme = new File($directory->pwd()."/".$readme);
-            $readme = $readme->read();
+                $readme = new File($directory->pwd()."/".$readme);
+                $readme = $readme->read();
+            }else{
+                $readme = false;
+            }
 
 	    	$this->set(compact("files", "vpath", "readme"));
 			// files : liste des dossiers & fichiers du dossier courant
