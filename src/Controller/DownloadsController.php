@@ -62,7 +62,13 @@ class DownloadsController extends AppController
 	    	$directory = new Folder($directory);
 	    	$files = $directory->read(true,$hiddenFiles);
 
-	    	$this->set(compact("files", "vpath"));
+            $readme = $directory->find("readme\..*");
+            if(count($readme) > 0)
+                $readme = $readme[0];
+            $readme = new File($directory->pwd()."/".$readme);
+            $readme = $readme->read();
+
+	    	$this->set(compact("files", "vpath", "readme"));
 			// files : liste des dossiers & fichiers du dossier courant
 			// vpath : répertoire dans lequel se trouve l'utilisateur
     	}
