@@ -16,7 +16,7 @@
 			endforeach;
 			foreach($files[1] as $f):
 				?>
-			<li class="files"><?= $this->Html->link($f, ["action" => "files", $vpath, $f]); ?></li>
+			<li class="files"><?= $this->Html->link($f, ["action" => "files", urlencode($vpath), $f]); ?></li>
 			<?php
 			endforeach;
 			?>
