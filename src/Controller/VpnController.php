@@ -56,6 +56,7 @@ class VpnController extends AppController
 			$this->Flash->error(__('Votre compte VPN n\'est pas valide'));
 			return $this->redirect(['action' => 'index']);
 		}
+		$this->viewClass = "VPNConfig";
 		$this->set(compact("user"));
 	}
 
