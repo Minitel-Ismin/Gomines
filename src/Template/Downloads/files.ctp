@@ -1,8 +1,5 @@
 <div class="container">
 	<div class="row">
-		<?= $this->Html->link("Retour", ["controller" => "Downloads","action" => "display"]); ?>
-	</div>
-	<div class="row">
 		<?php if($readme): ?>
 		<div class="col-lg-8">
 			<?php endif; ?>
