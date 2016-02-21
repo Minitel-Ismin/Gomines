@@ -6,6 +6,7 @@
 - Add possibility to download a whole folder at once
 - Add integration with LDAP for accounting
 - Add possibility to "Upload There"
+- Add development status + suggest area
 
 ## Install
 - git pull
