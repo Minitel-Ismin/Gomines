@@ -147,7 +147,7 @@ class VpnController extends AppController
 		$this->isAuthorized(2);
 		$status = file_get_contents("/var/run/openvpn/status.log");
 
-		$re = "/OpenVPN CLIENT LIST\\nUpdated,(.*)\\n([\\w,.: \\n]*)\\nROUTING TABLE\\n([\\w,.: \\n]*)\\nGLOBAL STATS\\n([\\w,.: \\/\\n]*)\\nEND/iu"; 
+		$re = "/OpenVPN CLIENT LIST\\nUpdated,(.*)\\n([\\w-,.: \\n]*)\\nROUTING TABLE\\n([\\w-,.: \\n]*)\\nGLOBAL STATS\\n([\\w-,.: \\/\\n]*)\\nEND/iu"; 
 
 		preg_match($re, $status, $matches);
 
