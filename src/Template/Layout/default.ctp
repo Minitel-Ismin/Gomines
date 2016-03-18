@@ -31,7 +31,8 @@ $cakeDescription = 'Gomines';
     <?= $this->Html->css('site.css') ?>
     <?= $this->Html->css('cake.css') ?>
     <?= $this->Html->css('base.css') ?>
-
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
