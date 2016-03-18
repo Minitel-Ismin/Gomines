@@ -7,6 +7,11 @@
 - Add integration with LDAP for accounting
 - Add possibility to "Upload There"
 - Add development status + suggest area
+- Add VPN bandwidth almost exhausted notification
+- Add VPN pending requests
+- Add VPN credited account
+- Add VPN reset accounts
+- Add change password
 
 ## Install
 - git pull

@@ -33,6 +33,7 @@ class VpnController extends AppController
 			'contain' => ['VpnComptes']
 		]);
 		$user->vpn_compte->bp = $this->_convertSize($user->vpn_compte->bp_used);
+		$user->vpn_compte->bp_day = $this->_convertSize($user->vpn_compte->bp_used_day);
 		$this->set(compact('user'));
 	}
 
