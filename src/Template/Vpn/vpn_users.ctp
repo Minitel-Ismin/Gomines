@@ -18,8 +18,9 @@
     <tr>
     <th><?= $this->Paginator->sort('Users.prenom','Prénom') ?></th>
     <th><?= $this->Paginator->sort('Users.nom','Nom') ?></th>
-    <th><?= $this->Paginator->sort('bp_used', 'BP Totale') ?></th>
-    <th><?= $this->Paginator->sort('bp_used_day', 'BP Journée') ?></th>
+    <th><?= $this->Paginator->sort('VpnComptes.bp_used', 'BP Totale') ?></th>
+    <th><?= $this->Paginator->sort('VpnComptes.bp_used_day', 'BP Journée') ?></th>
+    <th>Action</th>
     </tr>
     <?php foreach($user as $u): ?>
     	<tr>
@@ -27,6 +28,7 @@
     		<td><?= $u['user']['nom'] ?></td>
             <td><?= $u['bp'] ?></td>
             <td><?= $u['bp_day'] ?></td>
+            <td><?= $this->Html->link("Réinitialiser quota journalier","http://www.google.com") ?></td>
     	</tr>
     <?php endforeach; ?>
     </table>

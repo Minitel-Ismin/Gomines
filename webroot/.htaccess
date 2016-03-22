@@ -3,5 +3,5 @@
     RewriteBase /cakephp
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.*)$ /gomines/index.php [QSA,L]
+    RewriteRule ^(.*)$ /index.php [QSA,L]
 </IfModule>

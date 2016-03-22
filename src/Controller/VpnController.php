@@ -189,7 +189,7 @@ class VpnController extends AppController
 	public function vpnUsers(){
 		$this->paginate = [
 		    'sortWhitelist' => [
-		        'id', 'Users.nom', 'Users.prenom', 'bp_used', 'bp_used_day'
+		        'id', 'Users.nom', 'Users.prenom', 'VpnComptes.bp_used', 'VpnComptes.bp_used_day'
 		    ],
 			'order' => [
 				'bp_used' => 'desc'
