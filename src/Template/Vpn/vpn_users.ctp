@@ -28,7 +28,7 @@
     		<td><?= $u['user']['nom'] ?></td>
             <td><?= $u['bp'] ?></td>
             <td><?= $u['bp_day'] ?></td>
-            <td><?= $this->Html->link("Réinitialiser quota journalier","http://www.google.com") ?></td>
+            <td><?= $this->Html->link("Reset",['controller' => 'vpn', 'action' => 'vpnResetBW', $u['user']['id']]) ?></td>
     	</tr>
     <?php endforeach; ?>
     </table>

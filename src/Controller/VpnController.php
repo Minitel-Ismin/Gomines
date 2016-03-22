@@ -187,6 +187,7 @@ class VpnController extends AppController
 	}
 
 	public function vpnUsers(){
+		$this->isAuthorized(2);
 		$this->paginate = [
 		    'sortWhitelist' => [
 		        'id', 'Users.nom', 'Users.prenom', 'VpnComptes.bp_used', 'VpnComptes.bp_used_day'
@@ -245,5 +246,35 @@ class VpnController extends AppController
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 		curl_exec($ch);
+	}
+
+	public function vpnResetBW($uid = -1){
+		$this->isAuthorized(2);
+		if($uid < 0){
+			$this->flash->error("Utilisateur invalide");
+			return $this->redirect(['controller' => 'vpn', 'action' => 'vpnUsers']);
+		}
+		$user = $this->Users->get($uid, [
+			'contain' => ['VpnComptes']
+		]);
+		if(empty($user['vpn_compte'])){
+			$this->Flash->error(__('Le compte n\'est pas valide'));
+			return $this->redirect(['controller' => 'vpn', 'action' => 'vpnUsers']);
+		}else{
+			if($user['vpn_compte']['actif'] == 0){
+				$this->Flash->error(__('Le compte VPN n\'est pas actif'));
+				return $this->redirect(['controller' => 'vpn', 'action' => 'vpnUsers']);
+			}else{
+				$user['vpn_compte']['bp_used'] += $user['vpn_compte']['bp_used_day'];
+				$user['vpn_compte']['bp_used_day'] = 0;
+				if($this->VpnComptes->save($user['vpn_compte'])){
+					$this->Flash->success(__('Consommation de BP remise à zéro.'));
+					return $this->redirect(['controller' => 'vpn', 'action' => 'vpnUsers']);
+				}else{
+					$this->Flash->error(__('Erreur à la remise à zéro de la consommation de BP'));
+					return $this->redirect(['controller' => 'vpn', 'action' => 'vpnUsers']);
+				}
+			}
+		}
 	}
 }
