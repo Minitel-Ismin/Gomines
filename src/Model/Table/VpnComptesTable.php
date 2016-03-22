@@ -76,4 +76,11 @@ class VpnComptesTable extends Table
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
     }
+
+    protected function _initializeSchema(\Cake\Database\Schema\Table $table)
+    {
+        $table->columnType('bp_used', 'string');
+        $table->columnType('bp_used_day', 'string');
+        return $table;
+    }
 }

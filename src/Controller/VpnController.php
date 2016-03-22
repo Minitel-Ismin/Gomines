@@ -201,6 +201,7 @@ class VpnController extends AppController
 		$user = $this->paginate($this->VpnComptes)
 			->map(function($row){
 				$row->bp = $this->_convertSize($row->bp_used);
+				$row->bp_day = $this->_convertSize($row->bp_used_day);
 				$row->user->prenom = ucwords(strtolower($row->user->prenom),"- ");
 				$row->user->nom = ucwords(strtolower($row->user->nom),"- ");
 				return $row;

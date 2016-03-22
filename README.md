@@ -8,10 +8,14 @@
 - Add possibility to "Upload There"
 - Add development status + suggest area
 - Add VPN bandwidth almost exhausted notification
-- Add VPN pending requests
+- Add VPN pending requests list
 - Add VPN credited account
-- Add VPN reset accounts
+- Add VPN reset bandwidth limitation account
 - Add change password
+- Move VPN scripts to CakePHP Shell commands
+- Add rights management
+- Change administration part
+- Add rogue DHCP server detection : tcpdump -r ~/dhcp.pcap -n  -e
 
 ## Install
 - git pull

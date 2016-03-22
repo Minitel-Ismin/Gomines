@@ -18,13 +18,15 @@
     <tr>
     <th><?= $this->Paginator->sort('Users.prenom','Prénom') ?></th>
     <th><?= $this->Paginator->sort('Users.nom','Nom') ?></th>
-    <th><?= $this->Paginator->sort('bp_used', 'BP Utilisée') ?></th>
+    <th><?= $this->Paginator->sort('bp_used', 'BP Totale') ?></th>
+    <th><?= $this->Paginator->sort('bp_used_day', 'BP Journée') ?></th>
     </tr>
     <?php foreach($user as $u): ?>
     	<tr>
     		<td><?= $u['user']['prenom'] ?></td>
     		<td><?= $u['user']['nom'] ?></td>
-    		<td><?= $u['bp'] ?></td>
+            <td><?= $u['bp'] ?></td>
+            <td><?= $u['bp_day'] ?></td>
     	</tr>
     <?php endforeach; ?>
     </table>
