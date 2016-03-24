@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-3">
             <ul class="list-group">
-                <li class="list-group-item active" style="font-size: 20px"><?= __('Actions') ?></li>
+                <li class="list-group-item list-header" style="font-size: 20px"><?= __('Actions') ?></li>
                 <li class="list-group-item"><?= $this->Html->link('Télécharger la configuration', ['action' => 'dlConfig']) ?> </li>
                 <?= ($user['droits'] & 2) ? "<li class='list-group-item'>".$this->Html->link('Statut du VPN',['action' => 'vpnStatus'])."</li>" : "" ?>
                 <?= ($user['droits'] & 2) ? "<li class='list-group-item'>".$this->Html->link('Utilisateurs du VPN',['action' => 'vpnUsers'])."</li>" : "" ?>

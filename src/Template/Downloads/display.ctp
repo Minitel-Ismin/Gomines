@@ -20,7 +20,8 @@ use Cake\Network\Exception\NotFoundException;
 
 $title = "Accueil";
 ?>
-
+                
+                <div class="bg"></div>
                 <div class="container">
                     <div class="row cat-container">
                         <div class="g-img">

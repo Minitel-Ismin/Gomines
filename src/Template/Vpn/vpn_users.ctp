@@ -3,7 +3,7 @@
         <div class="col-lg-3">
 
         <ul class="list-group">
-            <li class="list-group-item active"><?= __('Actions') ?></li>
+            <li class="list-group-item list-header"><?= __('Actions') ?></li>
             <li class="list-group-item"><?= $this->Html->link(__('Retour'), ['controller' => 'vpn', 'action' => 'index']) ?> </li>
         </ul>
 

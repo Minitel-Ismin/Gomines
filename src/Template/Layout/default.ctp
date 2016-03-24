@@ -82,7 +82,7 @@ $cakeDescription = 'Gomines';
   </div><!-- /.container-fluid -->
 </nav>
     <?= $this->Flash->render() ?>
-    <section class="princ-container container-liquid">
+    <section class="container-liquid">
         <?= $this->fetch('content') ?>
     </section>
     <footer class="text-center">
