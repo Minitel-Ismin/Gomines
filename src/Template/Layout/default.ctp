@@ -24,12 +24,13 @@ $cakeDescription = 'Gomines';
         <?= $cakeDescription ?> - <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('bootstrap.css') ?>
+    
+    
     <?= $this->Html->css('jquery-ui.css') ?>
     <?= $this->Html->css('style.css') ?>
     <?= $this->Html->css('site.css') ?>
     <?= $this->Html->css('cake.css') ?>
+    <?= $this->Html->css('bootstrap.min.css') ?>
     <?= $this->Html->css('base.css') ?>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     
