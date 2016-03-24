@@ -324,6 +324,8 @@ return [
         'defaults' => 'php',
     ],
     'OpenVPNStatusFile' => "C:/GominesData/TestData/openvpn-status.log",
+    'DashingWidgetURL' => "http://127.0.0.1:3030/widgetURL",
+    'DashingToken' => "DASHINGTOKEN",
     'FileFolders' => [
         'AClasser'  => [
             'folder' => 'C:/GominesData/AClasser',

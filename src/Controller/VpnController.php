@@ -162,44 +162,8 @@ class VpnController extends AppController
 
 	public function vpnStatus(){
 		$this->isAuthorized(2);
-		$openvpnStatusFile = Configure::read("OpenVPNStatusFile");
-		$status = file_get_contents($openvpnStatusFile);
-
-		$re = "/OpenVPN CLIENT LIST\\nUpdated,(.*)\\n([\\w-,.: \\n]*)\\nROUTING TABLE\\n([\\w-,.: \\n]*)\\nGLOBAL STATS\\n([\\w-,.: \\/\\n]*)\\nEND/iu"; 
-
-		preg_match($re, $status, $matches);
-
-		list($data, $lastUpdate, $connected, $routing, $global) = $matches;
-		$connected = explode("\n",$connected);
-		$connectedColumns = array_shift($connected);
-		$connectedColumns = explode(",",$connectedColumns);
-		$listeCo = array();
-		foreach($connected as $i => $c){
-			$user = explode(",",$c);
-			list($cn, $real_addr, $b_rx, $b_tx, $conn_since) = $user;
-			$b_rx = $this->_convertSize($b_rx);
-			$b_tx = $this->_convertSize($b_tx);
-			$listeCo[$real_addr] = array(
-				"cn" => $cn, 
-				"real_addr" => $real_addr, 
-				"b_rx" => $b_rx, 
-				"b_tx" => $b_tx,
-				"conn_since" => $conn_since,
-				"virt_addr" => "",
-				"last_ref" => ""
-			);
-		}
-
-		$routing = explode("\n",$routing);
-		$routingColumns = array_shift($routing);
-		$routingColumns = explode(",",$routingColumns);
-		foreach($routing as $i => $c){
-			$route = explode(",",$c);
-			list($virt_addr, $cn, $real_addr, $last_ref) = $route;
-			$listeCo[$real_addr]["error"] = ($cn != $listeCo[$real_addr]["cn"]);
-			$listeCo[$real_addr]["virt_addr"] = $virt_addr;
-			$listeCo[$real_addr]["last_ref"] = $last_ref;
-		}
+		
+		$listeCo = $this->_getVPNStatus();
 
 		$this->set(compact("listeCo"));
 	}
@@ -242,23 +206,16 @@ class VpnController extends AppController
 
 	public function vpnStats(){
 		$this->autoRender = false;
-		$status = file_get_contents("/var/run/openvpn/status.log");
 
-		$re = "/OpenVPN CLIENT LIST\\nUpdated,(.*)\\n([\\w,.: \\n]*)\\nROUTING TABLE\\n([\\w,.: \\n]*)\\nGLOBAL STATS\\n([\\w,.: \\/\\n]*)\\nEND/iu"; 
-
-		preg_match($re, $status, $matches);
-
-		list($data, $lastUpdate, $connected, $routing, $global) = $matches;
-		$connected = explode("\n",$connected);
-		array_shift($connected);
-
-		$nb_user = count($connected);
+		$nb_user = count($this->_getVPNStatus());
 
 		echo $nb_user;
 
-		$ch = curl_init("http://192.168.130.124:3030/widgets/mde-vpn-users");
+		$dashingurl = Configure::read("DashingWidgetURL");
+		$dashingtoken = Configure::read("DashingToken");
+		$ch = curl_init($dashingurl);
 		$data = json_encode(array(
-			"auth_token" => "DSITOKEN2014",
+			"auth_token" => $dashingtoken,
 			"current" 	 => $nb_user
 		));
 		curl_setopt($ch, CURLOPT_POST, 1);
@@ -294,5 +251,56 @@ class VpnController extends AppController
 				}
 			}
 		}
+	}
+
+	/**
+	 * Function _getVPNStatus
+	 * 
+	 * Reads the openvpn status file and extract the
+	 * list of currently connected users with their
+	 * metadata (rx/tx bytes, ip addresses, ...)
+	 *
+	 * Returns an array with all users
+	 */
+	protected function _getVPNStatus(){
+		$openvpnStatusFile = Configure::read("OpenVPNStatusFile");
+		$status = file_get_contents($openvpnStatusFile);
+
+		$re = "/OpenVPN CLIENT LIST\\nUpdated,(.*)\\n([\\w-,.: \\n]*)\\nROUTING TABLE\\n([\\w-,.: \\n]*)\\nGLOBAL STATS\\n([\\w-,.: \\/\\n]*)\\nEND/iu"; 
+
+		preg_match($re, $status, $matches);
+
+		list($data, $lastUpdate, $connected, $routing, $global) = $matches;
+		$connected = explode("\n",$connected);
+		$connectedColumns = array_shift($connected);
+		$connectedColumns = explode(",",$connectedColumns);
+		$listeCo = array();
+		foreach($connected as $i => $c){
+			$user = explode(",",$c);
+			list($cn, $real_addr, $b_rx, $b_tx, $conn_since) = $user;
+			$b_rx = $this->_convertSize($b_rx);
+			$b_tx = $this->_convertSize($b_tx);
+			$listeCo[$real_addr] = array(
+				"cn" => $cn, 
+				"real_addr" => $real_addr, 
+				"b_rx" => $b_rx, 
+				"b_tx" => $b_tx,
+				"conn_since" => $conn_since,
+				"virt_addr" => "",
+				"last_ref" => ""
+			);
+		}
+
+		$routing = explode("\n",$routing);
+		$routingColumns = array_shift($routing);
+		$routingColumns = explode(",",$routingColumns);
+		foreach($routing as $i => $c){
+			$route = explode(",",$c);
+			list($virt_addr, $cn, $real_addr, $last_ref) = $route;
+			$listeCo[$real_addr]["error"] = ($cn != $listeCo[$real_addr]["cn"]);
+			$listeCo[$real_addr]["virt_addr"] = $virt_addr;
+			$listeCo[$real_addr]["last_ref"] = $last_ref;
+		}
+		return $listeCo;
 	}
 }
