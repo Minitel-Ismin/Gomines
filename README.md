@@ -16,6 +16,7 @@
 - Add rights management
 - Change administration part
 - Add rogue DHCP server detection : tcpdump -r ~/dhcp.pcap -n  -e
+- Review parent folder link
 
 ## Install
 - git pull

@@ -1,10 +1,10 @@
 <?php
 $this->Html->script('draganddrop.js', array('block' => 'footerscript'));
-$this->Html->script('previsualisation_image.js', array('block' => 'footerscript')); 
+$this->Html->script('previsualisation_image.js', array('block' => 'footerscript'));
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12 text-center">
             <div id="title"><h1>Upload de fichiers</h1></div>
         </div>
     </div>
@@ -47,14 +47,14 @@ $this->Html->script('previsualisation_image.js', array('block' => 'footerscript'
             <!-- MESSAGE -->
             <div class="row">
                 <div class="col-lg-12">    
-                    <div id="message"  class="label label-info">Tu peux lancer un upload</div>
+                    <div class="label label-info">Tu peux lancer un upload</div>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="row">
-                <div class="col-lg-12">
-                    <h2 id="subtitle">Récapitulatif des fichiers uploadés</h2>
+                <div class="col-lg-12 text-center">
+                    <h2>Récapitulatif des fichiers uploadés</h2>
                 </div>
             </div>
             <div class="row">

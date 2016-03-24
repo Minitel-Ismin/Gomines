@@ -20,7 +20,15 @@ use Cake\Network\Exception\NotFoundException;
 
 $title = "Accueil";
 ?>
-			<div id="mainContent">
+
+                <div class="container">
+                    <div class="row cat-container">
+                        <div class="g-img">
+                            <?=$this->Html->image('grominet.png'); ?>
+                        </div>
+                        <div class="titi-img">
+                            <?=$this->Html->image('titi.png'); ?>
+                        </div>
 <?php
 foreach($conf as $name => $item):
 	if(isset($item['hidden']) && $item['hidden'])
@@ -37,54 +45,37 @@ foreach($conf as $name => $item):
 		$url = ['controller' => 'Downloads', 'action' => 'display', $name];
 	else
 		$url = ['controller' => 'Downloads', 'action' => 'files', $name];
+                        
+    $html = '<div class="col-lg-3 col-md-6 col-sm-6 cat-window text-center" style="background-color: #'.$item['color'].'">'.$name.$this->Html->image($item['icon']).'</div>';
 ?>
-				<div class="whole">
-					<div class="type" <?= ($color) ? "style='background-color: #$color;'" : ""?>>
-						<p><?= $name ?></p>
-					</div>
-					<div class="plan">
-						<div class="header">
-							<?=$this->Html->link($this->Html->image("/img/{$item['icon']}"), $url, array('escape' => false)); ?>
-						</div>
-					</div>
-				</div>
+
+                
+                        <?=$this->Html->link($html, $url, array('escape' => false)); ?>
+                
+                    
 <?php
 endforeach;
+?>
+                    
+                    </div>
+                
+
+<?php
+                        
 
 // ADDs CONSTANT NODES
 if(empty($subcat)):
+        $htmlVPN = '<div class="col-lg-4 col-md-4 col-sm-4 cat-tools text-center" style="background-color: #4558A2">VPN<br>'.$this->Html->image("/img/vpn.png").'</div>';
+        $htmlUpload = '<div class="col-lg-4 col-md-4 col-sm-4 cat-tools text-center" style="background-color: #A2584E">Upload<br>'.$this->Html->image("/img/upload.png").'</div>';
+        $htmlAdmin = '<div class="col-lg-4 col-md-4 col-sm-4 cat-tools text-center" style="background-color: #75A685">Administration<br>'.$this->Html->image("/img/g.png").'</div>';
 ?>
-				<div class="whole">
-					<div class="type vpn">
-						<p>VPN</p>
-					</div>
-					<div class="plan">
-						<div class="header">
-							<?= $this->Html->link($this->Html->image("/img/vpn.png"),['controller' => 'Vpn'], ['escape' => false]); ?>
-						</div>
-					</div>
-				</div>
-				<div class="whole">
-					<div class="type upload">
-						<p>Upload</p>
-					</div>
-					<div class="plan">
-						<div class="header">
-							<?= $this->Html->link($this->Html->image("/img/upload.png"),['controller' => 'Upload'], ['escape' => false]); ?>
-						</div>
-					</div>
-				</div>
-				<div class="whole">
-					<div class="type admin">
-						<p>Administration</p>
-					</div>
-					<div class="plan">
-						<div class="header">
-							<?= $this->Html->link($this->Html->image("/img/g.png"),['controller' => 'users'], ['escape' => false]); ?>
-						</div>
-					</div>
-				</div>
-			</div>
+                <div class="row tools-container">
+                    <?= $this->Html->link($htmlVPN,['controller' => 'Vpn'], ['escape' => false]); ?>
+                    <?= $this->Html->link($htmlUpload,['controller' => 'Upload'], ['escape' => false]); ?>
+                    <?= $this->Html->link($htmlAdmin,['controller' => 'users'], ['escape' => false]); ?>
+                </div>
+    
 <?php
 endif;
 ?>
+                </div>

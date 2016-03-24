@@ -1,6 +1,6 @@
-<div class="users index content">
-    <h3><?= __('Users') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<div class="container">
+    <h2 class="text-center"><?= __('Users') ?></h2>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('nom') ?></th>
@@ -18,7 +18,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
+    <div class="paginator text-center">
         <ul class="pagination">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
             <?= $this->Paginator->numbers() ?>

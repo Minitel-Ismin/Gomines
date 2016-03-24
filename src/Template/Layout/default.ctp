@@ -27,12 +27,14 @@ $cakeDescription = 'Gomines';
     
     
     <?= $this->Html->css('jquery-ui.css') ?>
-    <?= $this->Html->css('style.css') ?>
-    <?= $this->Html->css('site.css') ?>
-    <?= $this->Html->css('cake.css') ?>
+    <?php //$this->Html->css('style.css') ?>
+    <?php //$this->Html->css('site.css') ?>
+    <?php //$this->Html->css('cake.css') ?>
     <?= $this->Html->css('bootstrap.min.css') ?>
-    <?= $this->Html->css('base.css') ?>
+    <?php // this->Html->css('base.css') ?>
+    <?= $this->Html->css('thomas.css') ?>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
     
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -80,10 +82,10 @@ $cakeDescription = 'Gomines';
   </div><!-- /.container-fluid -->
 </nav>
     <?= $this->Flash->render() ?>
-    <section class="clearfix container-liquid">
+    <section class="princ-container container-liquid">
         <?= $this->fetch('content') ?>
     </section>
-    <footer>
+    <footer class="text-center">
 		<?= $this->Html->script("jquery.min.js") ?>
 		<?= $this->Html->script("jquery-ui.js") ?>
 		<?= $this->Html->script("bootstrap.min.js") ?>

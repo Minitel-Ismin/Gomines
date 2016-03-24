@@ -20,6 +20,19 @@ use Cake\Network\Exception\NotFoundException;
 
 $title = "Accueil";
 ?>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $this->Html->link('Films', '/Films1', array('escape' => false)); ?>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 			<div id="mainContent">
 				<div class="whole">
 					<div class="type films">

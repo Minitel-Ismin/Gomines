@@ -1,35 +1,45 @@
-﻿<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3">
+
+<nav class="list-group">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Retour'), ['controller' => 'vpn', 'action' => 'index']) ?> </li>
+        <li class="list-group-item active"><?= __('Actions') ?></li>
+        <li class="list-group-item"><?= $this->Html->link(__('Retour'), ['controller' => 'vpn', 'action' => 'index']) ?> </li>
     </ul>
 </nav>
-<div class="users view large-9 medium-8 columns content">
-    <h3>Statut VPN</h3>
-<table>
-<tr>
-<th>Common Name</th>
-<th>Real Address</th>
-<th>Virtual Address</th>
-<th>Bytes Received</th>
-<th>Bytes Sent</th>
-<th>Connected Since</th>
-<th>Last Ref</th>
-</tr>
-<?php
-foreach($listeCo as $co):
-?>
-<tr>
-<td><?= $co['cn']; ?></td>
-<td><?= $co['real_addr']; ?></td>
-<td><?= $co['virt_addr']; ?></td>
-<td><?= $co['b_rx']; ?></td>
-<td><?= $co['b_tx']; ?></td>
-<td><?= $co['conn_since']; ?></td>
-<td><?= $co['last_ref']; ?></td>
-</tr>
-<?php
-endforeach;
-?>
-</table>
+        </div>
+        
+        <div class="col-lg-9">
+            <div class="text-center">
+                <h2>Statut VPN</h2>
+            </div>
+                <table class="table table-striped">
+                <tr>
+                <th>Common Name</th>
+                <th>Real Address</th>
+                <th>Virtual Address</th>
+                <th>Bytes Received</th>
+                <th>Bytes Sent</th>
+                <th>Connected Since</th>
+                <th>Last Ref</th>
+                </tr>
+                <?php
+                foreach($listeCo as $co):
+                ?>
+                <tr>
+                <td><?= $co['cn']; ?></td>
+                <td><?= $co['real_addr']; ?></td>
+                <td><?= $co['virt_addr']; ?></td>
+                <td><?= $co['b_rx']; ?></td>
+                <td><?= $co['b_tx']; ?></td>
+                <td><?= $co['conn_since']; ?></td>
+                <td><?= $co['last_ref']; ?></td>
+                </tr>
+                <?php
+                endforeach;
+                ?>
+                </table>
+        </div>
+    </div>
 </div>
