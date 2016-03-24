@@ -34,6 +34,23 @@ class VpnController extends AppController
 		]);
 		$user->vpn_compte->bp = $this->_convertSize($user->vpn_compte->bp_used);
 		$user->vpn_compte->bp_day = $this->_convertSize($user->vpn_compte->bp_used_day);
+
+		$openvpnStatusFile = Configure::read("OpenVPNStatusFile");
+		$status = file_get_contents($openvpnStatusFile);
+
+		$re = "/OpenVPN CLIENT LIST\\nUpdated,(.*)\\n([\\w-,.: \\n]*)\\nROUTING TABLE\\n([\\w-,.: \\n]*)\\nGLOBAL STATS\\n([\\w-,.: \\/\\n]*)\\nEND/iu"; 
+
+		preg_match($re, $status, $matches);
+
+		list($data, $lastUpdate, $connected, $routing, $global) = $matches;
+		$connected = explode("\n",$connected);
+		foreach($connected as $i => $c){
+			$cur_user = explode(",",$c);
+			list($cn, $real_addr, $b_rx, $b_tx, $conn_since) = $cur_user;
+			if($cn == $user->vpn_compte->common_name)
+				$user->vpn_compte->bp_day = $this->_convertSize($user->vpn_compte->bp_used_day + $b_rx + $b_tx);
+		}
+
 		$this->set(compact('user'));
 	}
 
@@ -145,7 +162,8 @@ class VpnController extends AppController
 
 	public function vpnStatus(){
 		$this->isAuthorized(2);
-		$status = file_get_contents("/var/run/openvpn/status.log");
+		$openvpnStatusFile = Configure::read("OpenVPNStatusFile");
+		$status = file_get_contents($openvpnStatusFile);
 
 		$re = "/OpenVPN CLIENT LIST\\nUpdated,(.*)\\n([\\w-,.: \\n]*)\\nROUTING TABLE\\n([\\w-,.: \\n]*)\\nGLOBAL STATS\\n([\\w-,.: \\/\\n]*)\\nEND/iu"; 
 

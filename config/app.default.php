@@ -323,6 +323,7 @@ return [
     'Session' => [
         'defaults' => 'php',
     ],
+    'OpenVPNStatusFile' => "C:/GominesData/TestData/openvpn-status.log",
     'FileFolders' => [
         'AClasser'  => [
             'folder' => 'C:/GominesData/AClasser',
