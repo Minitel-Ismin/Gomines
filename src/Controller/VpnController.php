@@ -27,28 +27,19 @@ class VpnController extends AppController
 	 *
 	 * @return void
 	 */
-	public function index()
-	{
+	public function index(){
 		$user = $this->Users->get($this->Auth->user()['id'], [
 			'contain' => ['VpnComptes']
 		]);
 		$user->vpn_compte->bp = $this->_convertSize($user->vpn_compte->bp_used);
 		$user->vpn_compte->bp_day = $this->_convertSize($user->vpn_compte->bp_used_day);
 
-		$openvpnStatusFile = Configure::read("OpenVPNStatusFile");
-		$status = file_get_contents($openvpnStatusFile);
-
-		$re = "/OpenVPN CLIENT LIST\\nUpdated,(.*)\\n([\\w-,.: \\n]*)\\nROUTING TABLE\\n([\\w-,.: \\n]*)\\nGLOBAL STATS\\n([\\w-,.: \\/\\n]*)\\nEND/iu"; 
-
-		preg_match($re, $status, $matches);
-
-		list($data, $lastUpdate, $connected, $routing, $global) = $matches;
-		$connected = explode("\n",$connected);
-		foreach($connected as $i => $c){
-			$cur_user = explode(",",$c);
-			list($cn, $real_addr, $b_rx, $b_tx, $conn_since) = $cur_user;
-			if($cn == $user->vpn_compte->common_name)
-				$user->vpn_compte->bp_day = $this->_convertSize($user->vpn_compte->bp_used_day + $b_rx + $b_tx);
+		$status = $this->_getVPNStatus();
+		foreach($status as $i => $c){
+			if($c['cn'] == $user->vpn_compte->common_name){
+				$bp = $user->vpn_compte->bp_used_day + $c['b_rx_raw'] + $c['b_tx_raw'];
+				$user->vpn_compte->bp_day = $this->_convertSize($bp);
+			}
 		}
 
 		$this->set(compact('user'));
@@ -192,7 +183,7 @@ class VpnController extends AppController
 		$this->set(compact("user"));
 	}
 
-	protected function _convertSize($size, $precision = 2){
+	static function _convertSize($size, $precision = 2){
 		$units = array('B', 'KB', 'MB', 'GB', 'TB'); 
 
 		$bytes = max($size, 0); 
@@ -262,7 +253,7 @@ class VpnController extends AppController
 	 *
 	 * Returns an array with all users
 	 */
-	protected function _getVPNStatus(){
+	static function _getVPNStatus(){
 		$openvpnStatusFile = Configure::read("OpenVPNStatusFile");
 		$status = file_get_contents($openvpnStatusFile);
 
@@ -278,13 +269,13 @@ class VpnController extends AppController
 		foreach($connected as $i => $c){
 			$user = explode(",",$c);
 			list($cn, $real_addr, $b_rx, $b_tx, $conn_since) = $user;
-			$b_rx = $this->_convertSize($b_rx);
-			$b_tx = $this->_convertSize($b_tx);
 			$listeCo[$real_addr] = array(
 				"cn" => $cn, 
 				"real_addr" => $real_addr, 
-				"b_rx" => $b_rx, 
-				"b_tx" => $b_tx,
+				"b_rx" => VpnController::_convertSize($b_rx),
+				"b_tx" => VpnController::_convertSize($b_tx),
+				"b_rx_raw" => $b_rx,
+				"b_tx_raw" => $b_tx,
 				"conn_since" => $conn_since,
 				"virt_addr" => "",
 				"last_ref" => ""

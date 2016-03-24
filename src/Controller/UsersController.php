@@ -45,6 +45,12 @@ class UsersController extends AppController
 		$this->set('_serialize', ['user']);
 	}
 
+	// MON COMPTE
+	public function me(){
+		$user = $this->Users->get($this->Auth->user()['id']);
+		$this->set(compact('user'));
+	}
+
 	/**
 	 * Add method
 	 *
@@ -77,11 +83,22 @@ class UsersController extends AppController
 	public function edit($id = null)
 	{
 		$this->isAuthorized(2);
-		$user = $this->Users->get($id, [
-			'contain' => []
-		]);
+		if($id == null)
+			return $this->redirect(['action' => 'index']);
+		try{
+			$user = $this->Users->get($id);
+		}catch(\Exception $e){
+			return $this->redirect(['action' => 'index']);
+		}
+		$droits = User::$tDroits;
 		if ($this->request->is(['patch', 'post', 'put'])) {
+			$numDroits = 0;
+			foreach($droits as $d => $v){
+				if($this->request->data[$d] >= 1)
+					$numDroits += $v;
+			}
 			$user = $this->Users->patchEntity($user, $this->request->data);
+			$user->droits = $numDroits;
 			if ($this->Users->save($user)) {
 				$this->Flash->success(__('The user has been saved.'));
 				return $this->redirect(['action' => 'index']);
@@ -89,7 +106,10 @@ class UsersController extends AppController
 				$this->Flash->error(__('The user could not be saved. Please, try again.'));
 			}
 		}
-		$this->set(compact('user'));
+		foreach($droits as $d => $v){
+			$uDroits[$d] = (($user->droits & $v) == 0) ? 0 : 1;
+		}
+		$this->set(compact('user', 'droits', 'uDroits'));
 		$this->set('_serialize', ['user']);
 	}
 
@@ -171,7 +191,7 @@ class UsersController extends AppController
 		$user['droits'] = User::$tDroits['Utilisateur'];
 		if ($this->Users->save($user)) {
 			$this->Flash->success(__('Compte bien activé.'));
-			return $this->redirect(['action' => 'index']);
+			return $this->redirect($this->referer());
 		} else {
 			$this->Flash->error(__('Erreur à la sauvegarde des modifications.'));
 		}

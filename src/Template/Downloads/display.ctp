@@ -73,7 +73,7 @@ if(empty($subcat)):
                 <div class="row tools-container">
                     <?= $this->Html->link($htmlVPN,['controller' => 'Vpn'], ['escape' => false]); ?>
                     <?= $this->Html->link($htmlUpload,['controller' => 'Upload'], ['escape' => false]); ?>
-                    <?= $this->Html->link($htmlAdmin,['controller' => 'users'], ['escape' => false]); ?>
+                    <?= $this->Html->link($htmlAdmin,['controller' => 'Admin', 'action' => 'dashboard'], ['escape' => false]); ?>
                 </div>
     
 <?php

@@ -1,28 +1,40 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $user->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Vpn Comptes'), ['controller' => 'VpnComptes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Vpn Compte'), ['controller' => 'VpnComptes', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
-    <fieldset>
-        <legend><?= __('Edit User') ?></legend>
-        <?php
-            echo $this->Form->input('nom');
-            echo $this->Form->input('prenom');
-            echo $this->Form->input('email');
-            echo $this->Form->input('password');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<div class="container">
+    <div class="row">
+        <?= $this->element('AdminMenu'); ?>
+        <div class="col-lg-9">
+            <h1><?= __('Editer l\'utilisateur') ?></h1>
+            <?= $this->Form->create($user) ?>
+            <div class="input-group">
+                <span class="input-group-addon">Nom</span>
+                <?php
+                echo $this->Form->input('nom', ['label' => false, 'div' => false, 'class' => 'form-control']);
+                ?>
+            </div><br>
+            <div class="input-group">
+                <span class="input-group-addon">Prénom</span>
+                <?php
+                echo $this->Form->input('prenom', ['label' => false, 'div' => false, 'class' => 'form-control']);
+                ?>
+            </div><br>
+            <div class="input-group">
+                <span class="input-group-addon">E-Mail</span>
+                <?php
+                echo $this->Form->input('email', ['label' => false, 'div' => false, 'class' => 'form-control']);
+                ?>
+            </div><br>
+            <div class="input-group">
+                <span class="input-group-addon">Mot de Passe</span>
+                <?php
+                echo $this->Form->input('password', ['label' => false, 'div' => false, 'class' => 'form-control']);
+                ?>
+            </div><br>
+                <?php
+                foreach($droits as $d => $v){
+                    echo $this->Form->input($d, ['value'=>$v, 'type' => 'checkbox', 'checked' => $uDroits[$d]]);
+                }
+            ?>
+            <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+            <?= $this->Form->end() ?>
+        </div>
+    </div>
 </div>

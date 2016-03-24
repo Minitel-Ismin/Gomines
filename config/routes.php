@@ -57,7 +57,12 @@ Router::scope('/', function ($routes) {
     $routes->redirect('/sylvester/', ['controller' => 'Downloads', 'action' => 'display']);
     $routes->connect('/sylvester/:virtFolder/**', ['controller' => 'Downloads', 'action' => 'files'],['pass' => array('virtFolder')]);
     $routes->connect('/mysteries/*', ['controller' => 'Downloads', 'action' => 'download']);
-
+    $routes->connect('/acme/',['controller' => 'Admin', 'action' => 'dashboard']);
+    $routes->connect('/acme/BugsBunny',['controller' => 'Admin', 'action' => 'manageVPN']);
+    $routes->connect('/acme/Granny',['controller' => 'Users', 'action' => 'index']);
+    $routes->connect('/acme/Granny/bake/*',['controller' => 'Users', 'action' => 'edit']);
+    $routes->connect('/acme/YosemiteSam',['controller' => 'Admin', 'action' => 'manageDownloads']);
+    $routes->connect('/acme/FoghornLeghorn',['controller' => 'Admin', 'action' => 'tools']);
     /**
      * Connect catchall routes for all controllers.
      *
