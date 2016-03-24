@@ -33,6 +33,7 @@ class User extends Entity
     ];
 	
 	public static $tDroits = array(
+		"AdminVPN" => 8,
 		"AdminFTP" => 4,
 		"Admin" => 2,
 		"Utilisateur" => 1
