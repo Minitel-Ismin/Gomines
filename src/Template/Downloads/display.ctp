@@ -19,6 +19,10 @@ use Cake\Error\Debugger;
 use Cake\Network\Exception\NotFoundException;
 
 $title = "Accueil";
+
+$this->Html->script('soundmanager2.js', array('block' => 'footerscript'));
+$this->Html->script('titiVoitGrominet.js', array('block' => 'footerscript'));
+
 ?>
                 
                 <div class="bg"></div>

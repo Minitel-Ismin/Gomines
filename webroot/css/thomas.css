@@ -15,7 +15,7 @@ footer{
 }
 
 .navbar{
-    z-index: 10;
+    z-index: 1000;
 }
 
 .bg{
@@ -113,8 +113,33 @@ footer{
     box-shadow: 0px 0px 5px #909090;
 }
 
-.list-header{
+.parent-folder{
+    position: relative;
+    left: 5px;
     font-weight: bold;
+}
+
+.admin-menu{
+    list-style: none;
+}
+
+.admin-menu-header{
+    font-weight: bold;
+    font-size: 20px;
+    border-bottom: 2px solid #882324;
+}
+
+.admin-menu-item{
+    margin: 5px;
+}
+
+.admin-menu-item a{
+    color: #707070;
+    margin: 5px;
+}
+
+.admin-menu-item:hover{
+    border-left: 3px solid #882324;
 }
 
 #dropper{

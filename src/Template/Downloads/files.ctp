@@ -12,7 +12,7 @@
 			<ul>
                 <li class="files">
                     <span class="glyphicon glyphicon-folder-open"></span>
-                    <?= $this->Html->link("Dossier Parent", ["action" => "files", $vpath, "../"]); ?>
+                    <?= $this->Html->link("Dossier Parent", ["action" => "files", $vpath, "../"], ["class" => "parent-folder"]); ?>
                 </li>
                 <?php
                 foreach($files[0] as $d):
