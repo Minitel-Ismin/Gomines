@@ -22,6 +22,7 @@ class AdminController extends AppController
 
 	public function dashboard()
 	{
+		$this->isAuthorized(2);
 		// Demandes de compte VPN
 		$demandeVPN = $this->VpnComptes->find('all', [
 			'conditions' => ['or' =>['VpnComptes.actif' => 0, 'VpnComptes.cert is null', 'VpnComptes.pkey is null']],
@@ -51,6 +52,7 @@ class AdminController extends AppController
 	}
 
 	public function tools(){
+		$this->isAuthorized(2);
 		$dhcpScript = Configure::read("rogueDHCPServerScript");
 		if ($this->request->is('post')) {
 			$output = "";

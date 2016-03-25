@@ -17,7 +17,7 @@
 					<tr>
 						<td><?= $dc->prenom ?> <?= $dc->nom ?></td>
 						<td><?= $dc->email ?></td>
-						<td><?= $this->Html->link("Activer", ['controller' => 'users', 'action' => 'activate', $dc->id]) ?></td>
+						<td><?= $this->Html->link("Activer", ['controller' => 'users', 'action' => 'activate', $dc->id]) ?> <?= $this->Form->postLink(__("Supprimer"), ['controller' => 'users', 'action' => 'delete', $dc->id]) ?></td>
 					</tr>
 				<?php endforeach; ?>
 			</table>
