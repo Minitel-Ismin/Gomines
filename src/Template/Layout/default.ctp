@@ -39,6 +39,19 @@ $cakeDescription = 'Gomines';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//<?= $_SERVER['SERVER_ADDR'] ?>/analytics/";
+        _paq.push(['setTrackerUrl', u+'st.php']);
+        _paq.push(['setSiteId', 1]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'st.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//<?= $_SERVER['SERVER_ADDR'] ?>/analytics/st.php?idsite=1" style="border:0;" alt="" /></p></noscript>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
