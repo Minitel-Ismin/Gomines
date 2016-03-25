@@ -3,11 +3,11 @@
         <h1>Login</h1>
         <?= $this->Form->create() ?>
         <div class="input-group">
-             <span class="input-group-addon">Email</span>
+             <span class="input-group-addon addon-size-fixed">Email</span>
              <?= $this->Form->input('email', ['label' => false, 'div' => false, 'class' => 'form-control']) ?>
         </div><br>
         <div class="input-group">
-             <span class="input-group-addon">Password</span>
+             <span class="input-group-addon addon-size-fixed">Password</span>
              <?= $this->Form->input('password', ['label' => false, 'div' => false, 'class' => 'form-control']) ?>
         </div>
         <?= $this->Form->checkbox('remember_me') ?> Connexion automatique<br><br>

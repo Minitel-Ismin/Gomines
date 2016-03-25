@@ -33,6 +33,7 @@ footer{
     z-index: 25;
     top: -114px;
     left: -70px;
+    pointer-events: none;
 }
 
 .titi-img{
@@ -40,6 +41,7 @@ footer{
     z-index: 25;
     bottom: -30px;
     left: 17%;
+    pointer-events: none;
 }
 
 .cat-container, .tools-container{
@@ -111,6 +113,11 @@ footer{
     font-size: 20px;
     padding: 15px;
     box-shadow: 0px 0px 5px #909090;
+}
+
+.folder{
+    position: relative;
+    left: 5px;
 }
 
 .parent-folder{
