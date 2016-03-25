@@ -27,7 +27,12 @@
                         <td><?= $u['user']['nom'] ?></td>
                         <td><?= $u['bp'] ?></td>
                         <td><?= $u['bp_day'] ?></td>
-                        <td><?= $this->Html->link("Reset",['controller' => 'vpn', 'action' => 'vpnResetBW', $u['user']['id']]) ?></td>
+                        
+                        <td>
+                            <div class="btn-group">
+                            <?= $this->Html->link("Reset",['controller' => 'vpn', 'action' => 'vpnResetBW', $u['user']['id']], ["class" => "btn btn-default"]) ?>
+                            </div>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </table>

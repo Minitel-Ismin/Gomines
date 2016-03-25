@@ -1,4 +1,4 @@
-body a, body a:hover{
+body a{
     text-decoration: none;
     font-family: 'Open sans', 'Lora', serif;
     font-size: 18px;
@@ -46,7 +46,7 @@ footer{
 
 .bugs-img{
     z-index: 25;
-    position: absolute;
+    position: fixed;
     pointer-events: none;
     left: 170px;
 }
