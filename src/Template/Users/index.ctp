@@ -16,7 +16,7 @@
                     <tr>
                         <td><?= $this->Html->link(h($user->nom), ['action' => 'edit', $user->id]) ?></td>
                         <td><?= $this->Html->link(h($user->prenom), ['action' => 'edit', $user->id]) ?></td>
-                        <td><?= $this->Html->link(__("Voir"), ['action' => 'edit', $user->id]) ?></td>
+                        <td><?= $this->Html->link(__("Voir"), ['action' => 'edit', $user->id]) ?> <?= $this->Html->link(__("Supprimer"), ['action' => 'delete', $user->id]) ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
