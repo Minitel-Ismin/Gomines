@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <?= $this->element('AdminMenu'); ?>
-        <div class="col-lg-9">
+        <div class="col-lg-8">
 
                 <h3 class="text-center">Utilisateurs VPN</h3>
                 <div class="paginator text-center">

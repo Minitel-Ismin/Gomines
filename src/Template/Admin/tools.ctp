@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
 		<?= $this->element('AdminMenu'); ?>
-		<div class="col-lg-9 col-md-8 column content">
+		<div class="col-lg-7 col-md-8 column content">
 			<h1>Détection de serveurs DHCP</h1>
 			<p>La détection de serveurs DHCP sur le réseau fonctionne en écoutant le réseau sur le port 67 en udp (<code>tcpdump -n -e udp port 67</code>) tout en réalisant une requête DHCP grâce à nmap (<code>nmap --script broadcast-dhcp-discover</code>).</p>
 			<?php
@@ -10,7 +10,7 @@
 			echo $this->Form->end();
 			if(isset($dhcp)){
 				?>
-				<table class="table">
+				<table class="table" style="margin-top: 10px">
 					<tr>
 						<th>Commande</th>
 						<th>Adresse MAC</th>

@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <?= $this->element('AdminMenu'); ?>
-        <div class="col-lg-9">
+        <div class="col-lg-8">
             <div class="text-center">
                 <h2>Statut VPN</h2>
             </div>

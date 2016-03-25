@@ -44,6 +44,13 @@ footer{
     pointer-events: none;
 }
 
+.bugs-img{
+    z-index: 25;
+    position: absolute;
+    pointer-events: none;
+    left: 170px;
+}
+
 .cat-container, .tools-container{
     position: relative;
     margin-top: 100px;

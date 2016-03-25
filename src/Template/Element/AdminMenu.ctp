@@ -1,5 +1,7 @@
 <nav class="col-lg-3 col-md-4 column" id="actions-sidebar">
-
+    <div class="bugs-img">
+        <?=$this->Html->image('bugsBunny.png'); ?>
+    </div>
     <ul class="admin-menu affix">
         <li class="admin-menu-header"><?= __('Administration') ?></li>
         <li class="admin-menu-item"><?= $this->Html->link('Utilisateurs',['controller' => 'users', 'action' => 'index']) ?></li>
