@@ -1,13 +1,6 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-lg-3">
-
-        <ul class="list-group">
-            <li class="list-group-item list-header"><?= __('Actions') ?></li>
-            <li class="list-group-item"><?= $this->Html->link(__('Retour'), ['controller' => 'vpn', 'action' => 'index']) ?> </li>
-        </ul>
-
-        </div>
+        <?= $this->element('AdminMenu'); ?>
         <div class="col-lg-9">
 
                 <h3 class="text-center">Utilisateurs VPN</h3>

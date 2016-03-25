@@ -8,8 +8,10 @@
 <?php
 $this->Html->script('fileManager.js', array('block' => 'footerscript'));
 ?>
-     
-    <div class="container">
+<div class="container-fluid">
+    <div class="row">
+        <?= $this->element('AdminMenu'); ?>
+        <div class="col-lg-9 col-md-8 column content">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="text-center">

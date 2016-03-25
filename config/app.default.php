@@ -326,6 +326,7 @@ return [
     'OpenVPNStatusFile' => "C:/GominesData/TestData/openvpn-status.log",
     'DashingWidgetURL' => "http://127.0.0.1:3030/widgetURL",
     'DashingToken' => "DASHINGTOKEN",
+    'rogueDHCPServerScript' => "D:/GominesData/dhcpscript.bat",
     'FileFolders' => [
         'AClasser'  => [
             'folder' => 'C:/GominesData/AClasser',

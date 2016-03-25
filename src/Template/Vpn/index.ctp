@@ -4,8 +4,6 @@
             <ul class="list-group">
                 <li class="list-group-item list-header" style="font-size: 20px"><?= __('Actions') ?></li>
                 <li class="list-group-item"><?= $this->Html->link('Télécharger la configuration', ['action' => 'dlConfig']) ?> </li>
-                <?= ($user['droits'] & 2) ? "<li class='list-group-item'>".$this->Html->link('Statut du VPN',['action' => 'vpnStatus'])."</li>" : "" ?>
-                <?= ($user['droits'] & 2) ? "<li class='list-group-item'>".$this->Html->link('Utilisateurs du VPN',['action' => 'vpnUsers'])."</li>" : "" ?>
                 <li class='list-group-item'><?= $this->Html->link(__('Retour'), ['controller' => 'pages', 'action' => 'index']) ?> </li>
             </ul>
         </div>
@@ -41,7 +39,7 @@
                         <p>Le VPN est accessible pour 1€/an.</p>
                         <p>Les identifiants fournis sont personnels et utilisés pour authentifier l'accès au VPN ainsi que les activités des utilisateurs.</p>
                         <p>La bande passante allouée à un utilisateur est limitée à 10mbits/s (environ 1.25mo/s).</p>
-                        <p>La bande passante consommée par un utilisateur ne dois pas excéder 1Go par semaine. Ainsi nous vous conseillons de ne pas utiliser le VPN pour vos téléchargements et autres mises à jour.</p>
+                        <p>La bande passante consommée par un utilisateur ne dois pas excéder 1Go par jour. Ainsi nous vous conseillons de ne pas utiliser le VPN pour vos téléchargements et autres mises à jour.</p>
                     </div>
                 </div>
                 <div class="panel panel-default">

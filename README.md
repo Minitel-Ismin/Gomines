@@ -16,6 +16,8 @@
 - Add rogue DHCP server detection : tcpdump -r ~/dhcp.pcap -n  -e
 - Review parent folder link- Clean vpn-status computation + add config openvpn-status.log path
 - Add regex support in file manager
+- Add disk space available
+
 ## Install
 - git pull
 - composer install (or if you do not have composer : php composer.phar install)

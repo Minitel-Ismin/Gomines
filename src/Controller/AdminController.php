@@ -49,4 +49,25 @@ class AdminController extends AppController
 
 		$this->set(compact('demandeVPN', 'demande', 'indicateurs'));
 	}
+
+	public function tools(){
+		$dhcpScript = Configure::read("rogueDHCPServerScript");
+		if ($this->request->is('post')) {
+			$output = "";
+			$h = popen($dhcpScript, "r");
+			$output = fread($h, 2096);
+			pclose($h);
+			$re = "/(.*) ([0-9a-f:]{17}) (.*) ([0-9\\.]{9,21}) (.*)(Reply|Request)/";
+			preg_match_all($re, $output, $matches);
+			$reponses = [];
+			foreach($matches[0] as $k => $m){
+				$reponses[] = [
+					"MAC" => $matches[2][$k],
+					"IP" => $matches[4][$k],
+					"Command" => $matches[6][$k],
+				];
+			}
+			$this->set(["dhcp" => $reponses]);
+		}
+	}
 }
