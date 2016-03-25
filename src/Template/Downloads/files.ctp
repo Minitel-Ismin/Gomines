@@ -19,7 +19,7 @@
                     ?>
                 <li class="files">
                     <span class="glyphicon glyphicon-folder-open"></span>
-                    <?= $this->Html->link($d, ["action" => "files", $vpath, $d]); ?>
+                    <?= $this->Html->link($d, ["action" => "files", $vpath, $d], ["class" => "folder"]); ?>
                 </li>
                 <?php
                 endforeach;
