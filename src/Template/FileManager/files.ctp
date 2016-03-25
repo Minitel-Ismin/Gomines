@@ -53,7 +53,7 @@ $this->Html->script('fileManager.js', array('block' => 'footerscript'));
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="input-group">
-                          <span class="input-group-addon" id="basic-addon3">Nouveau nom</span>
+                          <span class="input-group-addon addon-size-fixed" id="basic-addon3">Nouveau nom</span>
                           <input type="text" class="form-control" id="newName" aria-describedby="basic-addon3">
                         </div>
                     </div>
@@ -62,7 +62,7 @@ $this->Html->script('fileManager.js', array('block' => 'footerscript'));
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="input-group">
-                          <span class="input-group-addon" id="basic-addon3">RegEx</span>
+                          <span class="input-group-addon addon-size-fixed" id="basic-addon3">RegEx</span>
                           <input type="text" class="form-control" id="newName" aria-describedby="basic-addon3">
                         </div>
                     </div>

@@ -17,7 +17,12 @@
 					<tr>
 						<td><?= $dc->prenom ?> <?= $dc->nom ?></td>
 						<td><?= $dc->email ?></td>
-						<td><?= $this->Html->link("Activer", ['controller' => 'users', 'action' => 'activate', $dc->id]) ?> <?= $this->Form->postLink(__("Supprimer"), ['controller' => 'users', 'action' => 'delete', $dc->id]) ?></td>
+						<td>
+                            <div class="btn-group">
+                                <?= $this->Html->link("Activer", ['controller' => 'users', 'action' => 'activate', $dc->id], ["class" => "btn btn-default"]) ?> 
+                                <?= $this->Form->postLink(__("Supprimer"), ['controller' => 'users', 'action' => 'delete', $dc->id], ["class" => "btn btn-default"]) ?>
+                            </div>
+                        </td>
 					</tr>
 				<?php endforeach; ?>
 			</table>
@@ -35,7 +40,11 @@
 						<td><?= $dv->user->prenom ?> <?= $dv->user->nom ?></td>
 						<td><?= ($dv->actif) ? "Oui" : "Non" ?></td>
 						<td><?= (is_null($dv->cert) or is_null($dv->pkey)) ? "Non" : "Oui" ?></td>
-						<td><?= ($dv->actif) ? $this->Html->link("Générer", ['controller' => 'vpn', 'action' => 'generateVPN', $dv->user_id]) : $this->Html->link("Activer", ['controller' => 'vpn', 'action' => 'activateVPN', $dv->user_id]) ?></td>
+						<td>
+                            <div class="btn-group">
+                            <?= ($dv->actif) ? $this->Html->link("Générer", ['controller' => 'vpn', 'action' => 'generateVPN', $dv->user_id], ["class" => "btn btn-default"]) : $this->Html->link("Activer", ['controller' => 'vpn', 'action' => 'activateVPN', $dv->user_id], ["class" => "btn btn-default"]) ?>
+                            </div>
+                        </td>    
 					</tr>
 				<?php endforeach; ?>
 			</table>

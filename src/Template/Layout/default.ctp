@@ -102,6 +102,7 @@ $cakeDescription = 'Gomines';
 		<?= $this->Html->script("jquery.min.js") ?>
 		<?= $this->Html->script("jquery-ui.js") ?>
 		<?= $this->Html->script("bootstrap.min.js") ?>
+		<?= $this->Html->script("alert.js") ?>
 		<?= $this->Html->script("site.js") ?>
     <?= $this->fetch('footerscript') ?>
         Proud to be Gomines version <?php system("git log --pretty=format:%h -n 1"); ?> !

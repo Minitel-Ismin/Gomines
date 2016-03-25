@@ -1,7 +1,11 @@
-body a, body a:hover{
+body a{
     text-decoration: none;
     font-family: 'Open sans', 'Lora', serif;
     font-size: 18px;
+}
+
+body a:hover{
+    text-decoration: none;
 }
 
 footer{
@@ -46,7 +50,7 @@ footer{
 
 .bugs-img{
     z-index: 25;
-    position: absolute;
+    position: fixed;
     pointer-events: none;
     left: 170px;
 }
@@ -121,6 +125,12 @@ footer{
     padding: 15px;
     box-shadow: 0px 0px 5px #909090;
     z-index: 1001;
+}
+
+.close{
+    right: -7px !important;
+    top: 7px !important;
+    font-size: 16px;
 }
 
 .folder{

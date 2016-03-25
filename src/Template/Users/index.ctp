@@ -16,7 +16,12 @@
                     <tr>
                         <td><?= $this->Html->link(h($user->nom), ['action' => 'edit', $user->id]) ?></td>
                         <td><?= $this->Html->link(h($user->prenom), ['action' => 'edit', $user->id]) ?></td>
-                        <td><?= $this->Html->link(__("Voir"), ['action' => 'edit', $user->id]) ?> <?= $this->Html->link(__("Supprimer"), ['action' => 'delete', $user->id]) ?></td>
+                        <td>
+                            <div class="btn-group">
+                                <?= $this->Html->link(__("Voir"), ['action' => 'edit', $user->id], ["class" => "btn btn-default"]) ?> 
+                            <?= $this->Html->link(__("Supprimer"), ['action' => 'delete', $user->id], ["class" => "btn btn-default"]) ?>
+                            </div>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
