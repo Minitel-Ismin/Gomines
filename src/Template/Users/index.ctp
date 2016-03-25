@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <?= $this->element('AdminMenu'); ?>
         <div class="col-lg-9 col-md-4">

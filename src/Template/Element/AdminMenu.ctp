@@ -1,6 +1,6 @@
 <nav class="col-lg-3 col-md-4 column" id="actions-sidebar">
     <ul class="list-group">
-        <li class="list-group-item active"><?= __('Administration') ?></li>
+        <li class="list-group-item list-header"><?= __('Administration') ?></li>
         <li class="list-group-item"><?= $this->Html->link('Utilisateurs',['controller' => 'users', 'action' => 'index']) ?></li>
         <li class="list-group-item"><?= $this->Html->link('VPN',  ['action' => 'manageVPN']) ?> </li>
         <li class="list-group-item"><?= $this->Html->link('Upload',['action' => 'manageDownloads']) ?></li>

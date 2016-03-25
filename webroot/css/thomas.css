@@ -137,3 +137,11 @@ footer{
     max-height: 400px;
     overflow: auto;
 }
+
+.addon-size-fixed{
+    width: 120px;
+}
+
+.input-group{
+    width: 100%;
+}
