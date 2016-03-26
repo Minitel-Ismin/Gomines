@@ -48,6 +48,14 @@ footer{
     pointer-events: none;
 }
 
+.easter-egg-img{
+    position: absolute;
+    z-index: 25;
+    pointer-events: none;
+    right: -10%;
+    bottom: -10%;
+}
+
 .bugs-img{
     z-index: 25;
     position: fixed;

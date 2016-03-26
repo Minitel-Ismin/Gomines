@@ -34,6 +34,9 @@ $this->Html->script('titiVoitGrominet.js', array('block' => 'footerscript'));
                         <div class="titi-img">
                             <?=$this->Html->image('titi.png'); ?>
                         </div>
+                        <div class="easter-egg-img">
+                            <?=$this->Html->image('oeuf-paques.png'); ?>
+                        </div>
 <?php
 foreach($conf as $name => $item):
 	if(isset($item['hidden']) && $item['hidden'])
