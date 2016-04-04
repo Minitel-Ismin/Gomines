@@ -1,10 +1,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-3">
-            <ul class="list-group">
-                <li class="list-group-item list-header" style="font-size: 20px"><?= __('Actions') ?></li>
-                <li class="list-group-item"><?= $this->Html->link('Télécharger la configuration', ['action' => 'dlConfig']) ?> </li>
-                <li class='list-group-item'><?= $this->Html->link(__('Retour'), ['controller' => 'pages', 'action' => 'index']) ?> </li>
+            <ul class="admin-menu affix">
+                <li class="admin-menu-header"><?= __('Actions') ?></li>
+                <li class="admin-menu-item"><?= $this->Html->link('Télécharger la configuration', ['action' => 'dlConfig']) ?> </li>
+                <li class='admin-menu-item'><?= $this->Html->link(__('Retour'), ['controller' => 'pages', 'action' => 'index']) ?> </li>
             </ul>
         </div>
 
