@@ -27,7 +27,7 @@
             
             echo '<ol class="breadcrumb">';
             
-            echo '<li>'.$this->Html->link("..", ["action" => "files", $path, "../"]).'</li>';
+            echo '<li>'.$this->Html->link("Accueil", ["action" => "files", $path, "../"]).'</li>';
             
             foreach($folders as $foldersName){
                 $path = explode($foldersName, $vpath)[0];
