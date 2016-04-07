@@ -1,9 +1,10 @@
 <div class="bg"></div>
 <div class="container files-container">
-    
+
     <div class="row">
         <div class="col-lg-12">
             <div class="input-group">
+                <?= $this->Html->link("Pacman", ["controller" => "Pacman"], ['style' => 'display:none', 'id' => 'pacmanLink']); ?>
                 <span class="input-group-addon addon-size-fixed">Rechercher</span>
                 <input type="text" class="form-control" aria-label="..." id="searchInput">
                 <span class="input-group-btn">
@@ -12,10 +13,10 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-lg-12 path">
-            <?php 
+            <?php
             $folders = explode("/", $vpath);
             if($folders[count($folders)-1] == ""){
                 array_pop($folders);
@@ -24,11 +25,17 @@
             $path = "";
             $path = explode($folders[0], $vpath)[0];
             $path .= $folders[0];
-            
+
             echo '<ol class="breadcrumb">';
+<<<<<<< HEAD
             
             echo '<li>'.$this->Html->link("Accueil", ["action" => "files", $path, "../"]).'</li>';
             
+=======
+
+            echo '<li>'.$this->Html->link("..", ["action" => "files", $path, "../"]).'</li>';
+
+>>>>>>> e4731530b25f785c49344ff6255b95bedad0be0e
             foreach($folders as $foldersName){
                 $path = explode($foldersName, $vpath)[0];
                 $path .= $foldersName;
@@ -36,13 +43,13 @@
                     echo '<li class="active">'.$foldersName.'</li>';
                 else
                     echo '<li>'.$this->Html->link($foldersName, ["action" => "files", $path]).'</li>';
-            } 
-            
+            }
+
             echo '</ol>';
             ?>
         </div>
     </div>
-    
+
 	<div class="row">
 		<?php if($readme): ?>
 		<div class="col-lg-8">
