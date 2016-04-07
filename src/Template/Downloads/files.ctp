@@ -1,10 +1,11 @@
 <div class="bg"></div>
 <div class="container files-container">
-
+    
+    <?= $this->Html->link("Pacman", ["controller" => "Pacman"], ['style' => 'display:none', 'id' => 'pacmanLink']); ?>
+    
     <div class="row">
         <div class="col-lg-12">
             <div class="input-group">
-                <?= $this->Html->link("Pacman", ["controller" => "Pacman"], ['style' => 'display:none', 'id' => 'pacmanLink']); ?>
                 <span class="input-group-addon addon-size-fixed">Rechercher</span>
                 <input type="text" class="form-control" aria-label="..." id="searchInput">
                 <span class="input-group-btn">
@@ -27,15 +28,9 @@
             $path .= $folders[0];
 
             echo '<ol class="breadcrumb">';
-<<<<<<< HEAD
             
             echo '<li>'.$this->Html->link("Accueil", ["action" => "files", $path, "../"]).'</li>';
-            
-=======
 
-            echo '<li>'.$this->Html->link("..", ["action" => "files", $path, "../"]).'</li>';
-
->>>>>>> e4731530b25f785c49344ff6255b95bedad0be0e
             foreach($folders as $foldersName){
                 $path = explode($foldersName, $vpath)[0];
                 $path .= $foldersName;
