@@ -49,13 +49,14 @@
 		<?php if($readme): ?>
 		<div class="col-lg-8">
 			<?php endif; ?>
+            
 			<ul>
                 <li class="files">
                     <span class="glyphicon glyphicon-folder-open"></span>
                     <?= $this->Html->link("Dossier Parent", ["action" => "files", $vpath, "../"], ["class" => "parent-folder"]); ?>
                 </li>
                 <?php
-                foreach($files[0] as $d):
+                foreach($filesData[0] as $d):
                     ?>
                 <li class="files">
                     <span class="glyphicon glyphicon-folder-open"></span>
@@ -63,12 +64,13 @@
                 </li>
                 <?php
                 endforeach;
-                foreach($files[1] as $f):
-                    ?>
-                <li class="files">
-                    <span class="glyphicon glyphicon-file"></span>
-                    <?= $this->Html->link($f, ["action" => "files", urlencode($vpath), $f]); ?>
-                </li>
+                                
+                foreach($filesData[1] as $f):
+                ?>
+                    <li class="files">
+                        <?php echo '<span class="fa fa-file'.$f['type'].'-o" style="color: '.$f['color'].'"></span>'; ?>
+                        <?= $this->Html->link($f['file'], ["action" => "files", urlencode($vpath), $f['file']]); ?>
+                    </li>
                 <?php
                 endforeach;
                 ?>
