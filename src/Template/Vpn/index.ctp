@@ -21,7 +21,7 @@
                     <p>Votre compte est actif</p>
                     <p>Vous avez consommé : <?= $user['vpn_compte']['bp'] ?> depuis le 08/12/2015.</p>
                     <p>Vous avez consommé : <?= $user['vpn_compte']['bp_day'] ?> aujourd'hui</p>
-                    <p>Vous avez un quota d'un giga octet de données par jour, il est remis à zéro à minuit</p>
+                    <p>Vous avez un quota de deux giga octets de données par jour, il est remis à zéro à minuit</p>
                     <?php
                     endif;
                 else:
