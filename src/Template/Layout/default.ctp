@@ -33,6 +33,7 @@ $cakeDescription = 'Gomines';
     <?= $this->Html->css('bootstrap.min.css') ?>
     <?php // this->Html->css('base.css') ?>
     <?= $this->Html->css('thomas.css') ?>
+    <?= $this->Html->css('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css') ?>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
     
@@ -105,7 +106,7 @@ $cakeDescription = 'Gomines';
 		<?= $this->Html->script("alert.js") ?>
 		<?= $this->Html->script("site.js") ?>
 		<?= $this->Html->script("search.js") ?>
-    <?= $this->fetch('footerscript') ?>
+        <?= $this->fetch('footerscript') ?>
         Proud to be Gomines version <?php system("git log --pretty=format:%h -n 1"); ?> !
     </footer>
 </body>
