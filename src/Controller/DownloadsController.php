@@ -8,7 +8,7 @@ use Cake\Filesystem\File;
 
 class DownloadsController extends AppController
 {
-    
+
     private function docTypeAndColor($filename){
         $ext_excel = ['xls', 'xlt', 'xlm', 'xlsx', 'xlsm', 'xltx', 'xltm', 'xlsb', 'xla', 'xlam', 'xll', 'xlw', 'ods'];
         $ext_pdf = ['pdf'];
@@ -20,10 +20,10 @@ class DownloadsController extends AppController
         $ext_video = ['mkv'];
         $ext_code = ['html', 'XML', 'h', 'hpp', 'cpp', 'c', 'vhd', 'php', 'js', 'css', 'ctp', 'py'];
         $ext_powerpoint = ['ppt', 'pot', 'pps', 'pptx', 'pptm', 'potx', 'potm', 'ppam', 'ppsx', 'ppsm', 'sldx', 'sldm'];
-        
+
         $ext=strrchr($filename,'.');
         $ext=substr($ext,1);
-                    
+
         if(in_array($ext, $ext_excel))
             return ['type' => '-excel', 'color' => '#208A45'];
         if(in_array($ext, $ext_pdf))
@@ -44,10 +44,10 @@ class DownloadsController extends AppController
             return ['type' => '-code', 'color' => '#8080FF'];
         if(in_array($ext, $ext_powerpoint))
             return ['type' => '-powerpoint', 'color' => '#C14424'];
-                    
+
         return ['type' => '', 'color' => 'black'];
     }
-    
+
     public function display($subcat = "")
     {
     	$conf = Configure::read("FileFolders");
@@ -76,54 +76,61 @@ class DownloadsController extends AppController
     		throw new NotFoundException('Dossier inexistant.');
     	if(!isset($conf[$virtFolder]))
     		throw new NotFoundException('Dossier inexistant.');
-    	$directory = $conf[$virtFolder]['folder']."/";
-    	$vpath = $virtFolder."/";
+        $dir = $conf[$virtFolder]['folder'];
+        if(!is_array($dir))
+            $dir = [$dir];
 
-    	// Lecture du path
-    	if($path != ""){
-    		// TODO : Sanitize $path var
-    		$directory .= $path;
-    		$vpath .= $path;
-    	}
+        foreach($dir as $d)
+        {
+            $directory = $d."/";
+        	$vpath = $virtFolder."/";
 
-    	// Vérification et Lecture
-    	$file = is_file($directory);
-    	if($file){
-    		// Télécharger le fichier
-    		$name = substr(strrchr($directory,"/"),1);
-		    $this->response->file($directory, array(
-		        'download' => true,
-		        'name' => $name,
-		    ));
-		    $hFile = new File($directory);
-			$this->response->type($hFile->mime());
-		    return $this->response;
-    	}else{
-	    	$directory = new Folder($directory);
-	    	$files = $directory->read(true,$hiddenFiles);
+        	// Lecture du path
+        	if($path != ""){
+        		// TODO : Sanitize $path var
+        		$directory .= $path;
+        		$vpath .= $path;
+        	}
 
-            $readme = $directory->find("readme\..*");
-            if(count($readme) > 0){
-                $readme = $readme[0];
-                $readme = new File($directory->pwd()."/".$readme);
-                $readme = $readme->read();
-            }else{
-                $readme = false;
-            }
-            
-            $filesData[0] = $files[0];
-            
-            foreach($files[1] as $key => $f){                    
-                $filesData[1][$f] =    [   
-                                        'file' => $f, 
-                                        'type' => $this->docTypeAndColor($f)['type'],
-                                        'color' => $this->docTypeAndColor($f)['color']
-                                    ];
-            }
-            
-	    	$this->set(compact("filesData", "vpath", "readme"));
-			// files : liste des dossiers & fichiers du dossier courant
-			// vpath : répertoire dans lequel se trouve l'utilisateur
-    	}
+        	// Vérification et Lecture
+        	$file = is_file($directory);
+        	if($file){
+        		// Télécharger le fichier
+        		$name = substr(strrchr($directory,"/"),1);
+    		    $this->response->file($directory, array(
+    		        'download' => true,
+    		        'name' => $name,
+    		    ));
+    		    $hFile = new File($directory);
+    			$this->response->type($hFile->mime());
+    		    return $this->response;
+        	}else{
+    	    	$directory = new Folder($directory);
+    	    	$files = $directory->read(true,$hiddenFiles);
+
+                $readme = $directory->find("readme\..*");
+                if(count($readme) > 0){
+                    $readme = $readme[0];
+                    $readme = new File($directory->pwd()."/".$readme);
+                    $readme = $readme->read();
+                }else{
+                    $readme = false;
+                }
+
+                $filesData[0] = $files[0];
+
+                foreach($files[1] as $key => $f){
+                    $filesData[1][$f] =    [
+                                            'file' => $f,
+                                            'type' => $this->docTypeAndColor($f)['type'],
+                                            'color' => $this->docTypeAndColor($f)['color']
+                                        ];
+                }
+
+    	    	$this->set(compact("filesData", "vpath", "readme"));
+    			// files : liste des dossiers & fichiers du dossier courant
+    			// vpath : répertoire dans lequel se trouve l'utilisateur
+        	}
+        }
     }
 }

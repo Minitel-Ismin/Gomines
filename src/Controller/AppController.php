@@ -45,29 +45,29 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Cookie');
-		$this->loadComponent('Auth', [
-			'authenticate' => [
-				'FOC/Authenticate.Cookie' => [
-					'fields' => [
-						'username' => 'email',
-						'password' => 'password'
+				$this->loadComponent('Auth', [
+					'authenticate' => [
+						'FOC/Authenticate.Cookie' => [
+							'fields' => [
+								'username' => 'email',
+								'password' => 'password'
+							],
+		                    'userModel' => 'Users',
+		                    //'scope' => array('User.active' => 1)
+						],
+						'FOC/Authenticate.MultiColumn' => [
+							'fields' => [
+								'username' => 'email',
+								'password' => 'password'
+							],
+							'columns' => ['email','password']
+						]
 					],
-                    'userModel' => 'Users',
-                    //'scope' => array('User.active' => 1)
-				],
-				'FOC/Authenticate.MultiColumn' => [
-					'fields' => [
-						'username' => 'email',
-						'password' => 'password'
-					],
-					'columns' => ['email','password']
-				]
-			],
-			'loginAction' => [
-				'controller' => 'Users',
-				'action' => 'login'
-			]
-		]);
+					'loginAction' => [
+						'controller' => 'Users',
+						'action' => 'login'
+					]
+				]);
 
         // Allow the display action so our pages controller
         // continues to work.
@@ -89,11 +89,11 @@ class AppController extends Controller
         }
 		$this->set('authUser', $this->Auth->user());
     }
-	
+
 	public function isAuthorized($droits = 0)
     {
 		$user = $this->Auth->user();
-		
+
 		if($droits == 0){
 			return true;
 		}elseif(($user['droits'] & $droits) == 0){
