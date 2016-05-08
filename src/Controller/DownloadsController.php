@@ -70,6 +70,7 @@ class DownloadsController extends AppController
     	$hiddenFiles = Configure::read("HiddenFiles");
     	$directory = [];
     	$file = false;
+        $filesData = [[],[]];
 
     	// Lecture du dossier virtuel
     	if($virtFolder == "")
@@ -117,7 +118,7 @@ class DownloadsController extends AppController
                     $readme = false;
                 }
 
-                $filesData[0] = $files[0];
+                $filesData[0] = array_merge($filesData[0],$files[0]);
 
                 foreach($files[1] as $key => $f){
                     $filesData[1][$f] =    [
