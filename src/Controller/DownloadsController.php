@@ -178,23 +178,27 @@ class DownloadsController extends AppController
     		    return $this->response;
         	}else{
                 // Télécharge le dossier
-                $this->response->header("Content-Type", "application/octet-stream");
-                $this->response->header("Content-Disposition", 'attachment; filename="Gomines.zip"');
+                $dir = getcwd();
+                chdir($directory);
+                $fp = popen('zip -r - .', 'r');
+                chdir($dir);
 
-                $fp = popen('zip -r - '.$directory, 'r');
+                $this->response->header([
+                    "Content-Disposition" => 'attachment; filename="Gomines.zip"',
+                ]);
+                $this->response->type("zip");
 
-                // pick a bufsize that makes you happy (8192 has been suggested).
-                $bufsize = 8192;
-                $buff = '';
-                while( !feof($fp) ) {
-                   $buff = fread($fp, $bufsize);
-                   echo $buff;
-                }
-                pclose($fp);
+                $this->response->body(function() use ($fp) {
+                    $bufsize = 8192;
+                    $buff = '';
+                    while( !feof($fp) ) {
+                        $buff = fread($fp, $bufsize);
+                        echo $buff;
+                    }
+                    pclose($fp);
+                });
 
                 return $this->response;
-    			// files : liste des dossiers & fichiers du dossier courant
-    			// vpath : répertoire dans lequel se trouve l'utilisateur
         	}
         }
     }
