@@ -1,8 +1,8 @@
 <div class="bg"></div>
 <div class="container files-container">
-    
+
     <?= $this->Html->link("Pacman", ["controller" => "Pacman"], ['style' => 'display:none', 'id' => 'pacmanLink']); ?>
-    
+
     <div class="row">
         <div class="col-lg-12">
             <div class="input-group">
@@ -28,7 +28,7 @@
             $path .= $folders[0];
 
             echo '<ol class="breadcrumb">';
-            
+
             echo '<li>'.$this->Html->link("Accueil", ["action" => "files", $path, "../"]).'</li>';
 
             foreach($folders as $foldersName){
@@ -44,12 +44,17 @@
             ?>
         </div>
     </div>
+    <div class="row download-folder-link hidden-xl hidden-lg hidden-md hidden-sm hidden-xs">
+        <div class="col-lg-12">
+            <?= $this->Html->link("Telecharger ce dossier", ["action" => "download", $vpath], ['class' => 'btn btn-primary']) ?>
+        </div>
+    </div>
 
 	<div class="row">
 		<?php if($readme): ?>
 		<div class="col-lg-8">
 			<?php endif; ?>
-            
+
 			<ul>
                 <li class="files">
                     <span class="glyphicon glyphicon-folder-open"></span>
@@ -64,7 +69,7 @@
                 </li>
                 <?php
                 endforeach;
-                                
+
                 foreach($filesData[1] as $f):
                 ?>
                     <li class="files">

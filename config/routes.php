@@ -56,7 +56,7 @@ Router::scope('/', function ($routes) {
     $routes->connect('/tweety/*', ['controller' => 'Downloads', 'action' => 'display']);
     $routes->redirect('/sylvester/', ['controller' => 'Downloads', 'action' => 'display']);
     $routes->connect('/sylvester/:virtFolder/**', ['controller' => 'Downloads', 'action' => 'files'],['pass' => array('virtFolder')]);
-    $routes->connect('/mysteries/*', ['controller' => 'Downloads', 'action' => 'download']);
+    $routes->connect('/mysteries/:virtFolder/**', ['controller' => 'Downloads', 'action' => 'download'],['pass' => array('virtFolder')]);
     $routes->connect('/acme/',['controller' => 'Admin', 'action' => 'dashboard']);
     $routes->connect('/acme/BugsBunny',['controller' => 'vpn', 'action' => 'vpn-status']);
     $routes->connect('/acme/BugsBunny/carrot',['controller' => 'vpn', 'action' => 'vpn-users']);

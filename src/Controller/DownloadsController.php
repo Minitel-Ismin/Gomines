@@ -134,4 +134,68 @@ class DownloadsController extends AppController
         	}
         }
     }
+
+    // TO-DO: Bien nettoyer $path
+    public function download($virtFolder = "", $path = ""){
+        // Récupération Conf + Init variables
+    	$conf = Configure::read("FileFolders");
+    	$directory = [];
+    	$file = false;
+        $filesData = [[],[]];
+
+    	// Lecture du dossier virtuel
+    	if($virtFolder == "")
+    		throw new NotFoundException('Dossier inexistant.');
+    	if(!isset($conf[$virtFolder]))
+    		throw new NotFoundException('Dossier inexistant.');
+        $dir = $conf[$virtFolder]['folder'];
+        if(!is_array($dir))
+            $dir = [$dir];
+
+        foreach($dir as $d)
+        {
+            $directory = $d."/";
+        	$vpath = $virtFolder."/";
+
+        	// Lecture du path
+        	if($path != ""){
+        		// TODO : Sanitize $path var
+        		$directory .= $path;
+        		$vpath .= $path;
+        	}
+
+        	// Vérification et Lecture
+        	$file = is_file($directory);
+        	if($file){
+        		// Télécharger le fichier
+        		$name = substr(strrchr($directory,"/"),1);
+    		    $this->response->file($directory, array(
+    		        'download' => true,
+    		        'name' => $name,
+    		    ));
+    		    $hFile = new File($directory);
+    			$this->response->type($hFile->mime());
+    		    return $this->response;
+        	}else{
+                // Télécharge le dossier
+                $this->response->header("Content-Type", "application/octet-stream");
+                $this->response->header("Content-Disposition", 'attachment; filename="Gomines.zip"');
+
+                $fp = popen('zip -r - '.$directory, 'r');
+
+                // pick a bufsize that makes you happy (8192 has been suggested).
+                $bufsize = 8192;
+                $buff = '';
+                while( !feof($fp) ) {
+                   $buff = fread($fp, $bufsize);
+                   echo $buff;
+                }
+                pclose($fp);
+
+                return $this->response;
+    			// files : liste des dossiers & fichiers du dossier courant
+    			// vpath : répertoire dans lequel se trouve l'utilisateur
+        	}
+        }
+    }
 }
