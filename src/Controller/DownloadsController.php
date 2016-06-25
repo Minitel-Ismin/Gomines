@@ -180,7 +180,7 @@ class DownloadsController extends AppController
                 // Télécharge le dossier
                 $dir = getcwd();
                 chdir($directory);
-                $fp = popen('zip -r - .', 'r');
+                $fp = popen('zip -0 -r - .', 'r');
                 chdir($dir);
 
                 $this->response->header([

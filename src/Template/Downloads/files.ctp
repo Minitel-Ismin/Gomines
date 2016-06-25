@@ -44,7 +44,7 @@
             ?>
         </div>
     </div>
-    <div class="row download-folder-link hidden-xl hidden-lg hidden-md hidden-sm hidden-xs">
+    <div class="row">
         <div class="col-lg-12">
             <?= $this->Html->link("Telecharger ce dossier", ["action" => "download", $vpath], ['class' => 'btn btn-primary']) ?>
         </div>
