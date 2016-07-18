@@ -1,0 +1,94 @@
+<?php
+
+namespace App\Shell;
+
+
+use Cake\Console\Shell;
+
+use Cake\Network\Http\Client;
+
+class FilmInfoShell extends Shell{
+	
+	/**
+	 *
+	 * Documentation de l'api allocine v3 : https://wiki.gromez.fr/dev/api/allocine_v3
+	 * exemple de départ : 
+	 * 
+	 */
+	
+	private $_api_url = 'http://api.allocine.fr/rest/v3';
+	private $_partner_key = '100043982026';
+	private $_secret_key = '29d185d98c984a359e6e6f26a0474269';
+	private $_user_agent = 'Dalvik/1.6.0 (Linux; U; Android 4.2.2; Nexus 4 Build/JDQ39E)';
+	
+	
+	public function main()
+	{
+		
+		$dir = scandir("e:\Film\MARVEL\\");
+		
+		foreach($dir as $elmt){
+			
+			$this->search($elmt);
+		}
+		
+	}
+	
+	public function search($query)
+	{
+		// build the params
+		$params = array(
+				'partner' => $this->_partner_key,
+				'q' => $query,
+				'format' => 'json',
+				'filter' => 'movie'
+		);
+		// do the request
+		$response = $this->_do_request('search', $params);
+		
+		$response = json_decode($response, true);
+		
+		
+// 		$this->out(var_dump($response));
+		return $response;
+	}
+	
+	public function get($id)
+	{
+		// build the params
+		$params = array(
+				'partner' => $this->_partner_key,
+				'code' => $id,
+				'profile' => 'large',
+				'filter' => 'movie',
+				'striptags' => 'synopsis,synopsisshort',
+				'format' => 'json',
+		);
+		// do the request
+		$response = $this->_do_request('movie', $params);
+		$response = json_decode($response, true);
+// 		$this->out($response);
+		return $response;
+	}
+	
+	
+	private function _do_request($method, $params)
+	{
+		// build the URL
+		$query_url = $this->_api_url.'/'.$method;
+		// new algo to build the query
+		$sed = date('Ymd');
+		$sig = urlencode(base64_encode(sha1($this->_secret_key.http_build_query($params).'&sed='.$sed, true)));
+		$query_url .= '?'.http_build_query($params).'&sed='.$sed.'&sig='.$sig;
+		// do the request
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $query_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_USERAGENT, $this->_user_agent);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+		$response = curl_exec($ch);
+		curl_close($ch);
+		return $response;
+	}
+	
+}
