@@ -207,3 +207,9 @@ Configure::write('ssl_cakey','/var/www/html/gomines/config/ca.key');
 
 Plugin::load('WyriHaximus/MinifyHtml', ['bootstrap' => true]);
 Plugin::load('Migrations');
+
+Plugin::load('Migrations');
+
+Plugin::load('DebugKit');
+
+Plugin::load('DebugKit');

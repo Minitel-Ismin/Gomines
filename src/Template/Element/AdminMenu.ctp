@@ -11,5 +11,6 @@
         <li class="admin-menu-item"><?= $this->Html->link('Outils',['controller' => 'Admin','action' => 'tools']) ?></li>
         <li class="admin-menu-item"><?= $this->Html->link(__('Dashboard Admin'), ['controller' => 'Admin', 'action' => 'dashboard']) ?> </li>
         <li class="admin-menu-item"><?= $this->Html->link(__('Retour à l\'accueil'), ['controller' => 'Downloads', 'action' => 'display']) ?> </li>
+    	<li class="admin-menu-item"><?= $this->Html->link(__('Film admin'), ['controller' => 'Film', 'action' => 'index']) ?> </li>
     </ul>
 </nav>
