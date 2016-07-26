@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Helpers\Allocine;
+
 
 /**
  * Film Controller
@@ -10,7 +12,7 @@ use App\Controller\AppController;
  */
 class FilmController extends AppController
 {
-
+	
     /**
      * Index method
      *
@@ -108,4 +110,15 @@ class FilmController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    
+    
+    public function filmInfo(){
+    	$this->request->allowMethod(['post']);
+    	$allocine = new Allocine();
+    	$filmInfo = $allocine->get($this->request->data["title"]);
+    	$this->set("content","ok");
+		
+//     	$this->render('/Layout/ajax');
+    }
+    
 }

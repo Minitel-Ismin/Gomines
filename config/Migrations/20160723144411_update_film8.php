@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class Category extends AbstractMigration
+class UpdateFilm8 extends AbstractMigration
 {
     /**
      * Change Method.
@@ -27,12 +27,9 @@ class Category extends AbstractMigration
      */
     public function change()
     {
-    	$table = $this->table('category');
-    	 
-    	$table->addColumn('name','string');
-    	$table->addColumn("allocine_code","string");
-    	$table->addColumn("category_id","integer");
-    	 
-    	$table->create();
+		$table = $this->table("film");
+		$table->addColumn("subtitles","string");
+		$table->addColumn("language","string");
+		$table->update();
     }
 }

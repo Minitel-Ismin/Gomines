@@ -8,6 +8,10 @@
                     <tr>
                         <th><?= $this->Paginator->sort('name') ?></th>
                         <th><?= $this->Paginator->sort('size') ?></th>
+                        <th>Année</th>
+                        <th>Sous-titre</th>
+                        <th>langue</th>
+                        <th>A vérifier</th>
         				<th>Action</th>
                     </tr>
                 </thead>
@@ -16,6 +20,11 @@
                     <tr>
                         <td><?= $f->title ?></td>
                         <td><?=$f->size ?></td>
+                        <td><?=$f->year ?></td>
+                        <td><?=$f->subtitles ?></td>
+                        <td><?=$f->language ?></td>
+                        <td><span class="glyphicon glyphicon-<?php echo ($f->to_verify)? 'remove':'ok'; ?>"></td>
+                        
                         <td>
                             <div class="btn-group">
                                 <?= $this->Html->link(__("Voir"), ['action' => 'edit', $f->id], ["class" => "btn btn-default"]) ?> 
