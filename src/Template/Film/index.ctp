@@ -8,6 +8,7 @@
                     <tr>
                         <th><?= $this->Paginator->sort('name') ?></th>
                         <th><?= $this->Paginator->sort('size') ?></th>
+                        <th>Fichier</th>
                         <th>Année</th>
                         <th>Sous-titre</th>
                         <th>langue</th>
@@ -20,6 +21,7 @@
                     <tr>
                         <td><?= $f->title ?></td>
                         <td><?=$f->size ?></td>
+                        <td><?= $f->path ?></td>
                         <td><?=$f->year ?></td>
                         <td><?=$f->subtitles ?></td>
                         <td><?=$f->language ?></td>

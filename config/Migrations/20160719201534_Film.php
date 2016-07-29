@@ -63,13 +63,11 @@ class Film extends AbstractMigration
     			'default' => null,
     			'limit' => 11,
     	]);
-    	$table->addColumn('press_rate', 'integer', [
+    	$table->addColumn('press_rate', 'float', [
     			'default' => null,
-    			'limit' => 11,
     	]);
-    	$table->addColumn('user_rate', 'integer', [
+    	$table->addColumn('user_rate', 'float', [
     			'default' => null,
-    			'limit' => 11,
     	]);
     	$table->addColumn('created', 'datetime', [
     			'default' => null,

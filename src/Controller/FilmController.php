@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use App\Helpers\Allocine;
+use Cake\ORM\TableRegistry;
 
 
 /**
@@ -112,13 +113,49 @@ class FilmController extends AppController
     }
     
     
-    public function filmInfo(){
+    public function filmInfo($id){
     	$this->request->allowMethod(['post']);
     	$allocine = new Allocine();
     	$filmInfo = $allocine->get($this->request->data["title"]);
-    	$this->set("content","ok");
-		
-//     	$this->render('/Layout/ajax');
+    	$query = $this->Film->find()->where(["allocine_code"=>$filmInfo["movie"]["code"]]);
+//     	$this->set("content",$query->first());
+//     	file_put_contents("response1.txt", json_encode($allocine->get($this->request->data["title"])));
+		$test = $query->first();
+		if(!$test){ //si aucun résultat n'est trouvé en bdd on l'enregistre
+			$film = $this->Film->get($id);
+			(isset($filmInfo["movie"]["title"])) ? $film->title = $filmInfo["movie"]["title"]:$film->title = $filmInfo["movie"]["originalTitle"];
+			
+			
+
+			$film->allocine_code = $filmInfo["movie"]["code"];
+			$film->year = $filmInfo["movie"]["productionYear"];
+			$film->actors = $filmInfo["movie"]["castingShort"]["actors"];
+			$film->directors = $filmInfo["movie"]["castingShort"]["directors"];
+			(isset($filmInfo["movie"]["statistics"]["pressRating"]))? $film->press_rate = $filmInfo["movie"]["statistics"]["pressRating"]:$film->press_rate=0 ;
+			(isset($filmInfo["movie"]["statistics"]["userRating"]))? $film->user_rate = $filmInfo["movie"]["statistics"]["userRating"]:$film->user_rate = 0;
+			// 						if(isset)
+			(isset($filmInfo["movie"]["poster"]["href"]))?$film->poster = $filmInfo["movie"]["poster"]["href"]:$film->poster="";
+			$film->allocine_link = $filmInfo["movie"]["link"][0]["href"];
+			$film->to_verify = 0;
+			
+			
+				// 						$film->category = $searchResult["movie"]["genre"]["$"];
+			$categoryTable = TableRegistry::get('Category');
+			$category = $categoryTable->find()->where(["allocine_code"=>$filmInfo["movie"]["genre"][0]["code"]])->first();
+			if(!$category){
+				if(isset($filmInfo["movie"]["genre"]["$"])){
+					$category = $this->Film->category->newEntity();
+					$category->name = $filmInfo["movie"]["genre"]["$"];
+					$category->allocine_code = $filmInfo["movie"]["genre"]["code"];
+				}
+					
+			}
+			$film->category = $category;
+			$this->Film->save($film);
+			$this->set("content","ok");
+		}else{
+			$this->set("content","error");
+		}
     }
     
 }

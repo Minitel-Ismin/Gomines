@@ -137,5 +137,12 @@ class FilmInfoShell extends Shell{
 // 		]);
 // 		$this->out($film->category);
 // 	}
+
+// 	public function test(){
+// 		$allocine = new Allocine();
+// // 		$allocine->get("133730");
+// 		$filmInfo = $allocine->get("133730");
+// 		file_put_contents("response.txt", json_encode($allocine->get("133730")));
+// 	}
 	
 }
