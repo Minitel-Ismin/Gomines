@@ -153,7 +153,7 @@ class VpnController extends AppController
 
 	public function vpnStatus(){
 		$this->isAuthorized(2);
-		
+
 		$listeCo = $this->_getVPNStatus();
 
 		$this->set(compact("listeCo"));
@@ -184,11 +184,11 @@ class VpnController extends AppController
 	}
 
 	static function _convertSize($size, $precision = 2){
-		$units = array('B', 'KB', 'MB', 'GB', 'TB'); 
+		$units = array('B', 'KB', 'MB', 'GB', 'TB');
 
-		$bytes = max($size, 0); 
-		$pow = floor(($bytes ? log($bytes) : 0) / log(1024)); 
-		$pow = min($pow, count($units) - 1); 
+		$bytes = max($size, 0);
+		$pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+		$pow = min($pow, count($units) - 1);
 
 		$bytes /= pow(1024, $pow);
 
@@ -246,7 +246,7 @@ class VpnController extends AppController
 
 	/**
 	 * Function _getVPNStatus
-	 * 
+	 *
 	 * Reads the openvpn status file and extract the
 	 * list of currently connected users with their
 	 * metadata (rx/tx bytes, ip addresses, ...)
@@ -257,7 +257,7 @@ class VpnController extends AppController
 		$openvpnStatusFile = Configure::read("OpenVPNStatusFile");
 		$status = file_get_contents($openvpnStatusFile);
 
-		$re = "/OpenVPN CLIENT LIST\\nUpdated,(.*)\\n([\\w-,.: \\n]*)\\nROUTING TABLE\\n([\\w-,.: \\n]*)\\nGLOBAL STATS\\n([\\w-,.: \\/\\n]*)\\nEND/iu"; 
+		$re = "/OpenVPN CLIENT LIST\\nUpdated,(.*)\\n([\\w-',.: \\n]*)\\nROUTING TABLE\\n([\\w-',.: \\n]*)\\nGLOBAL STATS\\n([\\w-',.: \\/\\n]*)\\nEND/iu";
 
 		preg_match($re, $status, $matches);
 
@@ -270,8 +270,8 @@ class VpnController extends AppController
 			$user = explode(",",$c);
 			list($cn, $real_addr, $b_rx, $b_tx, $conn_since) = $user;
 			$listeCo[$real_addr] = array(
-				"cn" => $cn, 
-				"real_addr" => $real_addr, 
+				"cn" => $cn,
+				"real_addr" => $real_addr,
 				"b_rx" => VpnController::_convertSize($b_rx),
 				"b_tx" => VpnController::_convertSize($b_tx),
 				"b_rx_raw" => $b_rx,

@@ -35,6 +35,9 @@
             ?>
             <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
             <?= $this->Form->end() ?>
+            <ul class="admin-menu affix">
+                <li><?= $this->Html->link(__('New Vpn Compte'), ['controller' => 'VpnComptes', 'action' => 'add']) ?></li>
+            </ul>
         </div>
     </div>
 </div>

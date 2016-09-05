@@ -36,7 +36,7 @@ class UploadController extends AppController
 
 	public function newFile(){
 		$extension_allowed = ['avi', 'mkv', 'm4v', 'mp4', 'srt'];
-		$mail = "morgane.quilfen@etu.emse.fr";
+		$mail = Configure::read("Upload.Mail");
 
 		$files = $this->request->data;
 		$messages = array();
@@ -47,8 +47,8 @@ class UploadController extends AppController
 		    $extension = strrchr($filename, '.');
 		    $extension = substr($extension, 1);
 		    $extension = strtolower($extension);
-		    
-		    //if(in_array($extension, $extension_allowed)){   
+
+		    //if(in_array($extension, $extension_allowed)){
 		        move_uploaded_file($file['tmp_name'], '/media/Series2/UploadsWeb/' . $filename);
 		        $email = new Email('default');
 		        $email->from(['upload@gomines.rez' => 'Uploads'])

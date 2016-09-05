@@ -389,4 +389,7 @@ return [
         ],
     ],
     "HiddenFiles" => [".",".."],
+    "Upload" => [
+        "Mail" => "user@host.tld",
+    ],
 ];
