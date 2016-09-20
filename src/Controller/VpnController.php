@@ -61,12 +61,13 @@ class VpnController extends AppController
 		$user = $this->Users->get($this->Auth->user()['id'], [
 			'contain' => ['VpnComptes']
 		]);
+		$ca = file_get_contents(Configure::read("ssl_ca"));
 		if(empty($user['vpn_compte']) || $user['vpn_compte']['actif'] == 0){
 			$this->Flash->error(__('Votre compte VPN n\'est pas valide'));
 			return $this->redirect(['action' => 'index']);
 		}
 		$this->viewClass = "VPNConfig";
-		$this->set(compact("user"));
+		$this->set(compact("user", "ca"));
 	}
 
 	public function activateVPN($id = null){
