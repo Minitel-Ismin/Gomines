@@ -37,7 +37,7 @@ class FileManagerController extends AppController
     }
     
     public function files($path = ""){
-        $this->isAuthorized(2);
+        $this->isAuthorized(0);
     	// Récupération Conf + Init variables
     	$conf = Configure::read("FileFolders");
     	$directory = [];
