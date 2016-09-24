@@ -69,6 +69,8 @@ class Film extends AbstractMigration
     	$table->addColumn('user_rate', 'float', [
     			'default' => null,
     	]);
+    	$table->addColumn("subtitles","string");
+    	$table->addColumn("language","string");
     	$table->addColumn('created', 'datetime', [
     			'default' => null,
     			'null' => false,
@@ -77,6 +79,7 @@ class Film extends AbstractMigration
     			'default' => null,
     			'null' => false,
     	]);
+    	
     	$table->create();
     }
 }
