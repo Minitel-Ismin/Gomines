@@ -32,6 +32,7 @@ class UsersTable extends Table
         $this->hasOne('VpnComptes', [
             'foreignKey' => 'user_id'
         ]);
+        $this->addBehavior('Timestamp');
     }
 
     /**
