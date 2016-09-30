@@ -45,7 +45,7 @@ class AdminController extends AppController
 		$status = VpnController::_getVPNStatus();
 		$indicateurs = [
 			'nbVPN' => count($status),
-			'nbUploads' => 16
+			'nbUploads' => count($demandeVPN)
 		];
 
 		$this->set(compact('demandeVPN', 'demande', 'indicateurs'));

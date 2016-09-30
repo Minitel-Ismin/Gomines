@@ -19,7 +19,7 @@
                     else:
                     ?>
                     <p>Votre compte est actif</p>
-                    <p>Vous avez consommé : <?= $user['vpn_compte']['bp'] ?> depuis le 08/12/2015.</p>
+                    <p>Vous avez consommé : <?= $user['vpn_compte']['bp'] ?> depuis le 01/09/2016.</p>
                     <p>Vous avez consommé : <?= $user['vpn_compte']['bp_day'] ?> aujourd'hui</p>
                     <p>Vous avez un quota de deux giga octets de données par jour, il est remis à zéro à minuit</p>
                     <?php
@@ -36,10 +36,10 @@
                         Le VPN
                     </div>
                     <div class="panel-body">
-                        <p>Le VPN est accessible pour 1€/an.</p>
+                        <p>Le VPN est accessible pour 2€/an.</p>
                         <p>Les identifiants fournis sont personnels et utilisés pour authentifier l'accès au VPN ainsi que les activités des utilisateurs.</p>
                         <p>La bande passante allouée à un utilisateur est limitée à 10mbits/s (environ 1.25mo/s).</p>
-                        <p>La bande passante consommée par un utilisateur ne dois pas excéder 1Go par jour. Ainsi nous vous conseillons de ne pas utiliser le VPN pour vos téléchargements et autres mises à jour.</p>
+                        <p>La bande passante consommée par un utilisateur ne dois pas excéder 2Go par jour. Ainsi nous vous conseillons de ne pas utiliser le VPN pour vos téléchargements et autres mises à jour.</p>
                     </div>
                 </div>
                 <div class="panel panel-default">
