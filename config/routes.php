@@ -64,6 +64,7 @@ Router::scope('/', function ($routes) {
     $routes->connect('/acme/Granny/bake/*',['controller' => 'Users', 'action' => 'edit']);
     $routes->connect('/acme/YosemiteSam',['controller' => 'FileManager', 'action' => 'files']);
     $routes->connect('/acme/FoghornLeghorn',['controller' => 'Admin', 'action' => 'tools']);
+    $routes->connect('/acme/Film',['controller' => 'Film', 'action' => 'index']);
     /**
      * Connect catchall routes for all controllers.
      *

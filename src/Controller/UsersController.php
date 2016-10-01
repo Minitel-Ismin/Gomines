@@ -23,8 +23,8 @@ class UsersController extends AppController
 	 */
 	public function index()
 	{
-		$this->isAuthorized(0);
-		$this->set('users', $this->paginate($this->Users));
+		$this->isAuthorized(2);
+		$this->set('users', $this->paginate($this->Users));//, $this->paginate($this->Users));
 		$this->set('_serialize', ['users']);
 	}
 
@@ -37,7 +37,7 @@ class UsersController extends AppController
 	 */
 	public function view($id = null)
 	{
-		$this->isAuthorized(0);
+		$this->isAuthorized(2);
 		$user = $this->Users->get($id, [
 			'contain' => ['VpnComptes']
 		]);
@@ -82,7 +82,7 @@ class UsersController extends AppController
 	 */
 	public function edit($id = null)
 	{
-		$this->isAuthorized(0);
+		$this->isAuthorized(2);
 		if($id == null)
 			return $this->redirect(['action' => 'index']);
 		try{
@@ -166,7 +166,7 @@ class UsersController extends AppController
 
 	public function register()
 	{
-		$this->isAuthorized(0);
+		$this->isAuthorized(2);
 		$user = $this->Users->newEntity();
 		if ($this->request->is('post')) {
 			$user = $this->Users->patchEntity($user, $this->request->data);

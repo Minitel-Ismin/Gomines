@@ -1,12 +1,15 @@
 <!-- 
         File management interface by Arnaud PASQUELIN and Thomas TROUCHKINE 
-        Version 1.1 : 12/02/2016
+        Modifié par guillaume ANDRES
+        Version 1.2 : 01/10/2016
         Modifications :
             - Conservation de l'extension du fichier déplacé
             - Correction d'un bug qui empêchait d'écrire dans les dossiers "Annales" et "Moocs"
+            - Prise en charge des dossiers mutliple pour une catégorie
 -->
 <?php
-$this->Html->script('fileManager.js', array('block' => 'footerscript'));
+//$this->Html->script('fileManager.js', array('block' => 'footerscript'));
+$this->fetch('fileManagerJS')
 ?>
      
     <div class="container">
