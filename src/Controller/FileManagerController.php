@@ -17,16 +17,17 @@ class FileManagerController extends AppController
      */
     public function target()
     {
+    	$this->isAuthorized(2);
         //Changer l'url du script "fileManager.js" pour avoir l'url
         //de target en absolu
         $this->viewClass = "Ajax";
         
-        $source = $_POST["srcfolder"]."/".$_POST["source"];
-        $destination = $_POST["destination"];
-        $extension = strrchr($_POST["source"],'.');
-        $nouveauNom = $_POST["nouveauNom"].$extension;
+        $source = $this->request->data["srcfolder"].$this->request->data["source"]; //le "/" est déjà dedans, cf ci-bas
+        $destination = $this->request->data["destination"];
+        $extension = strrchr($this->request->data["source"],'.');
+        $nouveauNom = $this->request->data["nouveauNom"].$extension;
 
-        if(rename($source,$destination."/".$nouveauNom)){
+        if(rename($source,$destination.'/'.$nouveauNom)){
             $msg = "success";
         }
         else{
@@ -37,14 +38,14 @@ class FileManagerController extends AppController
     }
     
     public function files($path = ""){
-        $this->isAuthorized(0);
+        $this->isAuthorized(2);
     	// Récupération Conf + Init variables
     	$conf = Configure::read("FileFolders");
     	$directory = [];
 
     	// Lecture du dossier virtuel
     	$directory = $conf['AClasser']['folder']."/";
-
+		$this->set(compact("directory"));
     	// Lecture du path
     	if($path != ""){
     		// TODO : Sanitize $path var
@@ -59,11 +60,12 @@ class FileManagerController extends AppController
         // files : liste des dossiers & fichiers du dossier courant
         // vpath : répertoire dans lequel se trouve l'utilisateur
         $i = 0;
-        $folder = [];
+        $folder = []; //contient tout les dossiers ayant une propriété folder ==> un dossier de fichiers
         foreach($conf as $categorie){
             if($i>0){
                 if($categorie['folder']){
-                    $idFolder[$i] = substr($categorie['folder'], 15);
+                	$temp = preg_split('#\/#', $categorie['folder']);
+                    $idFolder[$i] = $temp[count($temp)-1];
                     $folder[$i] = $categorie['folder'];
                 }
             }
@@ -71,4 +73,5 @@ class FileManagerController extends AppController
         }
         $this->set(compact("idFolder", "folder"));
     }
+    
 }

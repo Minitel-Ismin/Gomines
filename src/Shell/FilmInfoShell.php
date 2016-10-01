@@ -61,16 +61,6 @@ class FilmInfoShell extends Shell{
 					$film = $filmTable->newEntity();
 					$film->title = $elmt;
 					$film->to_verify = 1;
-// 					$film->allocine_code = $searchResult["feed"]["movie"][0]["code"];
-// 					$film->year = $searchResult["feed"]["movie"][0]["productionYear"];
-// 					$film->actors = $searchResult["feed"]["movie"][0]["castingShort"]["actors"];
-// 					$film->directors = $searchResult["feed"]["movie"][0]["castingShort"]["directors"];
-// 					$film->path = $directory."/".$elmt;
-// 					$film->press_rate = $searchResult["feed"]["movie"][0]["statistics"]["pressRating"];
-// 					$film->user_rate = $searchResult["feed"]["movie"][0]["statistics"]["userRating"];
-// 					$film->poster = $searchResult["feed"]["movie"][0]["poster"]["href"];
-// 					$film->allocine_link = $searchResult["feed"]["movie"][0]["link"][0]["href"];
-// 					$film->size = filesize($directory."/".$elmt);
 					$filmTable->save($film);
 				}else if($searchResult["feed"]["totalResults"] > 0){ //sinon on prend le premier résultat (indice 0) mais on met le status "à vérifier"
 					

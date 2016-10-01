@@ -139,7 +139,6 @@ class FilmController extends AppController
 			$film->to_verify = 0;
 			
 			
-				// 						$film->category = $searchResult["movie"]["genre"]["$"];
 			$categoryTable = TableRegistry::get('Category');
 			$category = $categoryTable->find()->where(["allocine_code"=>$filmInfo["movie"]["genre"][0]["code"]])->first();
 			if(!$category){

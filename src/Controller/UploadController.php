@@ -36,7 +36,6 @@ class UploadController extends AppController
 
 	public function newFile(){
 		$extension_allowed = ['avi', 'mkv', 'm4v', 'mp4', 'srt'];
-		$mail = "morgane.quilfen@etu.emse.fr";
 
 		$files = $this->request->data;
 		$messages = array();
@@ -44,6 +43,7 @@ class UploadController extends AppController
 		foreach($files as $file){
 		    $filename = $file['name'];
 		    $objet = "Upload de ".$filename." sur G*";
+		    $user = $this->Auth->user();
 		    $extension = strrchr($filename, '.');
 		    $extension = substr($extension, 1);
 		    $extension = strtolower($extension);
@@ -54,7 +54,7 @@ class UploadController extends AppController
 		        $email->from(['upload@gomines.rez' => 'Uploads'])
 		        	->to($mail)
 		        	->subject($objet)
-		        	->send('Un nouveau fichier a été uploadé !');
+		        	->send('Un nouveau fichier a été uploadé par '. $user['nom'].' '.$user['prenom'].'!');
 		        $messages[] = $filename." a bien été enregistré !";
 		    //}
 		    //else{
