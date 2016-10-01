@@ -1,13 +1,14 @@
+<?= $this->element('datatable') ?>
 <div class="container-fluid">
     <div class="row">
         <?= $this->element('AdminMenu'); ?>
         <div class="col-lg-9 col-md-4">
             <h2 class="text-center"><?= __('Users') ?></h2>
-            <table class="table table-striped">
+            <table class="table table-striped" id="Table">
                 <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('nom') ?></th>
-                        <th><?= $this->Paginator->sort('prenom') ?></th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
         				<th>Action</th>
                     </tr>
                 </thead>
@@ -26,14 +27,7 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <div class="paginator text-center">
-                <ul class="pagination">
-                    <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                    <?= $this->Paginator->numbers() ?>
-                    <?= $this->Paginator->next(__('next') . ' >') ?>
-                </ul>
-                <p><?= $this->Paginator->counter() ?></p>
-            </div>
         </div>
     </div>
 </div>
+

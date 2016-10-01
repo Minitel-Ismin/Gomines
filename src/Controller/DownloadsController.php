@@ -81,14 +81,7 @@ class DownloadsController extends AppController
         if(!is_array($dir))
             $dir = [$dir];
         
-        if(isset($conf[$virtFolder]['folder1'])){
-        	if (!is_array($conf[$virtFolder]['folder1'])){
-        		$dir = array_merge($dir, [$conf[$virtFolder]['folder1']]);
-        	}else{
-        		$dir = array_merge($dir, $conf[$virtFolder]['folder1']);
-        	}
-        	
-        }
+        
         foreach($dir as $d)
         {
             $directory = $d."/";
