@@ -21,7 +21,7 @@ class VpnComptesController extends AppController
         $this->paginate = [
             'contain' => ['Users']
         ];
-        $this->set('vpnComptes', $this->paginate($this->VpnComptes));
+        $this->set('vpnComptes', $this->VpnComptes->find('all'));
         $this->set('_serialize', ['vpnComptes']);
     }
 

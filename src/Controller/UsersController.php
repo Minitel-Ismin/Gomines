@@ -24,7 +24,7 @@ class UsersController extends AppController
 	public function index()
 	{
 		$this->isAuthorized(2);
-		$this->set('users', $this->paginate($this->Users));//, $this->paginate($this->Users));
+		$this->set('users', $this->Users->find('all'));//, $this->paginate($this->Users));
 		$this->set('_serialize', ['users']);
 	}
 
