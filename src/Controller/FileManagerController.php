@@ -4,6 +4,7 @@ namespace App\Controller;
 use Cake\Core\Configure;
 use Cake\Filesystem\Folder;
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
     
 /*
  * File manager controller
@@ -26,8 +27,13 @@ class FileManagerController extends AppController
         $destination = $this->request->data["destination"];
         $extension = strrchr($this->request->data["source"],'.');
         $nouveauNom = $this->request->data["nouveauNom"].$extension;
-
+        $filmTable = TableRegistry::get('Film');
         if(rename($source,$destination.'/'.$nouveauNom)){
+        	$film = $filmTable->newEntity();
+        	$film->title = $destination.'/'.$nouveauNom;
+        	$film->to_verify = 1;
+        	$film->path = $destination.'/'.$nouveauNom;
+        	$filmTable->save($film);
             $msg = "success";
         }
         else{
@@ -64,9 +70,20 @@ class FileManagerController extends AppController
         foreach($conf as $categorie){
             if($i>0){
                 if($categorie['folder']){
-                	$temp = preg_split('#\/#', $categorie['folder']);
-                    $idFolder[$i] = $temp[count($temp)-1];
-                    $folder[$i] = $categorie['folder'];
+                	if(is_array($categorie['folder'])){
+                		foreach($categorie['folder'] as $subFolder){
+                			$temp = preg_split('#\/#', $subFolder);
+                			$idFolder[$i] = $temp[count($temp)-1];
+                			$folder[$i] = $subFolder;
+                			$i++;
+                		}
+                	}else{
+                		$temp = preg_split('#\/#', $categorie['folder']);
+                		$idFolder[$i] = $temp[count($temp)-1];
+                		$folder[$i] = $categorie['folder'];
+                	}
+                	
+                	
                 }
             }
             $i++;
