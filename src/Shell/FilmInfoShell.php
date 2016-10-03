@@ -52,11 +52,7 @@ class FilmInfoShell extends Shell{
 				$filmTable = TableRegistry::get('Film');
 				//test du nombre de résultat
 				if(isset($searchResult["error"]) || $searchResult["feed"]["totalResults"] > 5){
-					try{
-						rename($directory."/".$elmt,$directory."/a_traite/".$elmt);
-					}catch (Exception $e){
-						$this->out("erreur lors du déplacement de".$elmt);
-					}
+					
 					
 					$film = $filmTable->newEntity();
 					$film->title = $elmt;
@@ -65,13 +61,14 @@ class FilmInfoShell extends Shell{
 				}else if($searchResult["feed"]["totalResults"] > 0){ //sinon on prend le premier résultat (indice 0) mais on met le status "à vérifier"
 					
 					$query = $filmTable->find()->where(['allocine_code'=>$searchResult["feed"]["movie"][0]["code"]]);
-// 					$filmTable
+
 					//si le film existe déjà, on le met dans le dossier doublon (vérifier la qwalitay)
+					$film = $filmTable->newEntity();
 					if($query->first() != NULL){
-						rename($directory."/".$elmt,$directory."/doublon/".$elmt);
+						$film->doublon = $query->first()->path;
+						$film->to_verify = 1;
 					}else{
-// 						var_dump($searchResult);
-						$film = $filmTable->newEntity();
+						
 						(isset($searchResult["feed"]["movie"][0]["title"])) ? $film->title = $searchResult["feed"]["movie"][0]["title"]:$film->title = $searchResult["feed"]["movie"][0]["originalTitle"];
 
 						
