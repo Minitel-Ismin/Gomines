@@ -173,7 +173,7 @@ class VpnController extends AppController
 				'Users'
 			]
 		];
-		$user = $this->paginate($this->VpnComptes)
+		$user = $this->VpnComptes->find('all')->contain(['Users'])
 			->map(function($row){
 				$row->bp = $this->_convertSize($row->bp_used);
 				$row->bp_day = $this->_convertSize($row->bp_used_day);
