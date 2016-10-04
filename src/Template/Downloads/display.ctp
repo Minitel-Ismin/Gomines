@@ -52,7 +52,7 @@ foreach($conf as $name => $item):
 	else
 		$url = ['controller' => 'Downloads', 'action' => 'files', $name];
                         
-    $html = '<div class="col-lg-3 col-md-6 col-sm-6 cat-window text-center" style="background-color: #'.$item['color'].'">'.$name.$this->Html->image($item['icon']).'</div>';
+    $html = '<div class="col-lg-4 col-md-4 col-sm-4 cat-tools text-center" style="background-color: #'.$item['color'].'">'.$name.'<br>'.$this->Html->image($item['icon']).'</div>';
 ?>
 
                 
