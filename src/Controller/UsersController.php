@@ -166,7 +166,7 @@ class UsersController extends AppController
 
 	public function register()
 	{
-		$this->isAuthorized(2);
+		$this->isAuthorized(0);
 		$user = $this->Users->newEntity();
 		if ($this->request->is('post')) {
 			$user = $this->Users->patchEntity($user, $this->request->data);
