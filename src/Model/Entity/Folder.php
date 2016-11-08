@@ -4,14 +4,13 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Dlcategory Entity
+ * Folder Entity
  *
  * @property int $id
- * @property string $name
- * @property string $color
- * @property string $icon
+ * @property int $id_dlcategory
+ * @property string $path
  */
-class Dlcategory extends Entity
+class Folder extends Entity
 {
 
     /**
@@ -25,6 +24,6 @@ class Dlcategory extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'id' => false,
+        'id' => false
     ];
 }

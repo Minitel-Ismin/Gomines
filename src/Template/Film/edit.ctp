@@ -26,7 +26,7 @@ $this->start('footerscript');
 
 </script>
 
-<?= $this->end();?>
+<?= $this->end(); ?>
 
 <div class="container-fluid">
     <div class="row">

@@ -4,6 +4,8 @@
         <?= $this->element('AdminMenu'); ?>
         <div class="col-lg-9 col-md-4">
             <h2 class="text-center"><?= __('Catégories de téléchargements') ?></h2>
+            <?= $this->Html->link(__("Ajouter une catégorie"), ['action' => 'add'], ["class" => "btn btn-default", "style"=>"margin-bottom:50px;"]) ?>
+            <br>
             <table class="table table-striped" id="Table">
                 <thead>
                     <tr>
@@ -11,6 +13,7 @@
                         <th>Dossiers</th>
                         <th>couleurs</th>
                         <th>icône</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,7 +23,7 @@
                         <td><?php if(is_array($cat->folders)):?>
                         		<ul>
                         			<?php foreach($cat->folders as $folder): ?>
-                        			<li><?php echo $folder ;?></li>
+                        			<li><?php echo $folder->path ;?></li>
                         			<?php endforeach;?>
                         		</ul>
                         <?php else:?>
@@ -32,7 +35,7 @@
                         <td>
                             <div class="btn-group">
                                 <?= $this->Html->link(__("Voir"), ['action' => 'edit', $cat->id], ["class" => "btn btn-default"]) ?> 
-                            <?= $this->Html->link(__("Supprimer"), ['action' => 'delete', $cat->id], ["class" => "btn btn-default"]) ?>
+                            	<?= $this->Html->link(__("Supprimer"), ['action' => 'delete', $cat->id], ["class" => "btn btn-default"]) ?>
                             </div>
                         </td>
                     </tr>
