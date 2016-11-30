@@ -92,6 +92,22 @@ class DLCategoryController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dLCategory = $this->DLCategory->patchEntity($dLCategory, $this->request->data);
+            
+            $folders=[];
+            $folderTable = TableRegistry::get('Folders');
+            
+            $folderTable->deleteAll(['id_dlcategory' => $id]);
+            foreach ($this->request->data["folders"] as $fol){
+            	if($fol!=""){
+            		$temp = $folderTable->findOrCreate(["path"=>$fol]);
+            		$temp->path = $fol;
+            		$folders[] = $temp;
+            	}
+            	
+            }
+            
+            $dLCategory->folders = $folders;
+            
             if ($this->DLCategory->save($dLCategory)) {
                 $this->Flash->success(__('The d l category has been saved.'));
 

@@ -7,9 +7,9 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Content Model
+ * Contents Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Categories
+ * @property \Cake\ORM\Association\BelongsTo $Dlcategories
  *
  * @method \App\Model\Entity\Content get($primaryKey, $options = [])
  * @method \App\Model\Entity\Content newEntity($data = null, array $options = [])
@@ -21,7 +21,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class ContentTable extends Table
+class ContentsTable extends Table
 {
 
     /**
@@ -34,15 +34,18 @@ class ContentTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('content');
+        $this->table('contents');
         $this->displayField('name');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Categories', [
-            'foreignKey' => 'category_id',
-            'joinType' => 'INNER'
+        $this->belongsTo('Dlcategory', [
+            'foreignKey' => 'dlcategory_id'
+        ]);
+        
+        $this->belongsTo('Folder', [
+        		'foreignKey' => 'folder_id'
         ]);
     }
 
@@ -59,16 +62,10 @@ class ContentTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->allowEmpty('name');
 
         $validator
-            ->requirePresence('path', 'create')
-            ->notEmpty('path');
-
-        $validator
-            ->requirePresence('poster', 'create')
-            ->notEmpty('poster');
+            ->allowEmpty('path');
 
         $validator
             ->boolean('to_verify')
@@ -77,23 +74,10 @@ class ContentTable extends Table
 
         $validator
             ->integer('size')
-            ->requirePresence('size', 'create')
-            ->notEmpty('size');
+            ->allowEmpty('size');
 
         return $validator;
     }
 
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->existsIn(['category_id'], 'Categories'));
-
-        return $rules;
-    }
+    
 }

@@ -16,15 +16,24 @@
 				<?php foreach ($dLCategory->folders as $key=>$folder):?>
 				<div class="input-group" id="field<?php echo $key?>">
 					<input autocomplete="off" class="form-control" 
-						name="folders[]" id="folder<?php echo $key?>" type="text" placeholder="Path vers le dossier <?php echo $key;?>" value="<?php echo $folder->path;?>" /> 
+						name="folders[]" id="folder<?php echo $key?>" type="text" placeholder="Path vers le dossier <?php echo $key+1;?>" value="<?php echo $folder->path;?>" /> 
 					<span
-						id="b1"
 						style="display: table-cell; width: 1%; white-space: nowrap; vertical-align: middle;">
-						<button id="remove<?php $key-1;?>" class="btn btn-danger remove-me" >-</button>
+						<button id="remove<?php echo $key;?>" class="btn btn-danger remove-me" type="button">-</button>
 					</span>
 				</div>
 				<?php endforeach;?>
+				<div class="input-group" id="field<?php echo $key+1;?>">
+					<input autocomplete="off" class="form-control" 
+						name="folders[]" id="folder<?php echo $key+1;?>" type="text" placeholder="Path vers le dossier <?php echo $key+2;?>" /> 
+					<span
+						id="b1"
+						style="display: table-cell; width: 1%; white-space: nowrap; vertical-align: middle;">
+						<button  class="btn add-more" type="button">+</button>
+					</span>
+				</div>
 			</div>
+			<br>
             <div class="input-group">
                 <span class="input-group-addon addon-size-fixed">Couleur</span>
                 <?php
@@ -45,7 +54,7 @@
 <?=$this->start ( 'footerscript' );?>
 <script type="text/javascript">
 
-    var next = <?php echo $key; ?>;
+    var next = <?php echo $key+1; ?>;
     $(".add-more").click(function(e){
         e.preventDefault();
         var addto = "#field" + next;
@@ -58,7 +67,7 @@
         var newInput = $(newIn);
         var removeBtn = '<span\
     		class=""\
-    		style="display: table-cell; width: 1%; white-space: nowrap; vertical-align: middle;"><button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >-</button></span></div>';
+    		style="display: table-cell; width: 1%; white-space: nowrap; vertical-align: middle;"><button id="remove' + (next - 1) + '" class="btn btn-danger remove-me1" >-</button></span></div>';
         var removeButton = $(removeBtn);
         
         $(addto).after(newInput); //ajoute l'input après le div du n-1 input
@@ -68,7 +77,7 @@
         $("#start").val(next);  
    		
         
-            $('.remove-me').click(function(e){
+            $('.remove-me1').click(function(e){
                 e.preventDefault();
                 var fieldNum = this.id.charAt(this.id.length-1);
                 console.log(fieldNum);
@@ -77,6 +86,16 @@
                 $(fieldID).remove();
             });
     });
+
+    	$('.remove-me').click(function(e){
+            e.preventDefault();
+            console.log(this.id);
+            var fieldNum = this.id.charAt(this.id.length-1);
+            console.log(fieldNum);
+            var fieldID = "#field" + fieldNum;
+            $(this).remove();
+            $(fieldID).remove();
+        });
 
 
 </script>

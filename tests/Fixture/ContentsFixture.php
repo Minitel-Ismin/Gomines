@@ -4,18 +4,11 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * ContentFixture
+ * ContentsFixture
  *
  */
-class ContentFixture extends TestFixture
+class ContentsFixture extends TestFixture
 {
-
-    /**
-     * Table name
-     *
-     * @var string
-     */
-    public $table = 'content';
 
     /**
      * Fields
@@ -55,8 +48,8 @@ class ContentFixture extends TestFixture
             'to_verify' => 1,
             'dlcategory_id' => 1,
             'size' => 1,
-            'created' => '2016-11-11 18:47:27',
-            'modified' => '2016-11-11 18:47:27'
+            'created' => '2016-11-11 23:29:09',
+            'modified' => '2016-11-11 23:29:09'
         ],
     ];
 }

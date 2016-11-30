@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\ContentTable;
+use App\Model\Table\ContentsTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\ContentTable Test Case
+ * App\Model\Table\ContentsTable Test Case
  */
-class ContentTableTest extends TestCase
+class ContentsTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\ContentTable
+     * @var \App\Model\Table\ContentsTable
      */
-    public $Content;
+    public $Contents;
 
     /**
      * Fixtures
@@ -24,7 +24,8 @@ class ContentTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.content'
+        'app.contents',
+        'app.dlcategories'
     ];
 
     /**
@@ -35,8 +36,8 @@ class ContentTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Content') ? [] : ['className' => 'App\Model\Table\ContentTable'];
-        $this->Content = TableRegistry::get('Content', $config);
+        $config = TableRegistry::exists('Contents') ? [] : ['className' => 'App\Model\Table\ContentsTable'];
+        $this->Contents = TableRegistry::get('Contents', $config);
     }
 
     /**
@@ -46,7 +47,7 @@ class ContentTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Content);
+        unset($this->Contents);
 
         parent::tearDown();
     }
@@ -67,6 +68,16 @@ class ContentTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

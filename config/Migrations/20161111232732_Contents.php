@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class Content extends AbstractMigration
+class Contents extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,46 +12,52 @@ class Content extends AbstractMigration
      */
     public function change()
     {
-    	$table = $this->table('content');
+    	$table = $this->table('contents');
     	$table->addColumn('name', 'string', [
     			'default' => null,
     			'limit' => 255,
-    			//     			'null' => false,
+    			'null' => true,
     	]);
-    	
+    	 
     	$table->addColumn('path', 'string', [
     			'default' => null,
     			'limit' => 255,
-    			//     			'null' => false,
+    			'null' => true,
     	]);
-    	$table->addColumn('poster', 'string', [
-    			'default' => null,
-    			'limit' => 1024,
-    			//     			'null' => false,
-    	]);
-    	
+    	 
     	$table->addColumn('to_verify', 'boolean',[
     			'default' => true,
     	]);
-    	$table->addColumn('category_id', 'integer', [
+    	$table->addColumn('sub_folder', 'boolean',[
+    			'default' => false,
+    	]);
+    	$table->addColumn('folder_id', 'integer', [
     			'default' => null,
     			'limit' => 11,
+    			'null' => true,
+    	]);
+    	$table->addColumn('dlcategory_id', 'integer', [
+    			'default' => null,
+    			'limit' => 11,
+    			'null' => true,
     	]);
     	$table->addColumn('size', 'integer', [
     			'default' => null,
     			'limit' => 11,
+    			'null' => true,
     	]);
-    	
-    	
+    	 
+    	 
     	$table->addColumn('created', 'datetime', [
     			'default' => null,
     			'null' => false,
+    			'null' => true,
     	]);
     	$table->addColumn('modified', 'datetime', [
     			'default' => null,
     			'null' => false,
+    			'null' => true,
     	]);
-    	 
     	$table->create();
     }
 }

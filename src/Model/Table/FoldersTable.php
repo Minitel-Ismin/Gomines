@@ -33,6 +33,10 @@ class FoldersTable extends Table
         $this->table('folders');
         $this->displayField('id');
         $this->primaryKey('id');
+        
+        $this->hasMany('contents', [
+        		'foreignKey' => 'folder_id'
+        ]);
     }
 
     /**

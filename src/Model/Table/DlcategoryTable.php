@@ -33,9 +33,13 @@ class DlcategoryTable extends Table
         $this->table('dlcategory');
         $this->displayField('name');
         $this->primaryKey('id');
+        $this->hasMany('contents',[
+        		'foreignKey' => 'dlcategory_id'
+        ]);
         $this->hasMany('folders', [
         		'foreignKey' => 'id_dlcategory'
         ]);
+        
     }
 
     /**

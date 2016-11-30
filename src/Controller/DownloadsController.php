@@ -5,6 +5,7 @@ use Cake\Core\Configure;
 use Cake\Network\Exception\NotFoundException;
 use Cake\Filesystem\Folder;
 use Cake\Filesystem\File;
+use Cake\ORM\TableRegistry;
 
 class DownloadsController extends AppController
 {
@@ -17,7 +18,7 @@ class DownloadsController extends AppController
         $ext_archive = ['gz', 'rar', 'tar', 'zip'];
         $ext_image = ['png', 'gif', 'bmp', 'jpeg', 'jpg', 'jpe'];
         $ext_text = ['txt'];
-        $ext_video = ['mkv'];
+        $ext_video = ['mkv, avi'];
         $ext_code = ['html', 'XML', 'h', 'hpp', 'cpp', 'c', 'vhd', 'php', 'js', 'css', 'ctp', 'py'];
         $ext_powerpoint = ['ppt', 'pot', 'pps', 'pptx', 'pptm', 'potx', 'potm', 'ppam', 'ppsx', 'ppsm', 'sldx', 'sldm'];
 
@@ -136,6 +137,30 @@ class DownloadsController extends AppController
         }
     }
 
+    public function files2($virtFolder){
+        $TableContent = TableRegistry::get('Contents');
+        $content = $TableContent->find('all', ['contain'=>'Dlcategory'])->where(['Dlcategory.name'=>$virtFolder])
+        																->where(['Contents.path LIKE' => '%'.$virtFolder]);
+
+        $this->set(compact('content'));
+
+    }
+
+    public function dlFile($id){
+    	$Content = TableRegistry::get('Contents')->get($id);
+    	$directory = $Content->path;
+    	$name = $Content->name;
+        // Télécharger le fichier
+        $this->response->file($directory, array(
+            'download' => true,
+            'name' => $name,
+        ));
+        $hFile = new File($directory);
+        $this->response->type($hFile->mime());
+        return $this->response;
+    }
+	
+    //permet de télécharger tout un dossier
     // TO-DO: Bien nettoyer $path
     public function download($virtFolder = "", $path = ""){
         // Récupération Conf + Init variables

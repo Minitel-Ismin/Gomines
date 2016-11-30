@@ -9,14 +9,13 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $path
- * @property string $poster
  * @property bool $to_verify
- * @property int $category_id
+ * @property int $dlcategory_id
  * @property int $size
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
  *
- * @property \App\Model\Entity\Category $category
+ * @property \App\Model\Entity\Dlcategory $dlcategory
  */
 class Content extends Entity
 {

@@ -71,7 +71,7 @@ class AppController extends Controller
 
         // Allow the display action so our pages controller
         // continues to work.
-        $this->Auth->allow(['display', 'files', "download"]);
+        $this->Auth->allow(['display', 'files', "download", 'files2', "dlFile"]);
     }
 
     /**
