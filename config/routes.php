@@ -62,6 +62,7 @@ Router::scope('/', function ($routes) {
     $routes->connect('/acme/',['controller' => 'Admin', 'action' => 'dashboard']);
     $routes->connect('/acme/BugsBunny',['controller' => 'vpn', 'action' => 'vpn-status']);
     $routes->connect('/acme/BugsBunny/carrot',['controller' => 'vpn', 'action' => 'vpn-users']);
+    $routes->connect('/acme/vpn',['controller' => 'vpncomptes', 'action' => 'index']);
     $routes->connect('/acme/Granny',['controller' => 'Users', 'action' => 'index']);
     $routes->connect('/acme/Granny/bake/*',['controller' => 'Users', 'action' => 'edit']);
     $routes->connect('/acme/YosemiteSam',['controller' => 'FileManager', 'action' => 'files']);
