@@ -36,6 +36,7 @@ class UploadController extends AppController
 
 	public function newFile(){
 		$extension_allowed = ['avi', 'mkv', 'm4v', 'mp4', 'srt'];
+
 		$mail = Configure::read("Upload.Mail");
 		$uploadFolder = Configure::read("Upload.folder");
 
