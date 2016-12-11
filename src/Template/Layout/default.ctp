@@ -36,7 +36,6 @@ $cakeDescription = 'Gomines';
     <?= $this->Html->css('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css') ?>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
-    
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
