@@ -3,6 +3,7 @@ namespace App\Shell;
 
 use Cake\Console\Shell;
 use Cake\ORM\TableRegistry;
+use App\Model\Entity\Content;
 
 /**
  * Content shell command.
@@ -45,29 +46,34 @@ class ContentShell extends Shell
     		$category=$category[$cat-1];
     		foreach ($category->folders as $folder){
     			$newFolderContent = [];
-    			$this->out($folder->path);
+
+    			$folder->path = strtr($folder->path, '\\', '/');
     			$result=[];
     			$this->getDirContents($folder->path, $result);
-//     			debug($result);
     			foreach ($result as $res){
     				$temp = $ContentTable->findOrCreate(["name"=>$res["name"], "path"=>$res["path"]]);
-    				$temp->name = $res['name'];
-    				$temp->path = $res['path'];
-    				$temp->to_verify = 0;
-    				if(isset($res['filesize'])){
-    					$temp->size = $res['filesize'];
-    					$temp->sub_folder = false;
-    				}else{
-    					$temp->size=0;
-    					$temp->sub_folder = true;
+    				if($temp->name == ''){
+    					$temp->name = $res['name'];
+    					$temp->path = $res['path'];
+    					$temp->modified = date("Y-m-j H:i:s",filemtime($res['path']));
+    					$temp->to_verify = 0;
+    					$temp->virtual_path = substr(preg_split('/'.str_replace("/","\/",$folder->path).'/',strtr($temp->path, '\\', '/'))[1],1);
+    					$temp->virtual_path = preg_split("#[^/]*$#", $temp->virtual_path)[0];
+    					if(isset($res['filesize'])){
+    						$temp->size = $res['filesize'];
+    						$temp->sub_folder = false;
+    					}else{
+    						$temp->size=0;
+    						$temp->sub_folder = true;
+    					}
+    					$newContent[] = $temp;
+    					$newFolderContent[] = $temp;
     				}
-    				
-    				$newContent[] = $temp;
-    				$newFolderContent[] = $temp;
     			}
     			$folder->contents = $newFolderContent;
     			$FolderTable->save($folder);
-    			
+
+				
     		}
     		$category->contents = $newContent;
     		$CategoryTable->save($category);

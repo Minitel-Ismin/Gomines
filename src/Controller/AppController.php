@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -17,7 +18,6 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 
-
 /**
  * Application Controller
  *
@@ -26,79 +26,92 @@ use Cake\Event\Event;
  *
  * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller
-{
-
-    /**
-     * Initialization hook method.
-     *
-     * Use this method to add common initialization code like loading components.
-     *
-     * e.g. `$this->loadComponent('Security');`
-     *
-     * @return void
-     */
-    public function initialize()
-    {
-        parent::initialize();
-
-        $this->loadComponent('RequestHandler');
-        $this->loadComponent('Flash');
-        $this->loadComponent('Cookie');
-				$this->loadComponent('Auth', [
-					'authenticate' => [
-						'FOC/Authenticate.Cookie' => [
-							'fields' => [
-								'username' => 'email',
-								'password' => 'password'
-							],
-		                    'userModel' => 'Users',
-		                    //'scope' => array('User.active' => 1)
-						],
-						'FOC/Authenticate.MultiColumn' => [
-							'fields' => [
-								'username' => 'email',
-								'password' => 'password'
-							],
-							'columns' => ['email','password']
+class AppController extends Controller {
+	
+	/**
+	 * Initialization hook method.
+	 *
+	 * Use this method to add common initialization code like loading components.
+	 *
+	 * e.g. `$this->loadComponent('Security');`
+	 *
+	 * @return void
+	 */
+	public function initialize() {
+		parent::initialize ();
+		
+		$this->loadComponent ( 'RequestHandler' );
+		$this->loadComponent ( 'Flash' );
+		$this->loadComponent ( 'Cookie' );
+		$this->loadComponent ( 'Auth', [ 
+				'authenticate' => [ 
+						'FOC/Authenticate.Cookie' => [ 
+								'fields' => [ 
+										'username' => 'email',
+										'password' => 'password' 
+								],
+								'userModel' => 'Users' 
 						]
-					],
-					'loginAction' => [
+						// 'scope' => array('User.active' => 1)
+						,
+						'FOC/Authenticate.MultiColumn' => [ 
+								'fields' => [ 
+										'username' => 'email',
+										'password' => 'password' 
+								],
+								'columns' => [ 
+										'email',
+										'password' 
+								] 
+						] 
+				],
+				'loginAction' => [ 
 						'controller' => 'Users',
-						'action' => 'login'
-					]
-				]);
-
-        // Allow the display action so our pages controller
-        // continues to work.
-        $this->Auth->allow(['display', 'files', "download", 'files2', "dlFile"]);
-    }
-
-    /**
-     * Before render callback.
-     *
-     * @param \Cake\Event\Event $event The beforeRender event.
-     * @return void
-     */
-    public function beforeRender(Event $event)
-    {
-        if (!array_key_exists('_serialize', $this->viewVars) &&
-            in_array($this->response->type(), ['application/json', 'application/xml'])
-        ) {
-            $this->set('_serialize', true);
-        }
-		$this->set('authUser', $this->Auth->user());
-    }
-
-	public function isAuthorized($droits = 0)
-    {
-		$user = $this->Auth->user();
-
-		if($droits == 0){
-			return true;
-		}elseif(($user['droits'] & $droits) == 0){
-			$this->Flash->error(__('Vous n\'avez pas les droits pour accéder à cette page.'));
-			return $this->redirect(['controller' => 'pages', 'action' => 'index']);
+						'action' => 'login' 
+				]
+		] );
+		
+		// Allow the display action so our pages controller
+		// continues to work.
+		$this->Auth->allow ( [ 
+				'display',
+				'files',
+				"download",
+				'files2',
+				"dlFile",
+				"dlFolder",
+				"forgotPassword",
+				"resetPasswordToken"
+		] );
+	}
+	
+	/**
+	 * Before render callback.
+	 *
+	 * @param \Cake\Event\Event $event
+	 *        	The beforeRender event.
+	 * @return void
+	 */
+	public function beforeRender(Event $event) {
+		if (! array_key_exists ( '_serialize', $this->viewVars ) && in_array ( $this->response->type (), [ 
+				'application/json',
+				'application/xml' 
+		] )) {
+			$this->set ( '_serialize', true );
 		}
-    }
+		$this->set ( 'authUser', $this->Auth->user () );
+	}
+	public function isAuthorized($droits = 0) {
+		$user = $this->Auth->user ();
+		
+		if ($droits == 0) {
+			return true;
+		} elseif (($user ['droits'] & $droits) == 0) {
+			$this->Flash->error ( __ ( 'Vous n\'avez pas les droits pour accéder à cette page.' ) );
+			return $this->redirect ( [ 
+					'controller' => 'pages',
+					'action' => 'index' 
+			] );
+		}
+	}
 }

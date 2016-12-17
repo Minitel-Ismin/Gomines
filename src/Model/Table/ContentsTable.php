@@ -44,7 +44,7 @@ class ContentsTable extends Table
             'foreignKey' => 'dlcategory_id'
         ]);
         
-        $this->belongsTo('Folder', [
+        $this->belongsTo('Folders', [
         		'foreignKey' => 'folder_id'
         ]);
     }

@@ -19,7 +19,7 @@ class ContentsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Dlcategory']
+            'contain' => ['Folders', 'Dlcategory']
         ];
         
         $contents = $this->paginate($this->Contents);

@@ -46,7 +46,10 @@ class Contents extends AbstractMigration
     			'limit' => 11,
     			'null' => true,
     	]);
-    	 
+    	$table->addColumn('virtual_path', 'string',[
+    			'default' => '',
+    			'null' => true,
+    	]);
     	 
     	$table->addColumn('created', 'datetime', [
     			'default' => null,
