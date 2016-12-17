@@ -52,7 +52,7 @@ class ContentShell extends Shell
     			$this->getDirContents($folder->path, $result);
     			foreach ($result as $res){
     				$temp = $ContentTable->findOrCreate(["name"=>$res["name"], "path"=>$res["path"]]);
-    				if($temp->name == ''){
+    				
     					$temp->name = $res['name'];
     					$temp->path = $res['path'];
     					$temp->modified = date("Y-m-j H:i:s",filemtime($res['path']));
@@ -68,7 +68,6 @@ class ContentShell extends Shell
     					}
     					$newContent[] = $temp;
     					$newFolderContent[] = $temp;
-    				}
     			}
     			$folder->contents = $newFolderContent;
     			$FolderTable->save($folder);
