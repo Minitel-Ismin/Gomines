@@ -338,8 +338,8 @@ class UsersController extends AppController {
 				->emailFormat ( 'html' )
 				->viewVars ( [ 
 					'user' => $user 
-				] );
-// 				->send ();
+				] )
+				->send ();
 			return true;
 		}
 		return false;
@@ -359,8 +359,8 @@ class UsersController extends AppController {
 			$email = new Email ('default');
 			$email->to ( $user->email )
 					->subject ( 'Votre mot de passe a été changé' )
-					->from ( 'do-not-reply@gomines.rez', 'Gomines' );
-// 					->send ();
+					->from ( 'do-not-reply@gomines.rez', 'Gomines' )
+					->send ();
 			return true;
 		}
 		return false;
