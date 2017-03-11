@@ -56,15 +56,22 @@ Router::scope('/', function ($routes) {
     $routes->connect('/tweety/*', ['controller' => 'Downloads', 'action' => 'display']);
     $routes->redirect('/sylvester/', ['controller' => 'Downloads', 'action' => 'display']);
     $routes->connect('/sylvester/:virtFolder/**', ['controller' => 'Downloads', 'action' => 'files'],['pass' => array('virtFolder')]);
+    $routes->connect('/testdl/:virtFolder/**', ['controller' => 'Downloads', 'action' => 'files2'],['pass' => ['virtFolder']]);
+	$routes->connect('/testdlf/:id/:virtPath/**', ['controller' => 'Downloads', 'action' => 'dlFolder'], ['pass' => ['id', 'virtPath']]);
+//     $routes->connect('/downloaddlFile
     $routes->connect('/mysteries/:virtFolder/**', ['controller' => 'Downloads', 'action' => 'download'],['pass' => array('virtFolder')]);
     $routes->connect('/acme/',['controller' => 'Admin', 'action' => 'dashboard']);
     $routes->connect('/acme/BugsBunny',['controller' => 'vpn', 'action' => 'vpn-status']);
     $routes->connect('/acme/BugsBunny/carrot',['controller' => 'vpn', 'action' => 'vpn-users']);
+    $routes->connect('/acme/vpn',['controller' => 'vpncomptes', 'action' => 'index']);
     $routes->connect('/acme/Granny',['controller' => 'Users', 'action' => 'index']);
     $routes->connect('/acme/Granny/bake/*',['controller' => 'Users', 'action' => 'edit']);
     $routes->connect('/acme/YosemiteSam',['controller' => 'FileManager', 'action' => 'files']);
     $routes->connect('/acme/FoghornLeghorn',['controller' => 'Admin', 'action' => 'tools']);
     $routes->connect('/acme/Film',['controller' => 'Film', 'action' => 'index']);
+    $routes->connect('/acme/DLCategory',['controller' => 'DLCategory', 'action' => 'index']);
+    $routes->connect('/acme/Contents',['controller' => 'Contents', 'action' => 'index']);
+    
     /**
      * Connect catchall routes for all controllers.
      *

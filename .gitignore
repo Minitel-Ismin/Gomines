@@ -11,3 +11,4 @@
 /.settings
 /.metadata
 *.txt
+composer.lock

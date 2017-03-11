@@ -37,6 +37,7 @@ class AppView extends View
     public function initialize()
     {
         $this->loadHelper('WyriHaximus/MinifyHtml.MinifyHtml');
+        $this->loadHelper('File');
         echo <<< EOF
 <!--
       ________________________

@@ -71,6 +71,7 @@ class Film extends AbstractMigration
     	]);
     	$table->addColumn("subtitles","string");
     	$table->addColumn("language","string");
+    	$table->addColumn("doublon", "string");
     	$table->addColumn('created', 'datetime', [
     			'default' => null,
     			'null' => false,

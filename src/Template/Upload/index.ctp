@@ -19,7 +19,7 @@ $this->Html->script('previsualisation_image.js', array('block' => 'footerscript'
     <div class="row">
         <div class="col-lg-12 alert alert-info">
             L'upload est également possible en FTP avec les identifiants :<br/>
-            <strong>Host : </strong>192.168.163.11<br/>
+            <strong>Host : </strong>upload.gomines.rez ou ip: 172.17.0.11<br/>
             <strong>User : </strong><?= $username ?><br/>
             <strong>Pass : </strong><?= $pass ?><br/>
             Les fichiers seront ensuite triés et mis dans la liste principale.
