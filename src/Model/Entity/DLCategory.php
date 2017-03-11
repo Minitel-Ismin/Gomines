@@ -11,7 +11,7 @@ use Cake\ORM\Entity;
  * @property string $color
  * @property string $icon
  */
-class Dlcategory extends Entity
+class DLCategory extends Entity
 {
 
     /**

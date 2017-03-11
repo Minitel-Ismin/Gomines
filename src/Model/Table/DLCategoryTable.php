@@ -17,7 +17,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Dlcategory[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Dlcategory findOrCreate($search, callable $callback = null)
  */
-class DlcategoryTable extends Table
+class DLCategoryTable extends Table
 {
 
     /**
