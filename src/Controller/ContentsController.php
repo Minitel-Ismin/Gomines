@@ -18,11 +18,10 @@ class ContentsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Folders', 'Dlcategory']
-        ];
         
-        $contents = $this->paginate($this->Contents);
+        
+        $contents = $this->Contents->find('all')->contain(['Folders', 'Dlcategory']);
+        
         $this->set(compact('contents'));
         $this->set('_serialize', ['contents']);
     }
