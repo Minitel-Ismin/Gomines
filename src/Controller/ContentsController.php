@@ -20,7 +20,7 @@ class ContentsController extends AppController
     {
         
         
-        $contents = $this->Contents->find('all')->contain(['Folders', 'd_l_category']);
+        $contents = $this->Contents->find('all')->contain(['Folders', 'DLCategory']);
         
         $this->set(compact('contents'));
         $this->set('_serialize', ['contents']);
@@ -36,7 +36,7 @@ class ContentsController extends AppController
     public function view($id = null)
     {
         $content = $this->Contents->get($id, [
-            'contain' => ['d_l_category']
+            'contain' => ['DLCategory']
         ]);
 
         $this->set('content', $content);
