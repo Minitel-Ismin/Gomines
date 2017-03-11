@@ -19,7 +19,7 @@
                     <?php foreach ($contents as $cont): ?>
                     <tr>
                         <td><?= $cont->name ?></td>
-                        <td><?= $cont->dlcategory->name ?></td>
+                        <td><?= $cont->d_l_category->name ?></td>
                         <td><?= $cont->size	 ?></td>
 						<td><span class="glyphicon glyphicon-<?php echo ($cont->to_verify)? 'remove':'ok'; ?>"></td>
                         
