@@ -32,7 +32,7 @@ class ContentShell extends Shell
      */
     public function main() 
     {
-    	$CategoryTable = TableRegistry::get('Dlcategory');
+    	$CategoryTable = TableRegistry::get('DLCategory');
     	$ContentTable = TableRegistry::get('contents');
     	$FolderTable = TableRegistry::get('folders');
     	$category = $CategoryTable->find("all")->contain(['folders','contents'])->toArray();

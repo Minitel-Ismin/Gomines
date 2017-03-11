@@ -40,7 +40,7 @@ class ContentsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Dlcategory', [
+        $this->belongsTo('DLCategory', [
             'foreignKey' => 'dlcategory_id'
         ]);
         

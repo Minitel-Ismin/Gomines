@@ -30,7 +30,7 @@ class DlcategoryTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('dlcategory');
+        $this->table('d_l_category');
         $this->displayField('name');
         $this->primaryKey('id');
         $this->hasMany('contents',[

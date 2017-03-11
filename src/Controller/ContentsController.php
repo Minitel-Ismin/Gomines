@@ -20,7 +20,7 @@ class ContentsController extends AppController
     {
         
         
-        $contents = $this->Contents->find('all')->contain(['Folders', 'Dlcategory']);
+        $contents = $this->Contents->find('all')->contain(['Folders', 'd_l_category']);
         
         $this->set(compact('contents'));
         $this->set('_serialize', ['contents']);
@@ -36,7 +36,7 @@ class ContentsController extends AppController
     public function view($id = null)
     {
         $content = $this->Contents->get($id, [
-            'contain' => ['Dlcategory']
+            'contain' => ['d_l_category']
         ]);
 
         $this->set('content', $content);
@@ -61,7 +61,7 @@ class ContentsController extends AppController
                 $this->Flash->error(__('The content could not be saved. Please, try again.'));
             }
         }
-        $dlcategory = $this->Contents->Dlcategory->find('list', ['limit' => 200]);
+        $dlcategory = $this->Contents->DLCategory->find('list', ['limit' => 200]);
         $this->set(compact('content', 'dlcategory'));
         $this->set('_serialize', ['content']);
     }
