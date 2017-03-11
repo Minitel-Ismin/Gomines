@@ -7,9 +7,7 @@ client
 remote-cert-tls server
 tls-client
 dev tun
-#remote 172.17.0.11 443 tcp-client
-remote 172.17.0.11 1194 udp
-#redirect-gateway def1 bypass-dhcp
+remote 192.168.163.11 1194 udp
 resolv-retry infinite
 nobind
 persist-key
