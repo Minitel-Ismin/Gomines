@@ -12,3 +12,7 @@
 /.metadata
 *.txt
 composer.lock
+
+webroot/fonts/fontawesome-webfont\.eot
+
+webroot/fonts/fontawesome-webfont\.ttf
