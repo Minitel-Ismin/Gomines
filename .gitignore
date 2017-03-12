@@ -16,3 +16,5 @@ composer.lock
 webroot/fonts/fontawesome-webfont\.ttf
 
 webroot/fonts/fontawesome-webfont\.eot
+
+config/Migrations/schema-dump-default\.lock

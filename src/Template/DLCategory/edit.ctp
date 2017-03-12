@@ -22,7 +22,9 @@
 						<button id="remove<?php echo $key;?>" class="btn btn-danger remove-me" type="button">-</button>
 					</span>
 				</div>
-				<?php endforeach;?>
+				<?php endforeach;
+				if (isset($key)):
+				?>
 				<div class="input-group" id="field<?php echo $key+1;?>">
 					<input autocomplete="off" class="form-control" 
 						name="folders[]" id="folder<?php echo $key+1;?>" type="text" placeholder="Path vers le dossier <?php echo $key+2;?>" /> 
@@ -32,6 +34,7 @@
 						<button  class="btn add-more" type="button">+</button>
 					</span>
 				</div>
+				<?php endif;?>
 			</div>
 			<br>
             <div class="input-group">
