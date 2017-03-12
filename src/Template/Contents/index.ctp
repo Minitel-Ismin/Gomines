@@ -27,7 +27,7 @@
                         <td>
                             <div class="btn-group">
                                 <?= $this->Html->link(__("Voir"), ['action' => 'edit', $cont->id], ["class" => "btn btn-default"]) ?> 
-                            	<?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $cont->id], ['confirm' => __('êtes vous sûr? # {0}?', $cont->id)]) ?>
+                            	<?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $cont->id], [ "class" => "btn btn-default" , 'confirm' => __('êtes vous sûr? # {0}?', $cont->id)]) ?>
                             </div>
                         </td>
                     </tr>

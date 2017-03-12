@@ -28,9 +28,11 @@
                 <td><?= $this->Number->format($vpnCompte->bp_used) ?></td>
                 <td><?= h($vpnCompte->actif) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $vpnCompte->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $vpnCompte->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $vpnCompte->id], ['confirm' => __('Are you sure you want to delete # {0}?', $vpnCompte->id)]) ?>
+                	<div class="btn-group">
+	                    <?= $this->Html->link(__('View'), ['action' => 'view', $vpnCompte->id], ["class" => "btn btn-default"]) ?>
+	                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $vpnCompte->id], ["class" => "btn btn-default"]) ?>
+	                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $vpnCompte->id], ["class" => "btn btn-default", 'confirm' => __('Are you sure you want to delete # {0}?', $vpnCompte->id)]) ?>
+                	</div>
                 </td>
             </tr>
             <?php endforeach; ?>
