@@ -27,6 +27,63 @@ $this->Html->script('previsualisation_image.js', array('block' => 'footerscript'
     </div>
     <div class="row">
         <div class="col-md-6">
+
+         
+        <form class="form-horizontal"> 
+            <fieldset> 
+ 
+            <!-- Form Name --> 
+            <legend>Formulaire d'Upload</legend> 
+ 
+            <!-- Text input--> 
+            <div class="form-group"> 
+            <label class="col-md-4 control-label" for="dgid">Nom Du Fichier</label>   
+            <div class="col-md-4"> 
+            <input id="dgid" name="dgid" type="text" placeholder="Nom Du Fichier" class="form-control input-md"> 
+                 
+            </div> 
+            </div> 
+ 
+            <!-- Text input--> 
+            <div class="form-group"> 
+            <label class="col-md-4 control-label" for="token">Année De Sortie</label>   
+            <div class="col-md-4"> 
+            <input id="token" name="token" type="text" placeholder="2016" class="form-control input-md"> 
+                 
+            </div> 
+            </div> 
+ 
+            <!-- Text input--> 
+            <div class="form-group"> 
+            <label class="col-md-4 control-label" for="email">Qualité</label>   
+            <div class="col-md-4"> 
+                <input type="radio" name="qualite" value="inconnue" id="inconnue" /> <label for="inconnue">Inconnue</label><br /> 
+                <input type="radio" name="qualite" value="1080p" id="1080p" /> <label for="1080p">1080p</label><br /> 
+                <input type="radio" name="qualite" value="720p" id="720p" /> <label for="720p">720p</label><br /> 
+                <input type="radio" name="qualite" value="480p" id="480p" /> <label for="480p">480p</label><br /> 
+ 
+                 
+            </div> 
+            </div> 
+ 
+            <!-- Text input--> 
+            <div class="form-group"> 
+            <label class="col-md-4 control-label" for="abal">Type</label>   
+            <div class="col-md-4"> 
+                <input type="radio" name="type" value="Film" id="Film" /><label for="Film">Film</label> &emsp;&emsp;&nbsp; 
+                <input type="radio" name="type" value="Blu-Ray" id="Blu-Ray" /> <label for="Blu-Ray">Blu-Ray</label><br /> 
+                <input type="radio" name="type" value="Serie" id="Serie" /> <label for="Serie">Serie</label>&emsp;&emsp; 
+                <input type="radio" name="type" value="Logiciel" id="Logiciel" /> <label for="Logiciel">Logiciel</label><br /> 
+                <input type="radio" name="type" value="Jeux" id="Jeux" /> <label for="Jeux">Jeux</label>&emsp;&emsp;&nbsp; 
+                <input type="radio" name="type" value="Cours" id="Cours" /> <label for="Film">Cours</label><br /> 
+                <input type="radio" name="type" value="NSFW" id="NSFW" /> <label for="Film">NSFW</label>&emsp;&emsp; 
+                <input type="radio" name="type" value="Manga" id="Manga" /> <label for="Manga">Manga</label><br /> 
+                <input type="radio" name="type" value="Autre" id="Autre" /> <label for="Autre">Autre</label><br /> 
+                     
+            </div> 
+            </div> 
+ 
+            </form> 
             
             <!-- DROPPER -->
             <div class="row">
