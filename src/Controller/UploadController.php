@@ -54,14 +54,21 @@ class UploadController extends AppController
 		    //if(in_array($extension, $extension_allowed)){
 		    if(move_uploaded_file($file['tmp_name'],  $uploadFolder . $filename)){//'/media/Series2/UploadsWeb/'
 		    	$email = new Email('default');
-		    	$email->from(['upload@gomines.rez' => 'Uploads'])
-		    	->to($mail)
-		    	->subject($objet)
-		    	->send('Un nouveau fichier a Ã©tÃ© uploadÃ© par '. $user['nom'].' '.$user['prenom'].'!');
-		    	$messages[] = $filename." a bien Ã©tÃ© enregistrÃ© !";
+		    	$email->from(['upload@gomines.rez' => 'Uploads']);
+		    	if(is_array($mail)){
+		    		foreach ($mail as $m){
+		    			$email->addTo($m);
+		    		}
+		    	}else{
+		    		$email->to($mail);
+		    	}
+		    	
+		    	$email->subject($objet);
+		    	$email->send('Un nouveau fichier a été uploadé par '. $user['nom'].' '.$user['prenom'].'!');
+		    	$messages[] = $filename." a bien été enregistré !";
 		    }
 		    else{
-		        $messages[] = $filename." n'a pas Ã©tÃ© enregistrÃ© : extension non autorisÃ©e...";
+		        $messages[] = $filename." n'a pas été enregistré : extension non autorisée...";
 		    }
 		}
 
