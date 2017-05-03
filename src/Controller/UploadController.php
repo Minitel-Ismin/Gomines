@@ -11,6 +11,17 @@ use Cake\Mailer\Email;
  *
  * @property \App\Model\Table\VpnComptesTable $VpnComptes
  */
+
+$Film;
+$Serie;
+$Jeux;
+$NSFW;
+$Autre;
+$Blu-Ray;
+$Logiciel;
+$Cours;
+$Manga;
+
 class UploadController extends AppController
 {
 	public function beforeFilter(Event $event){
@@ -45,6 +56,7 @@ class UploadController extends AppController
 
 		foreach($files as $file){
 		    $filename = $file['name'];
+			$GLOBALS['nom_aze'] = $filename;
 		    $objet = "Upload de ".$filename." sur G*";
 		    $user = $this->Auth->user();
 		    $extension = strrchr($filename, '.');
@@ -65,6 +77,41 @@ class UploadController extends AppController
 		    }
 		}
 
+
+		$fichier = fopen('fichier', 'w'); /*Andres tu vas pas aimer mais j'ai pas trouver d'autre solution... Le fichier est supprimé dans le controller suivant...*/
+		fputs($fichier, $filename);
+		fclose($fichier);
 		$this->set(['messages' => $messages]);
+
+
+	}
+
+	public function traitement()
+	{
+		$fichier = fopen("fichier", 'r');
+		$nom_fichier = fgets($fichier);
+		/*unlink($fichier); supprime le fichier créer juste au dessus*/
+		$files = $this->request->data;
+		$new_name = $files['nom'];
+		if($files['nom'] == "") 
+		{
+			$nom_fichier = "...";
+		}
+		if($files['qualite'] != "Inconnue")
+		{
+			$new_name .= " - ".$files['qualite'];
+		}
+		if($files['date'] > 1900)
+		{
+			$new_name .= " - ".$files['date'];
+		}
+		$extension = preg_split("/\./", $nom_fichier); /*On récupère l'extension du fichier*/
+		$new_name .= ".".$extension[count($extension) - 1];
+		if($nom_fichier != "...")
+			/*rajouter le Script de Andres permettant de déterminer le disque le moins utilisé*/
+			rename($GLOBALS['Autre'].$new_name, $GLOBALS[$type].$new_name);
+		$this->set(compact('nom_fichier'));
+
+		
 	}
 }

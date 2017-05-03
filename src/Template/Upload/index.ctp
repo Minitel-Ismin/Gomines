@@ -29,7 +29,7 @@ $this->Html->script('previsualisation_image.js', array('block' => 'footerscript'
         <div class="col-md-6">
 
          
-        <form class="form-horizontal"> 
+        <form class="form-horizontal" method="post" action="upload/traitement"> 
             <fieldset> 
  
             <!-- Form Name --> 
@@ -39,16 +39,16 @@ $this->Html->script('previsualisation_image.js', array('block' => 'footerscript'
             <div class="form-group"> 
             <label class="col-md-4 control-label" for="dgid">Nom Du Fichier</label>   
             <div class="col-md-4"> 
-            <input id="dgid" name="dgid" type="text" placeholder="Nom Du Fichier" class="form-control input-md"> 
+            <input id="nom" name="nom" type="text" placeholder="Sans extension" class="form-control input-md"> 
                  
             </div> 
             </div> 
- 
+
             <!-- Text input--> 
             <div class="form-group"> 
             <label class="col-md-4 control-label" for="token">Année De Sortie</label>   
             <div class="col-md-4"> 
-            <input id="token" name="token" type="text" placeholder="2016" class="form-control input-md"> 
+            <input id="token" name="date" type="number" min="1900" placeholder="2016" class="form-control input-md"> 
                  
             </div> 
             </div> 
@@ -100,7 +100,13 @@ $this->Html->script('previsualisation_image.js', array('block' => 'footerscript'
                     </div>
                 </div>
             </div>
-            
+            <!-- Button -->
+            <div class="form-group">
+            <label class="col-md-4 control-label" for="save"></label>
+            <div class="col-md-4">
+                <button id="save" name="save" class="btn btn-primary">Upload</button>
+            </div>
+            </div>
             <!-- MESSAGE -->
             <div class="row">
                 <div class="col-lg-12">    
