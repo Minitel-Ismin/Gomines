@@ -56,7 +56,6 @@ class UploadController extends AppController
 
 		foreach($files as $file){
 		    $filename = $file['name'];
-			$GLOBALS['nom_aze'] = $filename;
 		    $objet = "Upload de ".$filename." sur G*";
 		    $user = $this->Auth->user();
 		    $extension = strrchr($filename, '.');
