@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -36,6 +36,7 @@ class UploadController extends AppController
 
 	public function newFile(){
 		$extension_allowed = ['avi', 'mkv', 'm4v', 'mp4', 'srt'];
+
 		$mail = Configure::read("Upload.Mail");
 		$uploadFolder = Configure::read("Upload.folder");
 
@@ -53,14 +54,21 @@ class UploadController extends AppController
 		    //if(in_array($extension, $extension_allowed)){
 		    if(move_uploaded_file($file['tmp_name'],  $uploadFolder . $filename)){//'/media/Series2/UploadsWeb/'
 		    	$email = new Email('default');
-		    	$email->from(['upload@gomines.rez' => 'Uploads'])
-		    	->to($mail)
-		    	->subject($objet)
-		    	->send('Un nouveau fichier a été uploadé par '. $user['nom'].' '.$user['prenom'].'!');
-		    	$messages[] = $filename." a bien été enregistré !";
+		    	$email->from(['upload@gomines.rez' => 'Uploads']);
+		    	if(is_array($mail)){
+		    		foreach ($mail as $m){
+		    			$email->addTo($m);
+		    		}
+		    	}else{
+		    		$email->to($mail);
+		    	}
+		    	
+		    	$email->subject($objet);
+		    	$email->send('Un nouveau fichier a été uploadé par '. $user['nom'].' '.$user['prenom'].'!');
+		    	$messages[] = $filename." a bien été enregistré";
 		    }
 		    else{
-		        $messages[] = $filename." n'a pas été enregistré : extension non autorisée...";
+		        $messages[] = $filename." n'a pas été enregistré: extension non autorisée..";
 		    }
 		}
 

@@ -13,6 +13,8 @@
 *.txt
 composer.lock
 
+webroot/fonts/fontawesome-webfont\.ttf
+
 webroot/fonts/fontawesome-webfont\.eot
 
-webroot/fonts/fontawesome-webfont\.ttf
+config/Migrations/schema-dump-default\.lock

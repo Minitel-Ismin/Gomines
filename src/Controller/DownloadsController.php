@@ -64,7 +64,7 @@ class DownloadsController extends AppController
     }
 
     // TO-DO : Review this function
-    // TO-DO : Ajouter lien de retour qui, lorsque l'on est au top-level d'une catégorie, nous ramène à la page de la catégorie
+    // TO-DO : Ajouter lien de retour qui, lorsque l'on est au top-level d'une catégorie, nous ramène à  la page de la catégorie
     // Affiche le contenu des dossiers & permet le téléchargement de fichiers
     public function files($virtFolder = "", $path = ""){
     	// Récupération Conf + Init variables
@@ -163,7 +163,7 @@ class DownloadsController extends AppController
 
     }
     
-    //construit un path à partir d'un array split en ne prennant pas en compte les 2 premiers
+    //construit un path à  partir d'un array split en ne prennant pas en compte les 2 premiers
     private function constructPath($arrFolder, $start = 3){
     	$res = "";
     	foreach($arrFolder as $key => $elmt){
