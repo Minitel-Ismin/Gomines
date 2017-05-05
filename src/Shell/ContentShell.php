@@ -36,11 +36,11 @@ class ContentShell extends Shell
     	$ContentTable = TableRegistry::get('contents');
     	$FolderTable = TableRegistry::get('folders');
     	$category = $CategoryTable->find("all")->contain(['folders','contents'])->toArray();
-    	$this->out("(0) pour faire un import dans toutes les catégories");
+    	$this->out("(0) pour faire un import dans toutes les catÃ©gories");
     	foreach($category as $key=>$cat){
     		$this->out("(".($key+1).") ".$cat->name);
     	}
-    	$cat = $this->in('Quel catégorie importer?');
+    	$cat = $this->in('Quel catÃ©gorie importer?');
     	if($cat){
     		$newContent = [];
     		$category=$category[$cat-1];
@@ -78,12 +78,12 @@ class ContentShell extends Shell
     		$CategoryTable->save($category);
     		
     	}
-    	//TODO: pouvoir ajouter toutes les catégories d'un coup
+    	//TODO: pouvoir ajouter toutes les catÃ©gories d'un coup
     }
 
     
     /**
-     * fonction lisant récursivement le dossier $dir spécifié
+     * fonction lisant rÃ©cursivement le dossier $dir spÃ©cifiÃ©
      * @param unknown $dir
      * @param array $results
      */

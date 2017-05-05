@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -64,11 +64,11 @@ class UploadController extends AppController
 		    	}
 		    	
 		    	$email->subject($objet);
-		    	$email->send('Un nouveau fichier a été uploadé par '. $user['nom'].' '.$user['prenom'].'!');
-		    	$messages[] = $filename." a bien été enregistré !";
+		    	$email->send('Un nouveau fichier a Ã©tÃ© uploadÃ© par '. $user['nom'].' '.$user['prenom'].'!');
+		    	$messages[] = $filename." a bien Ã©tÃ© enregistrÃ©";
 		    }
 		    else{
-		        $messages[] = $filename." n'a pas été enregistré : extension non autorisée...";
+		        $messages[] = $filename." n'a pas Ã©tÃ© enregistrÃ©: extension non autorisÃ©e..";
 		    }
 		}
 

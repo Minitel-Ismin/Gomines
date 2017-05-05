@@ -64,10 +64,10 @@ class DownloadsController extends AppController
     }
 
     // TO-DO : Review this function
-    // TO-DO : Ajouter lien de retour qui, lorsque l'on est au top-level d'une catégorie, nous ramène à  la page de la catégorie
-    // Affiche le contenu des dossiers & permet le téléchargement de fichiers
+    // TO-DO : Ajouter lien de retour qui, lorsque l'on est au top-level d'une catÃ©gorie, nous ramÃ¨ne Ã Â  la page de la catÃ©gorie
+    // Affiche le contenu des dossiers & permet le tÃ©lÃ©chargement de fichiers
     public function files($virtFolder = "", $path = ""){
-    	// Récupération Conf + Init variables
+    	// RÃ©cupÃ©ration Conf + Init variables
     	$conf = Configure::read("FileFolders");
     	$hiddenFiles = Configure::read("HiddenFiles");
     	$directory = [];
@@ -96,10 +96,10 @@ class DownloadsController extends AppController
         		$vpath .= $path;
         	}
 
-        	// Vérification et Lecture
+        	// VÃ©rification et Lecture
         	$file = is_file($directory);
         	if($file){
-        		// Télécharger le fichier
+        		// TÃ©lÃ©charger le fichier
         		$name = substr(strrchr($directory,"/"),1);
     		    $this->response->file($directory, array(
     		        'download' => true,
@@ -133,7 +133,7 @@ class DownloadsController extends AppController
 
     	    	$this->set(compact("filesData", "vpath", "readme"));
     			// files : liste des dossiers & fichiers du dossier courant
-    			// vpath : répertoire dans lequel se trouve l'utilisateur
+    			// vpath : rÃ©pertoire dans lequel se trouve l'utilisateur
         	}
         }
     }
@@ -163,7 +163,7 @@ class DownloadsController extends AppController
 
     }
     
-    //construit un path à  partir d'un array split en ne prennant pas en compte les 2 premiers
+    //construit un path Ã Â  partir d'un array split en ne prennant pas en compte les 2 premiers
     private function constructPath($arrFolder, $start = 3){
     	$res = "";
     	foreach($arrFolder as $key => $elmt){
@@ -179,7 +179,7 @@ class DownloadsController extends AppController
     	$Content = TableRegistry::get('Contents')->get($id);
     	$directory = $Content->path;
     	$name = $Content->name;
-        // Télécharger le fichier
+        // TÃ©lÃ©charger le fichier
         $this->response->file($directory, array(
             'download' => true,
             'name' => $name,
@@ -219,10 +219,10 @@ class DownloadsController extends AppController
     	
     	return $this->response;
     }
-    //permet de télécharger tout un dossier
+    //permet de tÃ©lÃ©charger tout un dossier
     // TO-DO: Bien nettoyer $path
     public function download($virtFolder = "", $path = ""){
-        // Récupération Conf + Init variables
+        // RÃ©cupÃ©ration Conf + Init variables
     	$conf = Configure::read("FileFolders");
     	$directory = [];
     	$file = false;
@@ -249,10 +249,10 @@ class DownloadsController extends AppController
         		$vpath .= $path;
         	}
 
-        	// Vérification et Lecture
+        	// VÃ©rification et Lecture
         	$file = is_file($directory);
         	if($file){
-        		// Télécharger le fichier
+        		// TÃ©lÃ©charger le fichier
         		$name = substr(strrchr($directory,"/"),1);
     		    $this->response->file($directory, array(
     		        'download' => true,
@@ -262,7 +262,7 @@ class DownloadsController extends AppController
     			$this->response->type($hFile->mime());
     		    return $this->response;
         	}else{
-                // Télécharge le dossier
+                // TÃ©lÃ©charge le dossier
                 $dir = getcwd();
                 chdir($directory);
                 $fp = popen('zip -0 -r - .', 'r');
