@@ -7,7 +7,7 @@ client
 remote-cert-tls server
 tls-client
 dev tun
-remote 172.17.0.10 1194 udp
+remote 172.17.0.11 1194 udp
 redirect-gateway def1
 resolv-retry infinite
 nobind
