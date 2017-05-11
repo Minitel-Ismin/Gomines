@@ -12,33 +12,33 @@
  * @since         0.10.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 $cakeDescription = 'Gomines';
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
 <head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?> - <?= $this->fetch('title') ?>
+    <?= $this->Html->charset()?>
+    <meta name="viewport"
+	content="width=device-width, initial-scale=1.0">
+<title>
+        <?= $cakeDescription ?> - <?= $this->fetch('title')?>
     </title>
-    <?= $this->Html->meta('icon') ?>
+    <?= $this->Html->meta('icon')?>
     
     
-    <?= $this->Html->css('jquery-ui.css') ?>
+    <?= $this->Html->css('jquery-ui.css')?>
     <?php //$this->Html->css('style.css') ?>
     <?php //$this->Html->css('site.css') ?>
     <?php //$this->Html->css('cake.css') ?>
-    <?= $this->Html->css('bootstrap.min.css') ?>
+    <?= $this->Html->css('bootstrap.min.css')?>
     <?php // this->Html->css('base.css') ?>
-    <?= $this->Html->css('thomas.css') ?>
-    <?= $this->Html->css('font-awesome.min.css') ?>
+    <?= $this->Html->css('thomas.css')?>
+    <?= $this->Html->css('font-awesome.min.css')?>
     <?= $this->Html->css('font.css')?>
     
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
+    <?= $this->fetch('meta')?>
+    <?= $this->fetch('css')?>
+    <?= $this->fetch('script')?>
     <script type="text/javascript">
       var _paq = _paq || [];
       _paq.push(['trackPageView']);
@@ -51,62 +51,75 @@ $cakeDescription = 'Gomines';
         g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'st.js'; s.parentNode.insertBefore(g,s);
       })();
     </script>
-    <noscript><p><img src="//<?= $_SERVER['SERVER_ADDR'] ?>/analytics/st.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<noscript>
+	<p>
+		<img src="//<?= $_SERVER['SERVER_ADDR'] ?>/analytics/st.php?idsite=1"
+			style="border: 0;" alt="" />
+	</p>
+</noscript>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <?= $this->Html->link($cakeDescription, ['controller' => 'Downloads', 'action' => 'display'], ['class' => 'navbar-brand']) ?>
-    </div>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+      			<?= $this->Html->link($cakeDescription, ['controller' => 'Downloads', 'action' => 'display'], ['class' => 'navbar-brand'])?>
+    		</div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <!--<li class="active"><?= $this->Html->link('Accueil', ['controller' => 'Downloads', 'action' => 'display']) ?></li>-->
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-		<?php
-		if ($authUser): ?>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $authUser['nom'] ?> <?= $authUser['prenom'] ?> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Mon compte</a></li>
-            <li><?= $this->Html->link('Se déconnecter', ['controller' => 'users', 'action' => "logout"]); ?></li>
-          </ul>
-        </li>
-		<?php
-		else:
-		?>
-        <li><?= $this->Html->link('Se connecter', ['controller' => 'users', 'action' => 'login']) ?></li>
-        <li><?= $this->Html->link("S'inscrire", ['controller' => 'users', 'action' => 'register']) ?></li>
-		<?php
-		endif;
-		?>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-    <?= $this->Flash->render() ?>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<!--<li class="active"><?= $this->Html->link('Accueil', ['controller' => 'Downloads', 'action' => 'display']) ?></li>-->
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" data-toggle="modal" data-target="#myModal">Faire une demande</a></li>
+					<?php if ($authUser) : ?>
+			        	<li class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown" role="button" aria-haspopup="true"
+									aria-expanded="false"><?= $authUser['nom'] ?> <?= $authUser['prenom'] ?> <span
+										class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Mon compte</a></li>
+								<li><?= $this->Html->link('Se déconnecter', ['controller' => 'users', 'action' => "logout"]); ?></li>
+							</ul>
+						</li>
+		
+		 			<?php else : ?>
+        				<li><?= $this->Html->link('Se connecter', ['controller' => 'users', 'action' => 'login']) ?></li>
+						<li><?= $this->Html->link("S'inscrire", ['controller' => 'users', 'action' => 'register']) ?></li>
+		
+					<?php endif; ?>
+		
+      			</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+    <?= $this->Flash->render()?>
     <section class="container-liquid" style="margin-top: 70px">
-        <?= $this->fetch('content') ?>
+        <?= $this->fetch('content')?>
     </section>
-    <footer class="text-center">
-		<?= $this->Html->script("jquery.min.js") ?>
-		<?= $this->Html->script("jquery-ui.js") ?>
-		<?= $this->Html->script("bootstrap.min.js") ?>
-		<?= $this->Html->script("alert.js") ?>
-		<?= $this->Html->script("site.js") ?>
+	<footer class="text-center">
+		<?= $this->Html->script("jquery.min.js")?>
+		<?= $this->Html->script("jquery-ui.js")?>
+		<?= $this->Html->script("bootstrap.min.js")?>
+		<?= $this->Html->script("alert.js")?>
+		<?= $this->Html->script("site.js")?>
 		<?php //$this->Html->script("search.js") ?>
-        <?= $this->fetch('footerscript') ?>
+        <?= $this->fetch('footerscript')?>
         Proud to be Gomines version <?php system("git log --pretty=format:%h -n 1"); ?> !
     </footer>
 </body>
+<!-- Modal -->
+<?= $this->element('modal_form'); ?>
+
 </html>
