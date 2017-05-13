@@ -71,6 +71,7 @@ Router::scope('/', function ($routes) {
     $routes->connect('/acme/Film',['controller' => 'Film', 'action' => 'index']);
     $routes->connect('/acme/DLCategory',['controller' => 'DLCategory', 'action' => 'index']);
     $routes->connect('/acme/Contents',['controller' => 'Contents', 'action' => 'index']);
+    $routes->connect('/acme/Ticketheme',['controller' => 'TicketTheme', 'action' => 'index']);
     
     /**
      * Connect catchall routes for all controllers.

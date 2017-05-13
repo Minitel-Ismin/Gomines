@@ -18,10 +18,9 @@ class TicketThemeController extends AppController
      */
     public function index()
     {
-        $ticketTheme = $this->paginate($this->TicketTheme);
+    	$ticketThemes = $this->TicketTheme->find('all');
 
-        $this->set(compact('ticketTheme'));
-        $this->set('_serialize', ['ticketTheme']);
+        $this->set(compact('ticketThemes'));
     }
 
     /**

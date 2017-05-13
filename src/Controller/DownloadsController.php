@@ -141,17 +141,17 @@ class DownloadsController extends AppController
     public function files2($virtFolder){
     	$this->isAuthorized(0);
     	$this->loadModel('Contents');
-    	$this->loadModel('DLcategory');
+    	$this->loadModel('DLCategory');
     	$subFolder = preg_split("#/#",$this->request->here);
     	$searchFolder = $subFolder[2];
     	
     	if(count($subFolder) < 4){ //cas sous-dossiers
-    		$content = $this->Contents->find('all', ['contain'=>'Dlcategory'])->where(['Dlcategory.name'=>$virtFolder])
+    		$content = $this->Contents->find('all', ['contain'=>'DLCategory'])->where(['DLCategory.name'=>$virtFolder])
     																		->where(['virtual_path'=>'']);
     		$subFolder = '';
     	}else{
     		$subFolder = $this->constructPath($subFolder);
-    		$content = $this->Contents->find('all', ['contain'=>['Dlcategory', 'Folders']])
+    		$content = $this->Contents->find('all', ['contain'=>['DLCategory', 'Folders']])
 							    		->where(['Folders.path LIKE'=> '%'.$searchFolder.'%'])
 							    		->where(['virtual_path'=>$subFolder]);
     	}
