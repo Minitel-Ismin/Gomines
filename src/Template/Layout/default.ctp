@@ -31,6 +31,7 @@ $cakeDescription = 'Gomines';
     <?php //$this->Html->css('site.css') ?>
     <?php //$this->Html->css('cake.css') ?>
     <?= $this->Html->css('bootstrap.min.css')?>
+    <?= $this->Html->css('modal_form.css')?>
     <?php // this->Html->css('base.css') ?>
     <?= $this->Html->css('thomas.css')?>
     <?= $this->Html->css('font-awesome.min.css')?>
@@ -119,7 +120,9 @@ $cakeDescription = 'Gomines';
         Proud to be Gomines version <?php system("git log --pretty=format:%h -n 1"); ?> !
     </footer>
 </body>
+<?php if(isset($ticketThemes)):?>
 <!-- Modal -->
-<?= $this->element('modal_form'); ?>
+<?= $this->element('modal_form', ['ticketThemes'=>$ticketThemes]); ?>
+<?php endif;?>
 
 </html>

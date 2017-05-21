@@ -20,10 +20,8 @@
                         
                         
                         <td>
-                            <div class="btn-group">
-                                <?= $this->Html->link(__("Voir"), ['action' => 'edit', $ticketTheme->id], ["class" => "btn btn-default"]) ?> 
-								<?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $ticketTheme->id], ["class" => "btn btn-default" ,'confirm' => __('êtes vous sûr? # {0}?', $ticketTheme->id)]) ?>
-                            </div>
+                        	<?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $ticketTheme->id], ["class" => "btn btn-default" ,'confirm' => __('êtes vous sûr? # {0}?', $ticketTheme->id)]) ?>
+                           
                         </td>
                     </tr>
                     <?php endforeach; ?>

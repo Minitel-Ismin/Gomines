@@ -18,6 +18,7 @@ class TicketThemeController extends AppController
      */
     public function index()
     {
+    	$this->isAuthorized(2);
     	$ticketThemes = $this->TicketTheme->find('all');
 
         $this->set(compact('ticketThemes'));

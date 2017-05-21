@@ -44,6 +44,7 @@ class AppController extends Controller {
 		$this->loadComponent ( 'Flash' );
 		$this->loadComponent ( 'Cookie' );
 		$this->loadComponent ( 'Auth', [ 
+// 				'authorize' => ['Controller'],
 				'authenticate' => [ 
 						'FOC/Authenticate.Cookie' => [ 
 								'fields' => [ 
@@ -68,7 +69,7 @@ class AppController extends Controller {
 				'loginAction' => [ 
 						'controller' => 'Users',
 						'action' => 'login' 
-				]
+				],
 		] );
 		
 		// Allow the display action so our pages controller
@@ -83,6 +84,9 @@ class AppController extends Controller {
 				"forgotPassword",
 				"resetPasswordToken"
 		] );
+		
+		$this->Auth->allow(['controller' => 'Ticket', 'action' => 'add']);
+		
 	}
 	
 	/**
@@ -101,12 +105,19 @@ class AppController extends Controller {
 		}
 		$this->set ( 'authUser', $this->Auth->user () );
 	}
+	
+	public function beforeFilter(Event $event){
+		parent::beforeFilter($event);
+		
+		$this->loadModel("TicketTheme");
+		$this->set('ticketThemes', $this->TicketTheme->find('all'));
+	}
+	
 	public function isAuthorized($droits = 0) {
 		$user = $this->Auth->user ();
-		
 		if ($droits == 0) {
 			return true;
-		} elseif (($user ['droits'] & $droits) == 0) {
+		} elseif (($user ['droits'] & $droits) == 0) { 
 			$this->Flash->error ( __ ( 'Vous n\'avez pas les droits pour accéder à cette page.' ) );
 			return $this->redirect ( [ 
 					'controller' => 'pages',

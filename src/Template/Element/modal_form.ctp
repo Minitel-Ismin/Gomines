@@ -8,7 +8,10 @@
 				<h4 class="modal-title">Formulaire de demande</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="#">
+				<form class="form-horizontal" accept-charset="utf-8" method="post" action="<?= $this->Url->build(['controller' => 'Ticket','action' => 'add']);?>">
+					<?php if($authUser):?>
+						<input type="hidden" name="Ticket[user_id]" value="<?= $authUser['id'];?>">
+					<?php endif;?>
 					<fieldset>
 
 
@@ -16,9 +19,8 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="name">Nom &amp; prénom</label>
 							<div class="col-md-8">
-								<input id="name" name="name" type="text" placeholder=""
-									class="form-control input-md" required="">
-
+								<input id="name" name="Ticket[asker]" type="text" placeholder=""
+									class="form-control input-md" required="" <?php if($authUser): echo 'value="'.$authUser['nom'].' ' .$authUser['prenom'].'" disabled'; endif; ?>>
 							</div>
 						</div>
 
@@ -26,8 +28,8 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="email">Email</label>
 							<div class="col-md-8">
-								<input id="email" name="email" type="text" placeholder=""
-									class="form-control input-md" required="">
+								<input id="email" name="Ticket[email]" type="email" placeholder=""
+									class="form-control input-md" required <?php if($authUser): echo 'value="'.$authUser['email'].'" disabled'; endif; ?>>
 
 							</div>
 						</div>
@@ -37,10 +39,12 @@
 							<label class="col-md-4 control-label" for="theme">Thème de ta
 								demande</label>
 							<div class="col-md-8">
-								<select id="theme" name="theme" class="form-control">
-									<option value="1">Option one</option>
-									<option value="2">Option two</option>
+								<select id="theme" name="Ticket[ticket_theme_id]" class="form-control">
+									<?php foreach($ticketThemes as $ticketTheme):?>
+										<option <?php if($ticketTheme->name=="autre"): echo 'class="editable" value="autre"'; else: echo 'value='.$ticketTheme->id; endif;?>><?= $ticketTheme->name ?></option>
+									<?php endforeach;?>
 								</select>
+								<input class="editOption" style="display:none;" name="Ticket[theme]" value=""></input>
 							</div>
 						</div>
 
@@ -49,9 +53,7 @@
 							<label class="col-md-4 control-label" for="question">Description
 								de ta demande</label>
 							<div class="col-md-8">
-								<textarea class="form-control" id="question" name="question">Merci d'être le plus précis possible
-					
-								</textarea>
+								<textarea class="form-control" id="question" name="Ticket[question]" placeholder="Merci d'être le plus précis possible"></textarea>
 							</div>
 						</div>
 
@@ -74,3 +76,33 @@
 
 	</div>
 </div>
+
+<?php //$this->start('footerscript');?>
+<script type="text/javascript">
+$(document).ready(function(){
+	var initialText = $('.editable').val();
+	$('.editOption').val(initialText);
+
+	$('#theme').change(function(){
+		console.log("coucou");
+		var selected = $('option:selected', this).attr('class');
+		var optionText = $('.editable').text();
+		
+		if(selected == "editable"){
+		  $('.editOption').show();
+		
+		  
+		  $('.editOption').keyup(function(){
+		      var editText = $('.editOption').val();
+// 		      $('.editable').val(editText);
+		      $('.editable').html(editText);
+		  });
+		
+		}else{
+		  $('.editOption').hide();
+		}
+	});
+});
+
+</script>
+<?php //$this->end(); ?>
