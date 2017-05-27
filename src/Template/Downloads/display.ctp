@@ -35,33 +35,19 @@ $this->Html->script('titiVoitGrominet.js', array('block' => 'footerscript'));
                             <?=$this->Html->image('titi.png'); ?>
                         </div>
                         
-<?php
-foreach($conf as $name => $item):
-	if(isset($item['hidden']) && $item['hidden'])
-		continue;
-	if(isset($item['cat']) && $item['cat'] != $subcat)
-		continue;
-	if(isset($item['color']))
-		$color = $item['color'];
-	else
-		$color = false;
-	if(isset($item['link']))
-		$url = $item['link'];
-	elseif(isset($item['subcat']))
-		$url = ['controller' => 'Downloads', 'action' => 'display', $name];
-	else
-		$url = ['controller' => 'Downloads', 'action' => 'files', $name];
-                        
-    $html = '<div class="col-lg-4 col-md-4 col-sm-4 cat-tools text-center" style="background-color: #'.$item['color'].'">'.$name.'<br>'.$this->Html->image($item['icon']).'</div>';
-?>
-
-                
-                        <?=$this->Html->link($html, $url, array('escape' => false)); ?>
-                
-                    
-<?php
-endforeach;
-?>
+						<?php
+						
+							for($k=0;$k<$row;$k++){
+								for($i=0;$i<$column;$i++){
+									$category = $categories[$k*$row + $i];
+									$url = ['controller' => 'Downloads', 'action' => 'files', $category->name];
+									$html = '<div class="col-lg-'.(12/$column).' cat-tools text-center" style="background-color: #'.$category->color.'">'.$category->name.'<br>'.$this->Html->image($category->icon).'</div>';
+									echo $this->Html->link($html, $url, array('escape' => false));
+								}
+								
+							}                             
+						              
+						?>
                     
                     </div>
                 

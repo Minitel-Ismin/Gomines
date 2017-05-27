@@ -35,7 +35,9 @@ class FoldersTable extends Table
         $this->primaryKey('id');
         
         $this->hasMany('contents', [
-        		'foreignKey' => 'folder_id'
+        		'foreignKey' => 'folder_id',
+        		'saveStrategy' =>'replace'
+        		
         ]);
     }
 

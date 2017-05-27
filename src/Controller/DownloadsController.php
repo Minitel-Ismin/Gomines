@@ -52,15 +52,23 @@ class DownloadsController extends AppController
 
     public function display($subcat = "")
     {
-    	$conf = Configure::read("FileFolders");
-    	if($subcat != "" && isset($conf[$subcat])){
-    		$cats = [];
-    		foreach($conf as $n => $c)
-    			if(isset($c['cat']) && $c['cat'] == $subcat)
-    				$cats[$n] = $c;
-    		$conf = $cats;
+    	$this->loadModel('DLCategory');
+    	$column = 2;
+    	$limit = 10;
+    	
+    	
+    	$categories = $this->DLCategory->find('all');
+    	$numberCat = $categories->count();
+    	
+    	
+    	while($numberCat%$column!=0 && $column!=$limit){
+    		$column++;
+    		
     	}
-        $this->set(compact("conf", "subcat"));
+    	$row = $numberCat/$column;
+    	$categories = $categories->toArray();
+
+        $this->set(compact("categories", "row", "column"));
     }
 
     // TO-DO : Review this function
@@ -138,8 +146,9 @@ class DownloadsController extends AppController
         }
     }
 
-    public function files2($virtFolder){
+    public function files2($virtFolder){ //virtFolder sert à créer le lien dans la vue
     	$this->isAuthorized(0);
+    	
     	$this->loadModel('Contents');
     	$this->loadModel('DLCategory');
     	$subFolder = preg_split("#/#",$this->request->here);
@@ -150,15 +159,12 @@ class DownloadsController extends AppController
     																		->where(['virtual_path'=>'']);
     		$subFolder = '';
     	}else{
-    		$subFolder = $this->constructPath($subFolder);
+    		$subFolder = str_replace("%20", " ", $this->constructPath($subFolder));
     		$content = $this->Contents->find('all', ['contain'=>['DLCategory', 'Folders']])
 							    		->where(['Folders.path LIKE'=> '%'.$searchFolder.'%'])
 							    		->where(['virtual_path'=>$subFolder]);
     	}
     	
-//     	->where(['Contents.path LIKE' => '%'.$virtFolder]);
-		
-
         $this->set(compact('content', 'subFolder', 'virtFolder'));
 
     }

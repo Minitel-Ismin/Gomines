@@ -34,7 +34,8 @@ class DLCategoryTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
         $this->hasMany('contents',[
-        		'foreignKey' => 'dlcategory_id'
+        		'foreignKey' => 'dlcategory_id',
+        		'saveStrategy' =>'replace'
         ]);
         $this->hasMany('folders', [
         		'foreignKey' => 'id_dlcategory'

@@ -4,7 +4,7 @@
 <?= $this->Html->script('jquery.dataTables'); ?>
 <script type="text/javascript">
 	$(document).ready(function(){
-	    $('#Table').DataTable({
+		var table = $('#Table').DataTable({
 	    	"language": {
                 "url": "/js/french.json"
             }

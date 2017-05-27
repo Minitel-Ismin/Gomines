@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Shell;
 
 use Cake\Console\Shell;
@@ -8,103 +9,105 @@ use App\Model\Entity\Content;
 /**
  * Content shell command.
  */
-class ContentShell extends Shell
-{
-
-    /**
-     * Manage the available sub-commands along with their arguments and help
-     *
-     * @see http://book.cakephp.org/3.0/en/console-and-shells.html#configuring-options-and-generating-help
-     *
-     * @return \Cake\Console\ConsoleOptionParser
-     */
-    public function getOptionParser()
-    {
-        $parser = parent::getOptionParser();
-
-        return $parser;
-    }
-
-    /**
-     * main() method.
-     *
-     * @return bool|int Success or error code.
-     */
-    public function main() 
-    {
-    	$CategoryTable = TableRegistry::get('DLCategory');
-    	$ContentTable = TableRegistry::get('contents');
-    	$FolderTable = TableRegistry::get('folders');
-    	$category = $CategoryTable->find("all")->contain(['folders','contents'])->toArray();
-    	$this->out("(0) pour faire un import dans toutes les catégories");
-    	foreach($category as $key=>$cat){
-    		$this->out("(".($key+1).") ".$cat->name);
-    	}
-    	$cat = $this->in('Quel catégorie importer?');
-    	if($cat){
-    		$newContent = [];
-    		$category=$category[$cat-1];
-    		foreach ($category->folders as $folder){
-    			$newFolderContent = [];
-
-    			$folder->path = strtr($folder->path, '\\', '/');
-    			$result=[];
-    			$this->getDirContents($folder->path, $result);
-    			foreach ($result as $res){
-    				$temp = $ContentTable->findOrCreate(["name"=>$res["name"], "path"=>$res["path"]]);
-    				
-    					$temp->name = $res['name'];
-    					$temp->path = $res['path'];
-    					$temp->modified = date("Y-m-j H:i:s",filemtime($res['path']));
-    					$temp->to_verify = 0;
-    					$temp->virtual_path = substr(preg_split('/'.str_replace("/","\/",$folder->path).'/',strtr($temp->path, '\\', '/'))[1],1);
-    					$temp->virtual_path = preg_split("#[^/]*$#", $temp->virtual_path)[0];
-    					if(isset($res['filesize'])){
-    						$temp->size = $res['filesize'];
-    						$temp->sub_folder = false;
-    					}else{
-    						$temp->size=0;
-    						$temp->sub_folder = true;
-    					}
-    					$newContent[] = $temp;
-    					$newFolderContent[] = $temp;
-    			}
-    			$folder->contents = $newFolderContent;
-    			$FolderTable->save($folder);
-
+class ContentShell extends Shell {
+	
+	/**
+	 * Manage the available sub-commands along with their arguments and help
+	 *
+	 * @see http://book.cakephp.org/3.0/en/console-and-shells.html#configuring-options-and-generating-help
+	 *
+	 * @return \Cake\Console\ConsoleOptionParser
+	 */
+	public function getOptionParser() {
+		$parser = parent::getOptionParser ();
+		
+		return $parser;
+	}
+	
+	/**
+	 * main() method.
+	 *
+	 * @return bool|int Success or error code.
+	 */
+	public function main() {
+		$CategoryTable = TableRegistry::get ( 'DLCategory' );
+		$ContentTable = TableRegistry::get ( 'contents' );
+		$FolderTable = TableRegistry::get ( 'folders' );
+		$category = $CategoryTable->find ( "all" )->contain ( [ 
+				'folders',
+				'contents' 
+		] )->toArray ();
+		
+// 		dd($category);
+		$this->out ( "(0) pour faire un import dans toutes les catégories" );
+		//construit les tableau des catégories
+		foreach ( $category as $key => $cat ) {
+			$this->out ( "(" . ($key + 1) . ") " . $cat->name );
+		}
+		$cat = $this->in ( 'Quel catégorie importer?' );
+		if ($cat) {
+			$newContent = [ ];
+			$category = $category [$cat - 1]; //sélectionne dans le tableau des catégories
+			foreach ( $category->folders as $folder ) {
+				$newFolderContent = [ ];
 				
-    		}
-    		$category->contents = $newContent;
-    		$CategoryTable->save($category);
-    		
-    	}
-    	//TODO: pouvoir ajouter toutes les catégories d'un coup
-    }
+				$folder->path = utf8_encode(strtr ( $folder->path, '\\', '/' ));
+				$results = [ ];
+				$this->getDirContents ( $folder->path, $results );
+				foreach ( $results as $result ) {
+					//corrige certains problèmes d'encodage
+					$result["name"] = utf8_encode ($result["name"]);
+					$result["path"] = utf8_encode ($result["path"]);
+					
+					$temp = $ContentTable->findOrCreate ( [ 
+							"name" => $result ["name"],
+							"path" => $result ["path"]
+					] );
+					$temp->modified = date ( "Y-m-j H:i:s", filemtime ( $result ['path'] ) ); //date de modification = date de modification du fichier
+					$temp->to_verify = 0; // à "vérifier"
+					$temp->virtual_path = substr ( preg_split ( '/' . str_replace ( "/", "\/", $folder->path ) . '/', strtr ( $temp->path, '\\', '/' ) ) [1], 1 );
+					$temp->virtual_path = preg_split ( "#[^/]*$#", $temp->virtual_path ) [0];
 
-    
-    /**
-     * fonction lisant récursivement le dossier $dir spécifié
-     * @param unknown $dir
-     * @param array $results
-     */
-    private function getDirContents($dir, &$results = array()){
-    	$files = scandir($dir);
-    	
-    	foreach($files as $key => $value){
-    		$path = realpath($dir.DIRECTORY_SEPARATOR.$value);
-    		$temp = [];
-    		$temp["path"] = $path;
-    		$temp["name"] = $value;
-    		if(!is_dir($path)) { //si ce n'est pas un dossier, on l'enregistre
-    			$temp["filesize"] = filesize ($path);
-    			$results[] = $temp;
-    		} else if($value != "." && $value != "..") { //on continue dans les sous dossiers
-    			$temp["folder"] = true;
-    			$results[] = $temp;
-    			$this->getDirContents($path, $results);
-    		}
-    	}
-    
-    	return $results;
-    }
+					if (!isset($result['folder']) ) {
+						$temp->size = $result ['filesize'];
+						$temp->sub_folder = 0;
+					} else {
+						$temp->size = 0;
+						$temp->sub_folder = 1;
+					}
+					$temp->folder_id = $folder->id;
+					$temp->dlcategory_id = $category->id;
+					$ContentTable->save($temp);
+				}
+			}
+		}
+		// TODO: pouvoir ajouter toutes les catégories d'un coup
+	}
+	
+	/**
+	 * fonction lisant récursivement le dossier $dir spécifié
+	 * 
+	 * @param unknown $dir        	
+	 * @param array $results        	
+	 */
+	private function getDirContents($dir, &$results = array()) {
+		$files = scandir ( $dir );
+		
+		foreach ( $files as $key => $value ) {
+			$path = realpath ( $dir . DIRECTORY_SEPARATOR . $value );
+			$temp = [ ];
+			$temp ["path"] = $path;
+			$temp ["name"] = $value;
+			if (! is_dir ( $path )) { // si ce n'est pas un dossier, on l'enregistre
+				$temp ["filesize"] = filesize ( $path );
+				$results [] = $temp;
+			} else if ($value != "." && $value != "..") { // on continue dans les sous dossiers
+				$temp ["folder"] = true;
+				$results [] = $temp;
+				$this->getDirContents ( $path, $results );
+			}
+		}
+		
+		return $results;
+	}
 }

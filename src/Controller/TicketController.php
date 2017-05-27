@@ -86,7 +86,7 @@ class TicketController extends AppController {
 					$objet = "Nouveaud ticket sur gomines";
 					$email = new Email ( 'default' );
 					$email->from ( [ 
-							'upload@gomines.rez' => 'Uploads' 
+							'ticket@gomines.rez' => 'Gomines' 
 					] );
 					if (is_array ( $mail )) {
 						foreach ( $mail as $m ) {
@@ -97,7 +97,7 @@ class TicketController extends AppController {
 					}
 					
 					$email->subject ( $objet );
-					$email->send ( 'Un nouveau ticket a été créé sur gomines par ' . $ticket->asker );
+					$email->send ( 'Un nouveau ticket a été créé sur gomines par ' . $ticket->asker .'\n '.$ticket->question );
 					return $this->redirect ( [ 
 							'controller' => 'Downloads',
 							'action' => 'display' 
