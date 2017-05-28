@@ -195,10 +195,9 @@ class DownloadsController extends AppController
         return $this->response;
     }
 	
-    public function dlFolder($folderId, $virtPath){
+    public function dlFolder($virtPath){
     	$this->isAuthorized(0);
     	$this->loadModel("Folders");
-    	$folder = $this->Folders->get($folderId);
     	
     	$dir = getcwd();
 //     	debug($folder->path."/".$virtPath);

@@ -55,8 +55,8 @@ Router::scope('/', function ($routes) {
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
     $routes->connect('/tweety/*', ['controller' => 'Downloads', 'action' => 'display']);
     $routes->redirect('/sylvester/', ['controller' => 'Downloads', 'action' => 'display']);
-    $routes->connect('/sylvester/:virtFolder/**', ['controller' => 'Downloads', 'action' => 'files'],['pass' => array('virtFolder')]);
-    $routes->connect('/testdl/:virtFolder/**', ['controller' => 'Downloads', 'action' => 'files2'],['pass' => ['virtFolder']]);
+//     $routes->connect('/sylvester/:virtFolder/**', ['controller' => 'Downloads', 'action' => 'files'],['pass' => array('virtFolder')]);
+    $routes->connect('/sylvester/:virtFolder/**', ['controller' => 'Downloads', 'action' => 'files2'],['pass' => ['virtFolder']]);
 	$routes->connect('/testdlf/:id/:virtPath/**', ['controller' => 'Downloads', 'action' => 'dlFolder'], ['pass' => ['id', 'virtPath']]);
 //     $routes->connect('/downloaddlFile
     $routes->connect('/mysteries/:virtFolder/**', ['controller' => 'Downloads', 'action' => 'download'],['pass' => array('virtFolder')]);
