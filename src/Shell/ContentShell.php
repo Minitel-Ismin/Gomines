@@ -51,13 +51,10 @@ class ContentShell extends Shell {
 			foreach ( $category->folders as $folder ) {
 				$newFolderContent = [ ];
 				
-				$folder->path = utf8_encode(strtr ( $folder->path, '\\', '/' ));
+				$folder->path = strtr ( $folder->path, '\\', '/' );
 				$results = [ ];
 				$this->getDirContents ( $folder->path, $results );
 				foreach ( $results as $result ) {
-					//corrige certains problèmes d'encodage
-					$result["name"] = utf8_encode ($result["name"]);
-					$result["path"] = utf8_encode ($result["path"]);
 					
 					$temp = $ContentTable->findOrCreate ( [ 
 							"name" => $result ["name"],
