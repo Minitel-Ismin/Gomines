@@ -55,7 +55,7 @@ sendBtn.addEventListener('click', function(e) {
 		dataType : 'html',
         data : "&source="+fileSrc.textContent.replace("&","%26")+"&srcfolder="+direcSrc+"&destination="+destination+"&nouveauNom="+newname,
         success : function(msg){
-            if(msg == "success"){
+            if(msg.indexOf("success") !== -1){
                 responseMess.innerHTML = success;
                 fileSrc.style.display = "none";
             }
