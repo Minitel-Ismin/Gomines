@@ -39,12 +39,11 @@
             <div class="col-lg-2 text-center">
                 <h3>Destination</h3>
                 <div class="btn-group" role="group" aria-label="...">
-                    <ul class="list-group">
+                    <ul class="list-group" id="destFolder">
                         <?php 
-                        foreach($folder as $value => $folderName){
-                            if($value > 0){
-                                echo '<li class="list-group-item"><input type= "radio" name="categorie" id="'.$idFolder[$value].'" value="'.$folderName.'"> '.$idFolder[$value].'</li>';
-                            }
+                        foreach($folders as $folder){
+                            echo '<li class="list-group-item"><input type= "radio" name="categorie" value="'.$folder->id.'"> '.$folder->path.'</li>';
+                            
                         }
                         ?>
                     </ul>

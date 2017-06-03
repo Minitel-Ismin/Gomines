@@ -39,6 +39,10 @@ class FoldersTable extends Table
         		'saveStrategy' =>'replace'
         		
         ]);
+        
+        $this->belongsTo('DLCategory',[
+        		'foreignKey'=>'id_dlcategory'
+        ]);
     }
 
     /**

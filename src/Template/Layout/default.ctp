@@ -37,6 +37,9 @@ $cakeDescription = 'Gomines';
     <?= $this->Html->css('font-awesome.min.css')?>
     <?= $this->Html->css('font.css')?>
     
+    
+	<?= $this->Html->script("jquery-3.2.1.min.js")?>
+    
     <?= $this->fetch('meta')?>
     <?= $this->fetch('css')?>
     <?= $this->fetch('script')?>
@@ -81,21 +84,21 @@ $cakeDescription = 'Gomines';
 					<!--<li class="active"><?= $this->Html->link('Accueil', ['controller' => 'Downloads', 'action' => 'display']) ?></li>-->
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#" data-toggle="modal" data-target="#myModal">Faire une demande</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#myModal">Faire
+							une demande</a></li>
 					<?php if ($authUser) : ?>
 			        	<li class="dropdown"><a href="#" class="dropdown-toggle"
-									data-toggle="dropdown" role="button" aria-haspopup="true"
-									aria-expanded="false"><?= $authUser['nom'] ?> <?= $authUser['prenom'] ?> <span
-										class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Mon compte</a></li>
-								<li><?= $this->Html->link('Se déconnecter', ['controller' => 'users', 'action' => "logout"]); ?></li>
-							</ul>
-						</li>
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"><?= $authUser['nom'] ?> <?= $authUser['prenom'] ?> <span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Mon compte</a></li>
+							<li><?= $this->Html->link('Se déconnecter', ['controller' => 'users', 'action' => "logout"]); ?></li>
+						</ul></li>
 		
 		 			<?php else : ?>
         				<li><?= $this->Html->link('Se connecter', ['controller' => 'users', 'action' => 'login']) ?></li>
-						<li><?= $this->Html->link("S'inscrire", ['controller' => 'users', 'action' => 'register']) ?></li>
+					<li><?= $this->Html->link("S'inscrire", ['controller' => 'users', 'action' => 'register']) ?></li>
 		
 					<?php endif; ?>
 		
@@ -110,7 +113,7 @@ $cakeDescription = 'Gomines';
         <?= $this->fetch('content')?>
     </section>
 	<footer class="text-center">
-		<?= $this->Html->script("jquery.min.js")?>
+		<?= $this->Html->script("jquery-3.2.1.min.js")?>
 		<?= $this->Html->script("jquery-ui.js")?>
 		<?= $this->Html->script("bootstrap.min.js")?>
 		<?= $this->Html->script("alert.js")?>

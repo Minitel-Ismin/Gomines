@@ -4,6 +4,7 @@ var url = '<?= $this->Url->build(array(
 	    "action" => "target"
 	));?>';
 var direcSrc = '<?php echo $directory; ?>';
+var destination;
 var sendBtn = document.getElementById("sendButton");
 var fileSrc = document.getElementById(0);
 var bgColor = "rgb(230,230,230)";
@@ -15,17 +16,13 @@ var failure = '<div class="row"><div class="col-lg-12"><p class="label label-dan
 fileSrc.style.backgroundColor = bgColor;
 fileSrc.style.color = "black";
 
-function choixDestination(){
-	var choix = <?php echo '[\''.implode("','",$idFolder).'\']'; ?>;
-	console.log(choix.length);
-	for(var i=0; i<choix.length; i++){
-		if(document.getElementById(choix[i]).checked){
-			console.log(choix[i]);
-			var destination = document.getElementById(choix[i]).value;
-		}
-	}
-	return destination;
-}
+// function choixDestination(){
+// 	$('#destFolder').each(function(index)){
+// 		console.log(index);
+// 		if($(this).children().
+// 	});
+// 	return destination;
+// }
 
 //ajoute l'event listener sur tous les fichers
 for (var i = 0; i < nbFichier; i++) {
@@ -40,7 +37,7 @@ for (var i = 0; i < nbFichier; i++) {
             fileSrc = this;
         }
 	}, false);
-};
+}
 
 sendBtn.addEventListener('click', function(e) {
 	e.preventDefault();
@@ -50,7 +47,8 @@ sendBtn.addEventListener('click', function(e) {
     else{
 	   var newname = document.getElementById("newName").value;
     }
-	var destination = choixDestination();
+// 	var destination = choixDestination();
+	
 	$.ajax({
 		url : url,
 		type : 'POST',
@@ -67,5 +65,12 @@ sendBtn.addEventListener('click', function(e) {
         }
 	});
 }, false)
+
+$(document).ready(function(){
+	$( "input[type=radio]" ).on( "click", function(){
+		destination=$(this).val();
+	});
+});
+
 
 </script>
