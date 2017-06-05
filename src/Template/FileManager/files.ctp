@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 text-center">
+            <div class="col-lg-4 text-center">
                 <h3>Fichiers du dossier</h3>
                 <ul class="list-group file-list">
                     <?php 
@@ -36,7 +36,7 @@
                 </ul>
             </div>
 
-            <div class="col-lg-2 text-center">
+            <div class="col-lg-3 text-center">
                 <h3>Destination</h3>
                 <div class="btn-group" role="group" aria-label="...">
                     <ul class="list-group" id="destFolder">
@@ -50,7 +50,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-4 text-center">
+            <div class="col-lg-5 text-center">
                 <h3>Outils</h3>
                 <div class="row">
                     <div class="col-lg-12">
