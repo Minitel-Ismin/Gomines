@@ -161,7 +161,7 @@ class DownloadsController extends AppController
     	}else{
     		$subFolder = str_replace("%20", " ", $this->constructPath($subFolder));
     		$content = $this->Contents->find('all', ['contain'=>['DLCategory', 'Folders']])
-							    		->where(['Folders.path LIKE'=> '%'.$searchFolder.'%'])
+							    		->where(['DLCategory.name LIKE'=> '%'.$searchFolder.'%'])
 							    		->where(['virtual_path'=>$subFolder]);
     	}
     	
