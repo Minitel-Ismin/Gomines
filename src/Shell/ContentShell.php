@@ -57,7 +57,7 @@ class ContentShell extends Shell {
 				foreach ( $results as $result ) {
 					
 					$temp = $ContentTable->findOrCreate ( [ 
-							"name" => $result ["name"],
+// 							"name" => $result ["name"],
 							"path" => $result ["path"]
 					] );
 					$temp->modified = date ( "Y-m-j H:i:s", filemtime ( $result ['path'] ) ); //date de modification = date de modification du fichier

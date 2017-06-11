@@ -20,10 +20,43 @@ class ContentsController extends AppController
     {
         
         
-        $contents = $this->Contents->find('all')->contain(['Folders', 'DLCategory']);
+//         $contents = $this->Contents->find('all')->contain(['Folders', 'DLCategory']);
         
         $this->set(compact('contents'));
         $this->set('_serialize', ['contents']);
+    }
+    
+    public function dataSource(){
+    	$this->viewClass = "Ajax";
+//     	dd($this->request->data);
+    	$contents = $this->Contents->find()
+    								->contain(['Folders', 'DLCategory'])
+    								->select([
+    										'Contents.id',
+    										'DLCategory.name',
+									    'Contents.name',
+									    'Contents.size',
+									    'Contents.to_verify'
+									]);
+    	
+    	$draw = intval($this->request->data["draw"]);
+    	$recordsTotal = $contents->count();
+// 		$recordsTotal = 1;
+		$contents = $contents->where(["Contents.name LIKE"=> '%'.$this->request->data["search"]["value"]. '%']);
+    	$recordsFiltered = $contents->count();
+    	$contents = $contents->limit($this->request->data["length"])
+    								->page($this->request->data["draw"]);
+    	$data = $contents->all();
+    								
+    								
+    	
+    	
+//     	$total = $contents->count();
+//     	$data["draw"] = $contents->count();
+    	
+//     	$data["recordsTotal"] = 
+    	
+    	$this->set(compact('draw', 'recordsTotal', 'recordsFiltered', 'data'));
     }
 
     /**
