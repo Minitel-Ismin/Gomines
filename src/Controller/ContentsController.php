@@ -44,7 +44,7 @@ class ContentsController extends AppController
 // 		$recordsTotal = 1;
 		$contents = $contents->where(["Contents.name LIKE"=> '%'.$this->request->data["search"]["value"]. '%']);
     	$recordsFiltered = $contents->count();
-    	if($this->request->data["search"]["value"]!=""){
+    	if($recordsFiltered > 500){
     		$contents = $contents->limit($this->request->data["length"])
     							->page($this->request->data["draw"]);
     	}
@@ -131,7 +131,9 @@ class ContentsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $content = $this->Contents->get($id);
+      	$path = $content->path;
         if ($this->Contents->delete($content)) {
+        	unlink($path);
             $this->Flash->success(__('The content has been deleted.'));
         } else {
             $this->Flash->error(__('The content could not be deleted. Please, try again.'));
