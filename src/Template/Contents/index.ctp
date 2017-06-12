@@ -30,7 +30,7 @@
                     		
 	                    },
 	                    { "data": function( row){
-	                    	var actions = '<div class="btn-group"><a href="/contents/view/'+row.id+'" class="btn btn-default">Voir</a><form name="azertyuiop'+row.id+'" style="display:none;" method="post" action="/contents/delete/'+row.id+'"><input type="hidden" name="_method" value="POST"></form><a href="#" class="btn btn-default" onclick="if (confirm(&quot;\u00eates vous s\u00fbr? # '+row.id+'?&quot;)) { document.azertyuiop'+row.id+'.submit(); } event.returnValue = false; return false;">Supprimer</a></div></td>';
+	                    	var actions = '<div class="btn-group"><a href="/contents/edit/'+row.id+'" class="btn btn-default">Voir</a><form name="azertyuiop'+row.id+'" style="display:none;" method="post" action="/contents/delete/'+row.id+'"><input type="hidden" name="_method" value="POST"></form><a href="#" class="btn btn-default" onclick="if (confirm(&quot;\u00eates vous s\u00fbr? # '+row.id+'?&quot;)) { document.azertyuiop'+row.id+'.submit(); } event.returnValue = false; return false;">Supprimer</a></div></td>';
 							return actions;
 	                    }}
 	                 

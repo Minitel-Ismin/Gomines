@@ -7,7 +7,7 @@
             <div class="input-group">
                 <span class="input-group-addon addon-size-fixed">Nom</span>
                 <?php
-                echo $this->Form->input('name', ['label' => false, 'div' => false, 'class' => 'input-size-fixed form-control title','disabled']);
+                echo $this->Form->input('name', ['label' => false, 'div' => false, 'class' => 'input-size-fixed form-control title']);
                 ?>
             </div><br>
             <div class="input-group">

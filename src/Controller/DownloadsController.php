@@ -7,6 +7,7 @@ use Cake\Filesystem\Folder;
 use Cake\Filesystem\File;
 use Cake\ORM\TableRegistry;
 use Cake\Http\Client\Request;
+use Cake\Event\Event;
 
 class DownloadsController extends AppController
 {
@@ -291,5 +292,11 @@ class DownloadsController extends AppController
                 return $this->response;
         	}
         }
+    }
+    
+    public function beforeRender(Event $event)
+    {
+    	parent::beforeRender($event);
+    	$this->viewBuilder()->helpers(['FileSize']);
     }
 }
