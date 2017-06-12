@@ -44,9 +44,12 @@ class ContentsController extends AppController
 // 		$recordsTotal = 1;
 		$contents = $contents->where(["Contents.name LIKE"=> '%'.$this->request->data["search"]["value"]. '%']);
     	$recordsFiltered = $contents->count();
-    	$contents = $contents->limit($this->request->data["length"])
-    								->page($this->request->data["draw"]);
-    	$data = $contents;
+    	if($this->request->data["search"]["value"]!=""){
+    		$contents = $contents->limit($this->request->data["length"])
+    							->page($this->request->data["draw"]);
+    	}
+    	
+    	$data = $contents->all();
     								
     	$this->set(compact('draw', 'recordsTotal', 'recordsFiltered', 'data'));
     }
