@@ -46,16 +46,8 @@ class ContentsController extends AppController
     	$recordsFiltered = $contents->count();
     	$contents = $contents->limit($this->request->data["length"])
     								->page($this->request->data["draw"]);
-    	$data = $contents->all();
+    	$data = $contents;
     								
-    								
-    	
-    	
-//     	$total = $contents->count();
-//     	$data["draw"] = $contents->count();
-    	
-//     	$data["recordsTotal"] = 
-    	
     	$this->set(compact('draw', 'recordsTotal', 'recordsFiltered', 'data'));
     }
 

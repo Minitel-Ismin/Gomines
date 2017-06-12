@@ -41,9 +41,8 @@ class Contents extends AbstractMigration
     			'limit' => 11,
     			'null' => true,
     	]);
-    	$table->addColumn('size', 'integer', [
+    	$table->addColumn('size', 'biginteger', [
     			'default' => null,
-    			'limit' => 11,
     			'null' => true,
     	]);
     	$table->addColumn('virtual_path', 'string',[

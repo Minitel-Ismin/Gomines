@@ -32,7 +32,7 @@ jQuery.fn.dataTable.ext.type.order['file-size-pre'] = function ( data ) {
 	    	"language": {
                 "url": "/js/french.json"
             },
-            "order": [[ 1, "desc" ]],
+            "order": [[ 2, "desc" ]],
             columnDefs: [
                          { type: 'file-size', targets: 1 }
                        ]
