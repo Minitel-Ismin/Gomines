@@ -60,6 +60,7 @@ class ContentShell extends Shell {
 // 							"name" => $result ["name"],
 							"path" => $result ["path"]
 					] );
+					$temp->name = $result ["name"];
 					$temp->modified = date ( "Y-m-j H:i:s", filemtime ( $result ['path'] ) ); //date de modification = date de modification du fichier
 					$temp->to_verify = 0; // à "vérifier"
 					$temp->virtual_path = substr ( preg_split ( '/' . str_replace ( "/", "\/", $folder->path ) . '/', strtr ( $temp->path, '\\', '/' ) ) [1], 1 );
