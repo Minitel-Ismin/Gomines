@@ -45,7 +45,7 @@ class FileManagerController extends AppController {
 			$content->name = $nouveauNom;
 			$content->path = $destination->path ."/". $this->request->data ["source"];
 			$content->to_verify = 0;
-			$content->size = filesize ( $source );
+			$content->size = filesize ( $destination->path ."/". $this->request->data ["source"]);
 			$content->sub_folder = 0;
 			$content->folder_id = $destination->id;
 			$content->dlcategory_id = $destination->d_l_category->id;
