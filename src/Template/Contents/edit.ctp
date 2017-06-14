@@ -13,13 +13,13 @@
             <div class="input-group">
                 <span class="input-group-addon addon-size-fixed">path</span>
                 <?php
-                echo $this->Form->input('path', ['label' => false, 'div' => false, 'class' => 'input-size-fixed form-control code','disabled']);
+                echo $this->Form->input('path', ['label' => false, 'div' => false, 'class' => 'input-size-fixed form-control code']);
                 ?>
             </div><br>
             <div class="input-group">
                 <span class="input-group-addon addon-size-fixed">taille</span>
                 <?php
-                echo $this->Form->input('size', ['label' => false, 'div' => false, 'class' => 'form-control input-size-fixed', 'disabled']);
+                echo $this->Form->input('size', ['label' => false, 'div' => false, 'class' => 'form-control input-size-fixed']);
                 ?>
             </div><br>
             <div class="input-group">
