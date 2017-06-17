@@ -327,70 +327,10 @@ return [
     'DashingWidgetURL' => "http://127.0.0.1:3030/widgetURL",
     'DashingToken' => "DASHINGTOKEN",
     'rogueDHCPServerScript' => "D:/GominesData/dhcpscript.bat",
-    'FileFolders' => [
-        'AClasser'  => [
-            'folder' => 'C:/GominesData/AClasser',
-            'icon'   => 'annales.png',
-            'color'  => 'B0813A',
-            'hidden' => true,
-        ],
-        'Cours'     => [
-            'folder' => false,
-            'icon'   => 'annales.png',
-            'color'  => 'B0813A',
-            'subcat' => true,
-        ],
-        'Annales'   => [
-            'folder' => 'C:/GominesData/Cours/Annales',
-            'icon'   => 'courses.png',
-            'color'  => 'B0813A',
-            'cat'    => 'Cours',
-        ],
-        'Moocs'     => [
-            'folder' => 'C:/GominesData/Cours/Moocs',
-            'icon'   => 'moocs.png',
-            'color'  => 'f6ee8a',
-            'cat'    => 'Cours',
-        ],
-        'Bluray'    => [
-            'folder' => 'C:/GominesData/Bluray',
-            'icon'   => 'film19.png',
-            'color'  => 'd65ef7',
-        ],
-        'Films1'    => [
-            'folder' => 'C:/GominesData/Films1',
-            'icon'   => 'darth.png',
-            'color'  => 'F6EE8A',
-        ],
-        'Jeux'      => [
-            'folder' => 'C:/GominesData/Jeux',
-            'icon'   => 'alien8.png',
-            'color'  => '7bf38b',
-        ],
-        'Logiciels' => [
-            'folder' => 'C:/GominesData/Logiciels',
-            'icon'   => 'github.png',
-            'color'  => 'f36060',
-        ],
-        'Mangas'    => [
-            'folder' => 'C:/GominesData/Mangas',
-            'icon'   => 'japan15.png',
-            'color'  => '98cced',
-        ],
-        'NSFW'      => [
-            'folder' => 'C:/GominesData/NSFW',
-            'icon'   => 'xxx.png',
-            'color'  => 'ffc4fc',
-        ],
-        'Series'    => [
-            'folder' => 'C:/GominesData/Series',
-            'icon'   => 'film50.png',
-            'color'  => '8ba4fd',
-        ],
-    ],
     "HiddenFiles" => [".",".."],
     "Upload" => [
         "Mail" => "user@host.tld",
     	"folder" => "C:/GominesData/uploadWeb"
     ],
+	"bootstrapCol" => 3,
 ];

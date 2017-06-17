@@ -36,15 +36,12 @@ $this->Html->script('titiVoitGrominet.js', array('block' => 'footerscript'));
                         </div>
                         
 						<?php
-						
-							for($k=0;$k<$row;$k++){
-								for($i=0;$i<$column;$i++){
-									$category = $categories[$k*$row + $i];
-									$url = ['controller' => 'Downloads', 'action' => 'files2', $category->name];
-									$html = '<div class="col-lg-'.(12/$column).' cat-tools text-center" style="background-color: #'.$category->color.'">'.$category->name.'<br>'.$this->Html->image($category->icon).'</div>';
-									echo $this->Html->link($html, $url, array('escape' => false));
-								}
-								
+							for($k=0; $k < $numberOfCat; $k++){ 
+								$category = $categories[$k];
+								$url = ['controller' => 'Downloads', 'action' => 'files2', $category->name];
+								$html = '<div class="col-lg-'.($bootstrapCol).' cat-tools text-center" style="background-color: #'.$category->color.'">'.$category->name.'<br>'.$this->Html->image($category->icon).'</div>';
+								echo $this->Html->link($html, $url, array('escape' => false));
+									
 							}                             
 						              
 						?>

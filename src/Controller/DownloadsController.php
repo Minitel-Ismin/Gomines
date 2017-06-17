@@ -54,22 +54,15 @@ class DownloadsController extends AppController
     public function display($subcat = "")
     {
     	$this->loadModel('DLCategory');
-    	$column = 2;
-    	$limit = 10;
+    	
+    	$bootstrapCol = Configure::read("bootstrapCol");
     	
     	
     	$categories = $this->DLCategory->find('all');
-    	$numberCat = $categories->count();
     	
-    	
-    	while($numberCat%$column!=0 && $column!=$limit){
-    		$column++;
-    		
-    	}
-    	$row = $numberCat/$column;
     	$categories = $categories->toArray();
-
-        $this->set(compact("categories", "row", "column"));
+    	$numberOfCat = count($categories);
+        $this->set(compact("categories", "bootstrapCol", "numberOfCat"));
     }
 
     // TO-DO : Review this function
