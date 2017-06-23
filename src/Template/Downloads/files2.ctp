@@ -35,7 +35,8 @@ jQuery.fn.dataTable.ext.type.order['file-size-pre'] = function ( data ) {
             "order": [[ 2, "desc" ]],
             columnDefs: [
                          { type: 'file-size', targets: 1 }
-                       ]
+                       ],
+                       "pageLength": 25
 	    });
 	});
 
