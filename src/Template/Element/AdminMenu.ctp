@@ -1,4 +1,4 @@
-<nav class="col-lg-3 col-md-4 column" id="actions-sidebar">
+<nav class="col-lg-3" id="actions-sidebar">
     <div class="bugs-img">
         <?=$this->Html->image('bugsBunny.png'); ?>
     </div>
@@ -14,6 +14,7 @@
     	<li class="admin-menu-item"><?= $this->Html->link(__('Film admin'), ['controller' => 'Film', 'action' => 'index']) ?> </li>
     	<li class="admin-menu-item"><?= $this->Html->link(__('DL Category'), ['controller' => 'DLCategory', 'action' => 'index']) ?> </li>
     	<li class="admin-menu-item"><?= $this->Html->link(__('Contenu'), ['controller' => 'Contents', 'action' => 'index']) ?> </li>
+        <li class="admin-menu-item"><?= $this->Html->link(__('Utilisation des disques'), ['controller' => 'FreeSpace', 'action' => 'index']) ?> </li>
     	<li class="admin-menu-item"><?= $this->Html->link(__('Tickets'), ['controller' => 'Ticket', 'action' => 'index']) ?> </li>
     	<li class="admin-menu-item"><?= $this->Html->link(__('Theme tickets'), ['controller' => 'TicketTheme', 'action' => 'index']) ?> </li>
     	

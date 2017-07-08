@@ -82,6 +82,11 @@ class ContentShell extends Shell {
 		// TODO: pouvoir ajouter toutes les catégories d'un coup
 	}
 	
+	//TODO: pouvoir faire un update des fichiers
+	public function update(){
+		
+	}
+	
 	/**
 	 * fonction lisant récursivement le dossier $dir spécifié
 	 * 

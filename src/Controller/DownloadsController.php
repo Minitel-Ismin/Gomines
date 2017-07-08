@@ -150,16 +150,24 @@ class DownloadsController extends AppController
     	
     	if(count($subFolder) < 4){ //cas sous-dossiers
     		$content = $this->Contents->find('all', ['contain'=>'DLCategory'])->where(['DLCategory.name'=>$virtFolder])
-    																		->where(['virtual_path'=>'']);
+    																		->where(['virtual_path'=>''])
+    																		->order(['Contents.modified'=>'DESC']);
     		$subFolder = '';
-    	}else{
+    	}else{ //dossier "racine"
     		$subFolder = htmlspecialchars(urldecode(str_replace("%20", " ", $this->constructPath($subFolder))));
     		$content = $this->Contents->find('all', ['contain'=>['DLCategory', 'Folders']])
 							    		->where(['DLCategory.name LIKE'=> '%'.$searchFolder.'%'])
-							    		->where(['virtual_path'=>$subFolder]);
+							    		->where(['virtual_path'=>$subFolder])
+    									->order(['Contents.modified'=>'DESC']);
     	}
     	
-        $this->set(compact('content', 'subFolder', 'virtFolder'));
+    	if($this->isEndFolder($content)){
+    		$endFolder = 1;
+    	}else{
+    		$endFolder = 0;
+    	}
+    	
+        $this->set(compact('content', 'subFolder', 'virtFolder', 'endFolder'));
 
     }
     
@@ -172,6 +180,25 @@ class DownloadsController extends AppController
     		}
     	}
     	return $res;
+    }
+    
+    private function isEndFolder($queryResult){ //vérifie qu'il n'y a pas de sous dossier dans le dossier et vérifier que ça dépasse pas 30go
+    	$nbElmt = 0;
+    	$size = 0;
+    	foreach ($queryResult as $result){
+    		$size+=$result->size;
+    		$nbElmt += 1;
+    		if($result->sub_folder){
+    			return false;
+    		}
+    		if($size > 32212254720){ //dossier trop gros
+    			return false;
+    		}
+    		if($nbElmt>35){
+    			return false;
+    		}
+    	}
+    	return true;
     }
 
     
@@ -191,11 +218,14 @@ class DownloadsController extends AppController
 	
     public function dlFolder($virtPath){
     	$this->isAuthorized(0);
-    	$this->loadModel("Folders");
-    	
+    	$this->loadModel("Contents");
+		$subFolder = preg_split("#/#",$this->request->here);
+		$subFolder = htmlspecialchars(urldecode(str_replace("%20", " ", $this->constructPath($subFolder))));
+		$folder = $this->Contents->find('all')->where(['path LIKE'=> '%'.$subFolder])->first();
+		
     	$dir = getcwd();
 //     	debug($folder->path."/".$virtPath);
-    	chdir($folder->path."/".$virtPath);
+    	chdir($folder->path);
 //     	debug($virtPath);
     	
     	$fp = popen('zip -0 -r - .', 'r');
