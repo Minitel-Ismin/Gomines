@@ -20,13 +20,13 @@ class FreeSpaceController extends AppController
      */
     public function index()
     {
-        $Disques["Films2"] = system("df -k | grep sdf2 | awk '{ print $5 }' | cut -c 1-2");
-        $Disques["Series2"] = system("df -k | grep sdd2 | awk '{ print $5 }' | cut -c 1-2");
-        $Disques["Jeux"] = system("df -k | grep sdh2 | awk '{ print $5 }' | cut -c 1-2");
-        $Disques["Films1"] = system("df -k | grep sda2 | awk '{ print $5 }' | cut -c 1-2");
-        $Disques["Series1"] = system("df -k | grep sdg2 | awk '{ print $5 }' | cut -c 1-2");
-        $Disques["Blurays"] = system("df -k | grep sdb2 | awk '{ print $5 }' | cut -c 1-2");
-        $Disques["NewDisk"] = system("df -k | grep sde1 | awk '{ print $5 }' | cut -c 1-2");
+        $Disques["Films2"] = str_replace("%","",system("df -k | grep sdf2 | awk '{ print $5 }' | cut -c 1-3")); 
+        $Disques["Series2"] = str_replace("%","",system("df -k | grep sdd2 | awk '{ print $5 }' | cut -c 1-3")); 
+        $Disques["Jeux"] = str_replace("%","",system("df -k | grep sdh2 | awk '{ print $5 }' | cut -c 1-3")); 
+        $Disques["Films1"] = str_replace("%","",system("df -k | grep sda2 | awk '{ print $5 }' | cut -c 1-3")); 
+        $Disques["Series1"] = str_replace("%","",system("df -k | grep sdg2 | awk '{ print $5 }' | cut -c 1-3")); 
+        $Disques["Blurays"] = str_replace("%","",system("df -k | grep sdb2 | awk '{ print $5 }' | cut -c 1-3")); 
+        $Disques["NewDisk"] = str_replace("%","",system("df -k | grep sde1 | awk '{ print $5 }' | cut -c 1-3"));
     
         
         $this->set(compact('Disques'));
