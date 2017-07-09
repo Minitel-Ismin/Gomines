@@ -221,32 +221,39 @@ class DownloadsController extends AppController
     	$this->loadModel("Contents");
 		$subFolder = preg_split("#/#",$this->request->here);
 		$subFolder = htmlspecialchars(urldecode(str_replace("%20", " ", $this->constructPath($subFolder))));
+		$subFolder = substr_replace($subFolder, "", -1); // enlève le "/" en fin de chaine
 		$folder = $this->Contents->find('all')->where(['path LIKE'=> '%'.$subFolder])->first();
+		if(!$folder){
+			
+			throw new NotFoundException();			
+		}else{
+
 		
-    	$dir = getcwd();
-//     	debug($folder->path."/".$virtPath);
-    	chdir($folder->path);
-//     	debug($virtPath);
-    	
-    	$fp = popen('zip -0 -r - .', 'r');
-    	chdir($dir);
-    	
-    	$this->response->header([
-    		"Content-Disposition" => 'attachment; filename="Gomines.zip"',
-    	]);
-    	$this->response->type("zip");
-    	
-    	$this->response->body(function() use ($fp) {
-    		$bufsize = 8192;
-    		$buff = '';
-    		while( !feof($fp) ) {
-    			$buff = fread($fp, $bufsize);
-    			echo $buff;
-    		}
-    		pclose($fp);
-    	});
-    	
-    	return $this->response;
+			$dir = getcwd();
+	//     	debug($folder->path."/".$virtPath);
+			chdir($folder->path);
+	//     	debug($virtPath);
+			
+			$fp = popen('zip -0 -r - .', 'r');
+			chdir($dir);
+			
+			$this->response->header([
+				"Content-Disposition" => 'attachment; filename="Gomines.zip"',
+			]);
+			$this->response->type("zip");
+			
+			$this->response->body(function() use ($fp) {
+				$bufsize = 8192;
+				$buff = '';
+				while( !feof($fp) ) {
+					$buff = fread($fp, $bufsize);
+					echo $buff;
+				}
+				pclose($fp);
+			});
+			
+			return $this->response;
+		}
     }
     //permet de télécharger tout un dossier
     // TO-DO: Bien nettoyer $path
