@@ -223,7 +223,7 @@ class DownloadsController extends AppController
 		$subFolder = htmlspecialchars(urldecode(str_replace("%20", " ", $this->constructPath($subFolder))));
 		$subFolder = substr_replace($subFolder, "", -1); // enlève le "/" en fin de chaine
 		$folder = $this->Contents->find('all')->where(['path LIKE'=> '%'.$subFolder]);
-		if(isEndFolder($folder->all())){
+		if($this->isEndFolder($folder->all())){
 			$folder = $folder->first();
 			if(!$folder){
 				
