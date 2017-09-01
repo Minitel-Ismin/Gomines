@@ -189,6 +189,7 @@ class DownloadsController extends AppController
     		$size+=$result->size;
     		$nbElmt += 1;
     		if($result->sub_folder){
+				
     			return false;
     		}
     		if($size > 32212254720){ //dossier trop gros
@@ -223,10 +224,12 @@ class DownloadsController extends AppController
 		$subFolder = htmlspecialchars(urldecode(str_replace("%20", " ", $this->constructPath($subFolder))));
 		$subFolder = substr_replace($subFolder, "", -1); // enlève le "/" en fin de chaine
 		$folder = $this->Contents->find('all')->where(['path LIKE'=> '%'.$subFolder]);
-		if($this->isEndFolder($folder->all())){
+		$folderItems = $this->Contents->find('all')->where(['path LIKE'=> '%'.$subFolder."/%"]);
+	
+		if($this->isEndFolder($folderItems->all())){
 			$folder = $folder->first();
+			
 			if(!$folder){
-				
 				throw new NotFoundException();			
 			}else{
 
