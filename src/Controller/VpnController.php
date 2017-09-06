@@ -31,16 +31,20 @@ class VpnController extends AppController
 		$user = $this->Users->get($this->Auth->user()['id'], [
 			'contain' => ['VpnComptes']
 		]);
-		$user->vpn_compte->bp = $this->_convertSize($user->vpn_compte->bp_used);
-		$user->vpn_compte->bp_day = $this->_convertSize($user->vpn_compte->bp_used_day);
 
-		$status = $this->_getVPNStatus();
-		foreach($status as $i => $c){
-			if($c['cn'] == $user->vpn_compte->common_name){
-				$bp = $user->vpn_compte->bp_used_day + $c['b_rx_raw'] + $c['b_tx_raw'];
-				$user->vpn_compte->bp_day = $this->_convertSize($bp);
+		if($user->vpn_compte){
+			$user->vpn_compte->bp = $this->_convertSize($user->vpn_compte->bp_used);
+			$user->vpn_compte->bp_day = $this->_convertSize($user->vpn_compte->bp_used_day);
+	
+			$status = $this->_getVPNStatus();
+			foreach($status as $i => $c){
+				if($c['cn'] == $user->vpn_compte->common_name){
+					$bp = $user->vpn_compte->bp_used_day + $c['b_rx_raw'] + $c['b_tx_raw'];
+					$user->vpn_compte->bp_day = $this->_convertSize($bp);
+				}
 			}
 		}
+		
 
 		$this->set(compact('user'));
 	}
