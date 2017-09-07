@@ -70,7 +70,7 @@ class VpnController extends AppController
 			$email->from(['vpn@gomines.rez' => 'VPN Minitel']);
 			
 			$email->subject("Une config vpn a été demandée");
-			$email->send('Une config vpn a été demandée par '.$user->nom.' '.$user->prenom);
+			$email->send('Une config vpn a été demandée par '.$user['nom'].' '.$user['prenom']);
 
 			$this->Flash->success(__('Requête bien transmise.'));
 			return $this->redirect(['action' => 'index']);
@@ -296,7 +296,7 @@ class VpnController extends AppController
 		$re = "/OpenVPN CLIENT LIST\\nUpdated,(.*)\\n([\\w-,.: \\n]*)\\nROUTING TABLE\\n([\\w-,.: \\n]*)\\nGLOBAL STATS\\n([\\w-,.: \\/\\n]*)\\nEND/iu"; 
 
 		preg_match($re, $status, $matches);
-
+		
 		list($data, $lastUpdate, $connected, $routing, $global) = $matches;
 		$connected = explode("\n",$connected);
 		$connectedColumns = array_shift($connected);
