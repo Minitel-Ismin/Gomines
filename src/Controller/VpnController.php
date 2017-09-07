@@ -51,8 +51,26 @@ class VpnController extends AppController
 
 	public function request(){
 		$vpnCompte = $this->VpnComptes->newEntity();
-		$vpnCompte['user_id'] = $this->Auth->user()['id'];
+		$user = $this->Auth->user();
+		$vpnCompte['user_id'] = $user['id'];
 		if ($this->VpnComptes->save($vpnCompte)) {
+
+
+			$mail = Configure::read("Upload.Mail");
+
+			$email = new Email('default');
+			if(is_array($mail)){
+				foreach ($mail as $m){
+					$email->addTo($m);
+				}
+			}else{
+				$email->to($mail);
+			}
+			$email->from(['vpn@gomines.rez' => 'VPN Minitel']);
+			
+			$email->subject("Une config vpn a été demandée");
+			$email->send('Une config vpn a été demandée par '.$user->nom.' '.$user->prenom);
+
 			$this->Flash->success(__('Requête bien transmise.'));
 			return $this->redirect(['action' => 'index']);
 		} else {
@@ -107,6 +125,8 @@ class VpnController extends AppController
 
 	public function generateVPN($id = null){
 		$this->isAuthorized(2);
+
+		
 		$user = $this->Users->get($id, [
 			'contain' => ['VpnComptes']
 		]);
@@ -146,6 +166,16 @@ class VpnController extends AppController
 				$user['vpn_compte']['pkey'] = $privKey;
 				$user['vpn_compte']['common_name'] = $cn;
 				if($this->VpnComptes->save($user['vpn_compte'])){
+					// envoie de mail
+					
+					$email = new Email('default');
+					$email->from(['vpn@gomines.rez' => 'VPN Minitel']);
+					$email->to($user->email);
+					
+					$email->subject("Ta config vpn est disponible!");
+					$email->send('Ta config vpn a bien été validée par un administrateur de Minitel, tu peux dès à présent la télécharger au http://gomines.rez/vpn');
+					
+
 					$this->Flash->success(__('Configuration VPN générée'));
 					return $this->redirect(['controller' => 'users', 'action' => 'index']);
 				}else{
