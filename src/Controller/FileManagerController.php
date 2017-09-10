@@ -32,8 +32,15 @@ class FileManagerController extends AppController {
 				] 
 		] );
 		
+
+		
 		$extension = strrchr ( $this->request->data ["source"], '.' );
-		$nouveauNom = $this->request->data ["nouveauNom"] . $extension;
+		if($this->request->data ["nouveauNom"] != $this->request->data ["source"]){
+			$nouveauNom = $this->request->data ["nouveauNom"] . $extension;
+		}else{
+			$nouveauNom = $this->request->data ["nouveauNom"];
+		}
+		
 		if (rename ( $source, $destination->path ."/". $this->request->data ["source"])) {
 			// $film = $filmTable->newEntity();
 			// $film->title = $destination.'/'.$nouveauNom;
