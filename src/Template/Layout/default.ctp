@@ -84,6 +84,16 @@ $cakeDescription = 'Gomines';
 					<!--<li class="active"><?= $this->Html->link('Accueil', ['controller' => 'Downloads', 'action' => 'display']) ?></li>-->
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
+	  				
+					<li><?= $this->Html->link('News', ['controller' => 'news', 'action' => "display"]); ?></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Liens utiles<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="http://minitel.emse.fr/wiki/Accueil">Wiki minitel</a></li>
+							<li><a href="https://services-numeriques.emse.fr/">Wiki dsi école</a></li>
+							<li><a href="https://myismin.emse.fr">MyIsmin</a></li>
+						</ul>
+					</li>
 					<li><a href="#" data-toggle="modal" data-target="#myModal">Faire
 							une demande</a></li>
 					<?php if ($authUser) : ?>
@@ -98,7 +108,7 @@ $cakeDescription = 'Gomines';
 		
 		 			<?php else : ?>
         				<li><?= $this->Html->link('Se connecter', ['controller' => 'users', 'action' => 'login']) ?></li>
-					<li><?= $this->Html->link("S'inscrire", ['controller' => 'users', 'action' => 'register']) ?></li>
+						<li><?= $this->Html->link("S'inscrire", ['controller' => 'users', 'action' => 'register']) ?></li>
 		
 					<?php endif; ?>
 		

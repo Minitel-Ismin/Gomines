@@ -17,7 +17,8 @@
         <li class="admin-menu-item"><?= $this->Html->link(__('Utilisation des disques'), ['controller' => 'FreeSpace', 'action' => 'index']) ?> </li>
     	<li class="admin-menu-item"><?= $this->Html->link(__('Tickets'), ['controller' => 'Ticket', 'action' => 'index']) ?> </li>
     	<li class="admin-menu-item"><?= $this->Html->link(__('Theme tickets'), ['controller' => 'TicketTheme', 'action' => 'index']) ?> </li>
-    	
+    	<li class="admin-menu-item"><?= $this->Html->link(__('News'), ['controller' => 'News', 'action' => 'index']) ?> </li>
     	<li class="admin-menu-item"><?= $this->Html->link(__('Vpn-Comptes'), ['controller' => 'VpnComptes', 'action' => 'index']) ?> </li>
+        
     </ul>
 </nav>

@@ -73,7 +73,7 @@ Router::scope('/', function ($routes) {
     $routes->connect('/acme/Contents',['controller' => 'Contents', 'action' => 'index']);
     $routes->connect('/acme/Ticketheme',['controller' => 'TicketTheme', 'action' => 'index']);
     $routes->connect('/acme/Ticket',['controller' => 'Ticket', 'action' => 'index']);
-    
+    $routes->connect('/acme/News',['controller' => 'News', 'action' => 'index']);
     /**
      * Connect catchall routes for all controllers.
      *
