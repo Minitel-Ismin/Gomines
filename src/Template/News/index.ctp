@@ -37,7 +37,7 @@
                     <tr>
                         <th>Titre</th>
                         <th>Redacteur</th>
-                        <th>Texte</th>
+                        <th>Action</th>
                         
                     </tr>
                 </thead>
