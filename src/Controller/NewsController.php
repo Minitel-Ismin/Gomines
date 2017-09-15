@@ -111,7 +111,7 @@ class NewsController extends AppController
 
     */
     public function display(){
-        $news = $this->News->find('all')->contain('Users');
+        $news = $this->News->find('all')->contain('Users')->order(['created' => 'DESC']);
 
         $this->set(compact('news'));
     }
