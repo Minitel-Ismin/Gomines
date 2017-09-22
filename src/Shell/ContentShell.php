@@ -60,7 +60,7 @@ class ContentShell extends Shell {
 // 							"name" => $result ["name"],
 							"path" => $result ["path"]
 					] );
-					if($temp->name=""){
+					if($temp->name==""){
 						$temp->name = $result ["name"];
 					}
 					
