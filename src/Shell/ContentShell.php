@@ -62,12 +62,13 @@ class ContentShell extends Shell {
 					] );
 					if($temp->name==""){
 						$temp->name = $result ["name"];
+						$temp->virtual_path = substr ( preg_split ( '/' . str_replace ( "/", "\/", $folder->path ) . '/', strtr ( $temp->path, '\\', '/' ) ) [1], 1 );
+						$temp->virtual_path = preg_split ( "#[^/]*$#", $temp->virtual_path ) [0];
 					}
 					
 					$temp->modified = date ( "Y-m-j H:i:s", filemtime ( $result ['path'] ) ); //date de modification = date de modification du fichier
 					$temp->to_verify = 0; // à "vérifier"
-					$temp->virtual_path = substr ( preg_split ( '/' . str_replace ( "/", "\/", $folder->path ) . '/', strtr ( $temp->path, '\\', '/' ) ) [1], 1 );
-					$temp->virtual_path = preg_split ( "#[^/]*$#", $temp->virtual_path ) [0];
+					
 
 					if (!isset($result['folder']) ) {
 						$temp->size = $result ['filesize'];
