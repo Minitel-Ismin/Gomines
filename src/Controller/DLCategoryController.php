@@ -95,7 +95,7 @@ class DLCategoryController extends AppController
             
             $folders=[];
             $folderTable = TableRegistry::get('Folders');
-            
+
             $folderTable->deleteAll(['id_dlcategory' => $id]);
             foreach ($this->request->data["folders"] as $fol){
             	if($fol!=""){

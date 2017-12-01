@@ -6,6 +6,8 @@ use Cake\Console\Shell;
 use Cake\ORM\TableRegistry;
 use App\Model\Entity\Content;
 
+use Cake\Datasource\ConnectionManager;
+
 /**
  * Content shell command.
  */
@@ -51,19 +53,22 @@ class ContentShell extends Shell {
 			foreach ( $category->folders as $folder ) {
 				$newFolderContent = [ ];
 				
-				$folder->path = strtr ( $folder->path, '\\', '/' );
+				$folder->path = str_replace ( '\\',  '/', $folder->path );
 				$results = [ ];
 				$this->getDirContents ( $folder->path, $results );
 				foreach ( $results as $result ) {
 					
+					$path = str_replace ( '\\',  '/', $result["path"] );
+					$path = str_ireplace($folder->path."/", "", $path);
 					$temp = $ContentTable->findOrCreate ( [ 
 // 							"name" => $result ["name"],
-							"path" => $result ["path"]
+							"path" => $path
 					] );
 					if($temp->name==""){
 						$temp->name = $result ["name"];
-						$temp->virtual_path = substr ( preg_split ( '/' . str_replace ( "/", "\/", $folder->path ) . '/', strtr ( $temp->path, '\\', '/' ) ) [1], 1 );
-						$temp->virtual_path = preg_split ( "#[^/]*$#", $temp->virtual_path ) [0];
+						
+						//virtual path contient le chemin du fichier sans son nom
+						$temp->virtual_path = str_replace($result ["name"], "", $path);
 					}
 					
 					$temp->modified = date ( "Y-m-j H:i:s", filemtime ( $result ['path'] ) ); //date de modification = date de modification du fichier

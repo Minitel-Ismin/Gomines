@@ -204,8 +204,10 @@ class DownloadsController extends AppController
 
     
     public function dlFile($id){
-    	$Content = TableRegistry::get('Contents')->get($id);
-    	$directory = $Content->path;
+		$this->loadModel('Contents');
+		$Content = $this->Contents->get($id, ['contain'=>['Folders']]);
+
+		$directory = $Content->folder->path . "/" . $Content->path;
     	$name = $Content->name;
         // Télécharger le fichier
         $this->response->file($directory, array(
@@ -219,23 +221,27 @@ class DownloadsController extends AppController
 	
     public function dlFolder($virtPath){
     	$this->isAuthorized(0);
-    	$this->loadModel("Contents");
+		$this->loadModel("Contents");
+		
 		$subFolder = preg_split("#/#",$this->request->here);
 		$subFolder = htmlspecialchars(urldecode(str_replace("%20", " ", $this->constructPath($subFolder))));
 		$subFolder = substr_replace($subFolder, "", -1); // enlève le "/" en fin de chaine
-		$folder = $this->Contents->find('all')->where(['path LIKE'=> '%'.$subFolder]);
-		$folderItems = $this->Contents->find('all')->where(['path LIKE'=> '%'.$subFolder."/%"]);
-	
+		
+		//folder : entrées dans la bdd de type dossier qui contient subfolder
+		$folder = $this->Contents->find('all')->where(['Contents.path LIKE'=> '%'.$subFolder])->contain(['folders']);
+		//folderItems : entrées dans la bdd de type fichier qui contient subfolder
+		$folderItems = $this->Contents->find('all')->where(['Contents.path LIKE'=> '%'.$subFolder."/%"]);
+		
 		if($this->isEndFolder($folderItems->all())){
-			$folder = $folder->first();
 			
+			$folder = $folder->first();
+
 			if(!$folder){
 				throw new NotFoundException();			
 			}else{
 
-			
 				$dir = getcwd();
-				chdir($folder->path);
+				chdir($folder->Folders["path"]."/".$folder->path);
 				
 				$fp = popen('zip -0 -r - .', 'r');
 				chdir($dir);
