@@ -22,9 +22,8 @@ class FreeSpaceController extends AppController
     {
         $Disques["Jeux"] = str_replace("%","",system("df -k | grep sdb2 | awk '{ print $5 }' | cut -c 1-3")); 
         $Disques["Films1"] = str_replace("%","",system("df -k | grep sdd2 | awk '{ print $5 }' | cut -c 1-3")); 
-        $Disques["Series1"] = str_replace("%","",system("df -k | grep sde2 | awk '{ print $5 }' | cut -c 1-3")); 
-        $Disques["Blurays"] = str_replace("%","",system("df -k | grep sdd2 | awk '{ print $5 }' | cut -c 1-3")); 
-        $Disques["NewDisk"] = str_replace("%","",system("df -k | grep sde1 | awk '{ print $5 }' | cut -c 1-3"));
+        $Disques["Series1"] = str_replace("%","",system("df -k | grep sde2 | awk '{ print $5 }' | cut -c 1-3"));
+        $Disques["NewDisk"] = str_replace("%","",system("df -k | grep sdf1 | awk '{ print $5 }' | cut -c 1-3"));
         $Disques["Iron1"] = str_replace("%","",system("df -k | grep sdh1 | awk '{ print $5 }' | cut -c 1-3"));
         $Disques["Iron2"] = str_replace("%","",system("df -k | grep sda1 | awk '{ print $5 }' | cut -c 1-3"));
         $Disques["Iron3"] = str_replace("%","",system("df -k | grep sdc1 | awk '{ print $5 }' | cut -c 1-3"));
