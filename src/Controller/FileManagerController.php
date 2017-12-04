@@ -50,7 +50,7 @@ class FileManagerController extends AppController {
 
 			$content = $this->Contents->newEntity ();
 			$content->name = $nouveauNom;
-			$content->path = $destination->path ."/". $this->request->data ["source"];
+			$content->path = $this->request->data ["source"];
 			$content->to_verify = 0;
 			$content->size = filesize ( $destination->path ."/". $this->request->data ["source"]);
 			$content->sub_folder = 0;
