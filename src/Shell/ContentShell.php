@@ -62,7 +62,7 @@ class ContentShell extends Shell {
 					$path = str_ireplace($folder->path."/", "", $path);
 					$temp = $ContentTable->findOrCreate ( [ 
 // 							"name" => $result ["name"],
-							"path" => $path
+							"path" => "/".$path
 					] );
 					if($temp->name==""){
 						$temp->name = $result ["name"];
