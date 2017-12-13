@@ -1,7 +1,9 @@
 <?= $this->Html->css('jquery.dataTables')?>
+<?= $this->Html->css('star-rating.min'); ?>
 
 <?= $this->Html->script('jquery.min'); ?>
 <?= $this->Html->script('jquery.dataTables'); ?>
+<?= $this->Html->script('star-rating.min'); ?>
 <script type="text/javascript">
 jQuery.fn.dataTable.ext.type.order['file-size-pre'] = function ( data ) {
     var matches = data.match( /^(\d+(?:\.\d+)?)\s*([a-z]+)/i );
@@ -32,16 +34,32 @@ jQuery.fn.dataTable.ext.type.order['file-size-pre'] = function ( data ) {
 	    	"language": {
                 "url": "/js/french.json"
             },
-            "order": [[ 2, "desc" ]],
+            "order": [[ 4, "desc" ]],
             columnDefs: [
                          { type: 'file-size', targets: 1 }
                        ],
                        "pageLength": 25
-	    });
+		});
+		
+		$('.input-2').rating('refresh', {disabled: false, showClear: false, showCaption: false});
+		$('.input-2').change(function(){
+			
+			$.ajax({
+				method : "POST",
+				url : "/rate/"+$(this).data("id")+"/", 
+				data: {"rate":$(this).val()}
+			})
+			.fail(function(){
+				alert("une erreur s'est produite, merci de contacter minitel");
+			}
+				
+			)
+		});
 	});
 
 
 </script>
+
 
 <div class="bg"></div>
 <div class="container files-container">
@@ -104,6 +122,8 @@ jQuery.fn.dataTable.ext.type.order['file-size-pre'] = function ( data ) {
 				<tr>
 					<th>Nom</th>
 					<th>Taille</th>
+					<th># de download</th>
+					<th>Note</th>
 					<th>Ajouté le</th>
 				</tr>
 			</thead>
@@ -125,11 +145,17 @@ jQuery.fn.dataTable.ext.type.order['file-size-pre'] = function ( data ) {
 		                  	<?php endif;?>
 	                  	</td>
 					<td>
-	                  		<?= $this->FileSize->convertSize($c->size) ?>
-	                  	</td>
+						<?= $this->FileSize->convertSize($c->size) ?>
+					</td>
 					<td>
-	                  		<?= $c->modified?>
-	                  	</td>
+						<?= $c->download_nbr ?>
+					</td>
+					<td>
+					<input class="input-2" name="input-2" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1" value="<?= $c->rate ?>" data-id="<?= $c->id ?>">
+					</td>
+					<td>
+						<?= $c->modified?>
+					</td>
 				</tr>
                 <?php endforeach; ?>
         	</tbody>

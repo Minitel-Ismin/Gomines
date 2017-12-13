@@ -82,7 +82,8 @@ class AppController extends Controller {
 				"dlFile",
 				"dlFolder",
 				"forgotPassword",
-				"resetPasswordToken"
+				"resetPasswordToken",
+				"rate",
 		] );
 		
 		$this->Auth->allow(['controller' => 'Ticket', 'action' => 'add']);
