@@ -3,7 +3,6 @@ namespace App\Controller;
 
 use Cake\Core\Configure;
 use Cake\Network\Exception\NotFoundException;
-use Cake\Network\Exception\UnauthorizedException;
 use Cake\Filesystem\Folder;
 use Cake\Filesystem\File;
 use Cake\ORM\TableRegistry;
@@ -207,8 +206,7 @@ class DownloadsController extends AppController
     public function dlFile($id){
 		$this->loadModel('Contents');
 		$Content = $this->Contents->get($id, ['contain'=>['Folders']]);
-		$Content->download_nbr += 1;
-		$this->Contents->save($Content);
+
 		$directory = $Content->folder->path . "/" . $Content->path;
     	$name = $Content->name;
         // Télécharger le fichier
@@ -219,25 +217,7 @@ class DownloadsController extends AppController
         $hFile = new File($directory);
         $this->response->type($hFile->mime());
         return $this->response;
-	}
-	
-	public function rate($id){
-		$this->loadModel("Contents");
-		if($this->request->is('post')){
-			$Content = $this->Contents->get($id);
-			$Content->rate_nbr += 1;
-			$Content->rate = ($Content->rate + $this->request->data ["rate"]) /2;
-			
-			$msg = $Content->rate;
-			$this->Contents->save($Content);
-			$this->set ( compact ( 'msg' ) );
-		}else{
-			throw new UnauthorizedException();
-		}
-		
-		
-
-	}
+    }
 	
     public function dlFolder($virtPath){
     	$this->isAuthorized(0);
