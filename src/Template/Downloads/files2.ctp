@@ -99,6 +99,7 @@ jQuery.fn.dataTable.ext.type.order['file-size-pre'] = function ( data ) {
 
 	
 	<div class="alert alert-warning" role="alert"><b>Important:</b> Si vous ne parvenez pas à lire certains fichiers (Batman vs superman), alien covenant, etc..., merci d'installer la version 3.0 de vlc encore en beta mais qui fonctionne à merveille <a href="https://nightlies.videolan.org/">télécharger vlc</a></div>
+	<div class="alert alert-warning" role="alert"><b>Important:</b> Quand un fichier est marqué MULTI c'est qu'il est au moins en VO + VFF ou VFQ (avec sous titres Fr + En)</div>
 	<?php if($endFolder && $subFolders[0]!=''):?>				
 		<div class="row">
 			<div class="col-lg-12">
