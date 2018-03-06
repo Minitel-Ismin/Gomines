@@ -94,8 +94,7 @@ $cakeDescription = 'Gomines';
 							<li><a href="https://myismin.emse.fr">MyIsmin</a></li>
 						</ul>
 					</li>
-					<li><a href="#" data-toggle="modal" data-target="#myModal">Faire
-							une demande</a></li>
+					<li style="background-color: #FF0000;"><a href="#" data-toggle="modal" data-target="#myModal" style="color: #FFFFFF">Demander l'ajout d'un film</a></li>
 					<?php if ($authUser) : ?>
 			        	<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"

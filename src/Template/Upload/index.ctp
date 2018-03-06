@@ -10,10 +10,10 @@ $this->Html->script('previsualisation_image.js', array('block' => 'footerscript'
     </div>
     <div class="row">
         <div class="col-lg-6 alert alert-info">
-            Les formats que tu peux uploadés sont : avi, mkv, m4v, mp4, srt
+            Les formats que tu peux uploader sont : avi, mkv, m4v, mp4, srt
         </div>
         <div class="col-lg-6 alert alert-info">
-            Navigateurs supportés : Firefox
+            Navigateur supporté : Firefox
         </div>
     </div>
     <div class="row">
