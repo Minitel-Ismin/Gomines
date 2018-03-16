@@ -68,7 +68,7 @@ class FileManagerController extends AppController {
 	public function files($path = "") {
 		$this->isAuthorized ( 2 );
 		$this->loadModel ( 'Folders' );
-		$conf = Configure::read ( "FileFolders" );
+		$conf = Configure::read ( "Upload" );
 		
 		$folders = $this->Folders->find ( 'all' )->contain ( [ 
 				'DLCategory' 
@@ -78,7 +78,7 @@ class FileManagerController extends AppController {
 		$directory = [ ];
 		
 		// Lecture du dossier virtuel
-		$directory = $conf ['Upload'] ['folder'] . "/";
+		$directory = $conf ['folder'] . "/";
 		$this->set ( compact ( "directory" ) ); // dossier du fichier initial
 		                                        // Lecture du path
 		if ($path != "") {
