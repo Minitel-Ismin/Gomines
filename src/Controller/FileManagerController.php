@@ -50,7 +50,7 @@ class FileManagerController extends AppController {
 
 			$content = $this->Contents->newEntity ();
 			$content->name = $nouveauNom;
-			$content->path = $this->request->data ["source"];
+			$content->path = "/".$this->request->data ["source"];
 			$content->to_verify = 0;
 			$content->size = filesize ( $destination->path ."/". $this->request->data ["source"]);
 			$content->sub_folder = 0;
@@ -78,7 +78,7 @@ class FileManagerController extends AppController {
 		$directory = [ ];
 		
 		// Lecture du dossier virtuel
-		$directory = $conf ['AClasser'] ['folder'] . "/";
+		$directory = $conf ['Upload'] ['folder'] . "/";
 		$this->set ( compact ( "directory" ) ); // dossier du fichier initial
 		                                        // Lecture du path
 		if ($path != "") {
